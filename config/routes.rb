@@ -1,17 +1,14 @@
 QuizzApp::Application.routes.draw do
   resources :game_details
 
-
   resources :games
 
+  resources :quizzs do
+    resources :questions do
+      resources :answers
+    end
+  end
 
-  resources :answers
-
-
-  resources :questions
-
-
-  resources :quizzs
   devise_for :users
   root :to => "quizzs#index"
 

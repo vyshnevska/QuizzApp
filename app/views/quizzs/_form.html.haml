@@ -7,4 +7,14 @@
           %li= msg
 
   .actions
+    = nested_form_for(@quizz) do |f|
+      %p
+        = f.label "Quizz Title"
+        %br
+        = f.text_field :description
+      %p
+        = f.fields_for :questions do |q|
+          = render 'questions_fields', :f => q
+      -#= link_to_add_fields "Add a question", f, :questions
+      -# %p
     = f.submit 'Save'

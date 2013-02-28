@@ -1,0 +1,6 @@
+%p
+  = f.label "Question:"
+  = f.text_field :title
+  %p
+    = f.fields_for :answers do |q|
+      = render 'answers_fields', :f => q

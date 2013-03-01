@@ -41,3 +41,11 @@ gem 'bootstrap-sass'
 
 # To use debugger
 # gem 'debugger'
+
+# For testing
+group :test do
+  gem "shoulda-matchers"
+end
+group :test, :development do
+  gem "rspec-rails", "~> 2.0"
+end

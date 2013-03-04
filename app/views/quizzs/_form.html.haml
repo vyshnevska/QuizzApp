@@ -12,9 +12,11 @@
         = f.label "Quizz Title"
         %br
         = f.text_field :description
-        %p
-          = f.semantic_fields_for :questions do |builder|
-            = render :partial => 'questions_fields', :locals => { :f => builder }
-  .links
+      %p
+        = f.semantic_fields_for :questions do |builder|
+          = render :partial => "questions_fields", :locals => { :f => builder }
+          -#= link_to_add_fields "Add a question", f, :questions
+      = f.submit 'Save'
+  -#.links
     =link_to_add_fields "Add a question", f, :questions
-  = f.submit 'Save'
+

@@ -5,6 +5,7 @@
     %p
       = f.fields_for :answers do |builder|
         = render :partial => 'answers_fields', :locals => { :f => builder }
-.links
+      -#= link_to_add_fields "Add an answer", f, :answers
+    = link_to_remove_fields "Remove Question", f
+-#.links
   = f.hidden_field :_destroy
-  = link_to_remove_fields "Remove Question", f

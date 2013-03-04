@@ -5,7 +5,7 @@ gem 'rails', '3.2.9'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem "nested_form"
+#gem "nested_form"
 gem "pg", :group => :production
 gem "sqlite3-ruby", :group => :development
 
@@ -25,7 +25,8 @@ end
 gem 'jquery-rails'
 gem 'devise'
 gem "haml-rails", :group => :development
-
+gem 'formtastic'
+gem "gherkin"
 gem 'bootstrap-sass'
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

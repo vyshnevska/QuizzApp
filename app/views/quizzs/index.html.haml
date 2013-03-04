@@ -1,17 +1,19 @@
 %h1 Listing quizzs
 
-%table
-  %tr
-    %th
-    %th
-    %th
 
-  - @quizzs.each do |quizz|
-    %tr
-      %td= link_to 'Show', quizz
-      %td= link_to 'Edit', edit_quizz_path(quizz)
-      %td= link_to 'Destroy', quizz, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+- @quizzs.each do |quizz|
+  %ul
+    = quizz.id
+    = quizz.description
+    - quizz.questions.each do |q|
+      %li
+        = q.title
+        - q.answers.each do |a|
+          %ul
+            = a.content
+  %ul
+    %li= link_to 'Show', quizz
+    %li= link_to 'Edit', edit_quizz_path(quizz)
+    %li= link_to 'Destroy', quizz, :method => :delete, :data => { :confirm => 'Are you sure?' }
 %br
-
 = link_to 'New Quizz', new_quizz_path

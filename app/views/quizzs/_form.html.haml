@@ -1,4 +1,6 @@
-= semantic_form_for @quizz do |f|
+= javascript_include_tag "nested_form"
+-#= javascript_include_tag :defaults, "nested_form"
+= nested_form_for @quizz do |f|
   - if @quizz.errors.any?
     #error_explanation
       %h2= "#{pluralize(@quizz.errors.count, "error")} prohibited this quizz from being saved:"
@@ -7,16 +9,16 @@
           %li= msg
 
   .actions
-    = semantic_form_for(@quizz) do |f|
+    = nested_form_for(@quizz) do |f|
       %p
         = f.label "Quizz Title"
         %br
         = f.text_field :description
-      %p
-        = f.semantic_fields_for :questions do |builder|
-          = render :partial => "questions_fields", :locals => { :f => builder }
-          -#= link_to_add_fields "Add a question", f, :questions
+        %p
+          = f.fields_for :questions do |q|
+            = render "questions_fields", :q => q
+        %p
+          = f.link_to_add "Add a question", :questions
       = f.submit 'Save'
-  -#.links
-    =link_to_add_fields "Add a question", f, :questions
+
 

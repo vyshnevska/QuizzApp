@@ -1,5 +1,4 @@
-%ul.nested-fields
-  %p
-    = f.label "Answer:"
-    = f.text_field :content
-  = link_to_remove_fields "Remove Answer", f
+%p
+  = a.label "Answer:"
+  = a.text_field :content
+  = a.link_to_remove "Remove Answer"

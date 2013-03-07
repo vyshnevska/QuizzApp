@@ -27,7 +27,7 @@ class GameDetailsController < ApplicationController
     @game_detail = GameDetail.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html # new.html.haml
       format.json { render json: @game_detail }
     end
   end

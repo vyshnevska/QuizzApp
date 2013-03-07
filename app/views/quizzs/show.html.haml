@@ -1,5 +1,14 @@
 %p#notice= notice
-
+%ul
+  = @quizz.id
+  = @quizz.description
+  - @quizz.questions.each do |q|
+    %li
+      = q.title
+      - q.answers.each do |a|
+        %ul
+          = a.content
+%br
 
 = link_to 'Edit', edit_quizz_path(@quizz)
 \|

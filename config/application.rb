@@ -61,5 +61,8 @@ module QuizzApp
     config.generators do |g|
       g.template_engine :haml
     end
+    config.to_prepare do
+      Devise::SessionsController.layout "sign"
+    end
   end
 end

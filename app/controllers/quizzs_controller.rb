@@ -1,4 +1,6 @@
 class QuizzsController < ApplicationController
+  before_filter :authenticate_user!
+
   # GET /quizzs
   # GET /quizzs.json
   def index
@@ -32,7 +34,7 @@ class QuizzsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html # new.html.haml
       format.json { render json: @quizz }
     end
   end

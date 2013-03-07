@@ -3,4 +3,8 @@ class Question < ActiveRecord::Base
   has_many :answers
   belongs_to :quizz
   accepts_nested_attributes_for :answers, :allow_destroy => :true
+
+  validates :title, :presence => true
+  validates_associated :answers
+  validates_associated :quizz
 end

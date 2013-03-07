@@ -45,17 +45,21 @@ class QuizzsController < ApplicationController
   # POST /quizzs
   # POST /quizzs.json
   def create
-    @quizz = Quizz.new(params[:quizz])
-
+    @quizz = Quizz.create!(params[:quizz])
+    flash[:notice] = "Thank you for creating this quizz"
     respond_to do |format|
-      if @quizz.save
-        format.html { redirect_to @quizz, notice: 'Quizz was successfully created.' }
-        format.json { render json: @quizz, status: :created, location: @quizz }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @quizz.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @quizz}
+      format.js
     end
+    #respond_to do |format|
+    #  if @quizz.save
+    #    format.html { redirect_to @quizz, notice: 'Quizz was successfully created.' }
+    #    format.json { render json: @quizz, status: :created, location: @quizz }
+    #  else
+    #    format.html { render action: "new" }
+    #    format.json { render json: @quizz.errors, status: :unprocessable_entity }
+    #  end
+    #end
   end
 
   # PUT /quizzs/1

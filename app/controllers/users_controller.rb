@@ -8,6 +8,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
   def create
+
     @user = User.new(params[:user])
     respond_to do |format|
       if @user.save

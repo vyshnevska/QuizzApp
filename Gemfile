@@ -31,7 +31,7 @@ gem "nested_form"
 #gem "gherkin"
 
 gem 'bootstrap-sass'
-
+gem "mailcatcher"
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 

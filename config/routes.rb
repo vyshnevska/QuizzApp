@@ -9,7 +9,8 @@ QuizzApp::Application.routes.draw do
     end
   end
 
-  devise_for :users
+  #resources :users
+  devise_for :users do get '/users/sign_out' => 'devise/sessions#destroy' end
   root :to => "quizzs#index"
 
   # The priority is based upon order of creation:

@@ -10,6 +10,8 @@
         = q.title
         - q.answers.each do |a|
           %ul
+            -#= f.radio_button :id => a[:id], :checked => @quizzs.questions[:answer_id] == a[:id]
+            %input{:name => "option", :type => "radio", :value => "answer"}
             = a.content
   %ul
     %li= link_to 'Show', quizz

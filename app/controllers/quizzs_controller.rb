@@ -27,12 +27,8 @@ class QuizzsController < ApplicationController
   # GET /quizzs/new.json
   def new
     @quizz = Quizz.new
-    2.times do
-      question = @quizz.questions.build
+    question = @quizz.questions.build
       3.times {question.answers.build}
-
-    end
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @quizz }

@@ -1,3 +1,5 @@
+require "pry"
+
 class QuizzsController < ApplicationController
   # GET /quizzs
   # GET /quizzs.json

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.9'
-
+#gem 'eventmachine', '1.0.0'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
@@ -31,7 +31,7 @@ gem "nested_form"
 #gem "gherkin"
 
 gem 'bootstrap-sass'
-gem "mailcatcher"
+#gem "mailcatcher"
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
@@ -55,3 +55,4 @@ group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem "shoulda-matchers"
 end
+gem "pry", :group => :development

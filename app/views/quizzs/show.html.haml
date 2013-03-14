@@ -1,5 +1,15 @@
-%p#notice= notice
-
+#notice= notice
+%ul
+  = @quizz.id
+  = @quizz.description
+  - @quizz.questions.each do |q|
+    %li
+      = q.title
+      - q.answers.each do |a|
+        %ul
+          = a.content
+%ul
+  %li= link_to 'Destroy', quizzs_path(@quizz), :action => :destroy, :data => { :confirm => 'Are you sure?' }
 
 = link_to 'Edit', edit_quizz_path(@quizz)
 \|

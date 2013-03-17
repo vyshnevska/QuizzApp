@@ -10,6 +10,7 @@
         = q.title
         - q.answers.each do |a|
           %ul
+            -#%input{:name => "option", :type => "radio", :value => "answer"}
             = a.content
   %ul
     %li= link_to 'Show', quizz

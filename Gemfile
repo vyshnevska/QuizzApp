@@ -48,9 +48,8 @@ gem "mailcatcher"
 # gem 'debugger'
 
 # For testing
-group :test do
-  gem "shoulda-matchers"
-end
+gem "pry"
+gem 'rb-readline'
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem "shoulda-matchers"

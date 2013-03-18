@@ -44,8 +44,14 @@ class QuizzsController < ApplicationController
 
   def update
     #binding.pry
+    ids=[]
     @quizz = Quizz.find(params[:id])
-
+    ids = params[:correct_ids].keys.collect {|k| k.to_i}
+    ids.each do |id|
+      @a = Answer.find_by_id(id)
+      @a.mark_as_correct
+      @a.save
+    end
     respond_to do |format|
       if @quizz.update_attributes(params[:quizz])
         format.html { redirect_to @quizz, notice: 'Quizz was successfully updated.' }

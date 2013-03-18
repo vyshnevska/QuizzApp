@@ -1,13 +1,11 @@
 %h1 Listing quizzs
-
-
 - @quizzs.each do |quizz|
   %ul
     = quizz.id
-    = quizz.description
+    %h5= quizz.description
     - quizz.questions.each do |q|
       %li
-        = q.title
+        %h6= q.title
         - q.answers.each do |a|
           %ul
             -#= f.radio_button :id => a[:id], :checked => @quizzs.questions[:answer_id] == a[:id]

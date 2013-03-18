@@ -31,6 +31,7 @@ class QuizzsController < ApplicationController
 
   def edit
     @quizz = Quizz.find(params[:id])
+    flash[:notice] = "Please add question and answers for #{@quizz.description}. Mark correct answers."
   end
 
   def create
@@ -44,17 +45,41 @@ class QuizzsController < ApplicationController
 
   def update
     #binding.pry
-    ids=[]
+    ids = []
+    q_saved_ids = []
+    a_saved_ids = []
     @quizz = Quizz.find(params[:id])
-    ids = params[:correct_ids].keys.collect {|k| k.to_i}
-    ids.each do |id|
-      @a = Answer.find_by_id(id)
-      @a.mark_as_correct
-      @a.save
+    @q= Question.where(:quizz_id => params[:id])
+    @q.each do |q|
+      q_saved_ids << q.id
+      @a = Answer.where(:question_id => q.id)
+      @a.each do |a|
+        a_saved_ids << a.id
+      end
     end
+
+    ids = params[:correct_ids].keys.collect {|k| k.to_i}
+
+    ids.each do |id|
+      @ca = Answer.find_by_id(id)
+      @ca.mark_as_correct
+      if @ca.save
+        flash[:notice] = 'Answer was successfully marked.'
+      end
+    end
+    (a_saved_ids - ids).each do |e|
+      @ia = Answer.find_by_id(e)
+      @ia.mark_as_incorrect
+      if @ia.save
+        flash[:notice] = 'Answer was successfully unmarked.' #bug here
+      end
+    end
+
     respond_to do |format|
       if @quizz.update_attributes(params[:quizz])
-        format.html { redirect_to @quizz, notice: 'Quizz was successfully updated.' }
+        flash[:notice] << 'Quizz was successfully updated.'
+        format.html { redirect_to @quizz } #, :notice << 'Quizz was successfully updated.'}
+        #' Answer was successfully marked.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

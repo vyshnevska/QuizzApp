@@ -1,5 +1,5 @@
 %p
-  = q.object.id
+  %p.temp= q.object.id
   = q.label "Question:"
   = q.text_field :title
   = q.fields_for :answers do |a|

@@ -1,13 +1,16 @@
 #notice= notice
 %ul
-  = @quizz.id
-  = @quizz.description
+  %p.temp= @quizz.id
+  %h5= @quizz.description
   - @quizz.questions.each do |q|
     %li
-      = q.title
+      %h6= q.title
       - q.answers.each do |a|
         %ul
-          = a.content
+          - if a.is_correct?
+            %p.temp= a.content
+          - else
+            %p= a.content
 %ul
   %li= link_to 'Destroy', @quizz, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

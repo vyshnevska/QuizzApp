@@ -10,4 +10,7 @@ class Answer < ActiveRecord::Base
   def mark_as_correct
     self.correct = true
   end
+  def mark_as_incorrect
+    self.correct = false
+  end
 end

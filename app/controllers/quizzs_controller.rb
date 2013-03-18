@@ -64,7 +64,7 @@ class QuizzsController < ApplicationController
       @ca = Answer.find_by_id(id)
       @ca.mark_as_correct
       if @ca.save
-        flash[:notice] = 'Answer was successfully marked.'
+        flash[:notice] = 'Answer was successfully marked.' #bug here
       end
     end
     (a_saved_ids - ids).each do |e|

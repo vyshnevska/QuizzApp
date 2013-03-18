@@ -11,4 +11,5 @@ class User < ActiveRecord::Base
   has_many :games
   has_many :quizzs, :through => :games
 
+  validates :name, :presence => true, :uniqueness => true
 end

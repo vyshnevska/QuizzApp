@@ -1,7 +1,9 @@
 QuizzApp::Application.routes.draw do
-  resources :game_details
-
-  resources :games
+  resources :games do
+    get 'start', :on => :member
+    post 'finish', :on => :member
+    resources :game_details
+  end
 
   resources :quizzs do
     resources :questions do

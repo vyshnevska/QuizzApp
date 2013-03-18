@@ -7,4 +7,10 @@
           %li= msg
 
   .actions
-    = f.submit 'Save'
+    = form_for(@game) do |f|
+      =f.label "Choose a quizz"
+      =f.select :quizz_id, Quizz.all.map{ |q| [q.description, q.id] }
+      =f.label "Assign player"
+      =f.select :user_id, User.all.map{ |u| [u.name, u.id] }
+    %br
+      = f.submit 'Save'

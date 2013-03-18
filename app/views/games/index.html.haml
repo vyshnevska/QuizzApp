@@ -2,11 +2,15 @@
 
 %table
   %tr
-    %th
+    %th Game
     %th
     %th
 
   - @games.each do |game|
+    %tr
+      %td.temp= game.id
+      %td
+      %td
     %tr
       %td= link_to 'Show', game
       %td= link_to 'Edit', edit_game_path(game)

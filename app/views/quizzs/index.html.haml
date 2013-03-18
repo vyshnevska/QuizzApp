@@ -1,7 +1,8 @@
 %h1 Listing quizzs
 - @quizzs.each do |quizz|
   %ul
-    = quizz.id
+    %p.temp
+      = quizz.id
     %h5= quizz.description
     - quizz.questions.each do |q|
       %li

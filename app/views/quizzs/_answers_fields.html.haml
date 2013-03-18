@@ -1,5 +1,6 @@
 %p
   = a.label "Answer:"
-  = a.radio_button :content, 0
+  -#= a.radio_button :content, 0
+  = check_box_tag "correct_ids[#{a.object.id}]", a.object.id
   = a.text_field :content
   = a.link_to_remove "Remove Answer"

@@ -14,3 +14,21 @@ td.col{
 tr.bottom{
   border-bottom: 1px solid #007fff;
 }
+.navbar .brand {
+  padding: 5px 10px 5px;
+  margin-left: -20px;
+  width: 90px;
+  height: 50px;
+}
+.nav li {
+  line-height: 25px;
+}
+div.hamster{
+ // background-image: url(/images/cute.jpg);
+  background-image: url(/assets/cute.jpg);
+  background-size: 350px 270px;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 270px;
+  border-bottom: 2px solid saddlebrown;
+}

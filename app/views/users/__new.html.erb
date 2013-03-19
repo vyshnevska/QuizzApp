@@ -1,5 +1,6 @@
 <%= form_for User.new do |f| %>
-
+    <%= f.label :name %>  <br/>
+    <%= f.text_field :name %>  <br/>
     <%#= f.label :name %>
     <%= f.label :email %>  <br/>
     <%= f.email_field :email %>  <br/>

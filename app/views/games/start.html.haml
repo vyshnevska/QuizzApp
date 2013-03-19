@@ -7,28 +7,10 @@
       - @quizz.questions.each do |q|
         %li
           %h6= q.title
+          %p.temp=q.id
           - q.answers.each do |a|
-            %ul
-              %input{:name => "option", :type => "radio", :value => "answer"}
-              = a.content
+            -#%input{:name => "option", :type => "radio", :value => "answer"}
+            %input{:type => "radio", :name => "answers[#{q.id}]", :id =>"ids", :value => a.id}
+            = a.content
+            %p.temp=a.id
     %input{:type => "submit", :value => "Finish", :class => "button"}
-
--#- @quizzs.each do |quizz|
--#  %ul
--#    %p.temp
--#      = quizz.id
--#    %h5= quizz.description
--#    - quizz.questions.each do |q|
--#      %li
--#        %h6= q.title
--#        - q.answers.each do |a|
--#          %ul
--#            -#= f.radio_button :id => a[:id], :checked => @quizzs.questions[:answer_id] == a[:id]
--#            %input{:name => "option", :type => "radio", :value => "answer"}
--#            = a.content
--#  %ul
--#    %li= link_to 'Show', quizz
--#    %li= link_to 'Edit', edit_quizz_path(quizz)
--#    %li= link_to 'Destroy', quizz, :method => :delete, :data => { :confirm => 'Are you sure?' }
--#%br
--#= link_to 'New Quizz', new_quizz_path

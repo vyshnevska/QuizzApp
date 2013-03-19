@@ -1,13 +1,19 @@
 -#%link{:href => "/assets/stylesheets/bootstrap.css", :rel => "stylesheet"}
 %h1 Listing games
-
-%table
-  %tr
-    %th Game
-    %th
-    %th Status
-    %th
-  - @games.each do |game|
+- @games.each do |game|
+  %table
+    %tr
+      %th
+        Game:
+        %strong=game.id
+      %th
+      %th
+        Points:
+        -if game.points.nil?
+          %strong 0
+        -else
+          %strong=game.points
+      %th
     %tr
       %td{:colspan => 4}
         Player

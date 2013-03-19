@@ -1,8 +1,10 @@
+%link{:href => "/assets/stylesheets/bootstrap.css", :rel => "stylesheet"}
 %h1 Listing games
 
 %table
   %tr
     %th Game
+    %th
     %th
     %th
 
@@ -11,11 +13,12 @@
       %td.temp= game.id
       %td
       %td
+      %td
     %tr
-      %td= link_to 'Show', game
-      %td= link_to 'Edit', edit_game_path(game)
+      %td= link_to 'Start |', start_game_path(game)
+      %td= link_to 'Show |', game
+      %td= link_to 'Edit |', edit_game_path(game)
       %td= link_to 'Destroy', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
 %br
 
 = link_to 'New Game', new_game_path

@@ -1,14 +1,17 @@
 %h3 Start a quizz
-%ul
-  %p.temp= @quizz.id
-  %h5= @quizz.description
-  - @quizz.questions.each do |q|
-    %li
-      %h6= q.title
-      - q.answers.each do |a|
-        %ul
-          %input{:name => "option", :type => "radio", :value => "answer"}
-          = a.content
+%form{ :action => "finish", :method => "post"}
+  %fieldset
+    %ul
+      %p.temp= @quizz.id
+      %h5= @quizz.description
+      - @quizz.questions.each do |q|
+        %li
+          %h6= q.title
+          - q.answers.each do |a|
+            %ul
+              %input{:name => "option", :type => "radio", :value => "answer"}
+              = a.content
+    %input{:type => "submit", :value => "Finish", :class => "button"}
 
 -#- @quizzs.each do |quizz|
 -#  %ul

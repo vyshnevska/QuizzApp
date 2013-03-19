@@ -74,4 +74,12 @@ class GamesController < ApplicationController
     @quizz = Quizz.where(:id => @game.quizz_id).first
     @game_detail = GameDetail.new(:game_id => params[:id])
   end
+  def finish
+    #binding.pry
+    @game = Game.find(params[:id])
+    respond_to do |format|
+      format.html { redirect_to @game, notice: "You have finished this game!" }
+      format.json { head :no_content }
+    end
+  end
 end

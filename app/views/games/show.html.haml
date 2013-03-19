@@ -2,9 +2,10 @@
 %p
   =@game.id
 %p
-  =@game.user.name
-%p
-  =@game.quizz.description
+  Player
+  %strong=@game.user.name
+  wants to play game:
+  %strong=@game.quizz.description
 
 = link_to 'Start', start_game_path(@game)
 \|

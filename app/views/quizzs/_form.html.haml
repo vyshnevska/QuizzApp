@@ -3,22 +3,16 @@
 = nested_form_for @quizz do |f|
   - if @quizz.errors.any?
     #error_explanation
-      %h2= "#{pluralize(@quizz.errors.count, "error")} prohibited this quizz from being saved:"
-      %ul
-        - @quizz.errors.full_messages.each do |msg|
-          %li= msg
+    %div{:class=> "alert alert-error"}
+      - @quizz.errors.full_messages.each do |msg|
+        = msg
 
   .actions
     = nested_form_for(@quizz) do |f|
-      %p
-        = f.label "Quizz Title"
-        %br
-        = f.text_field :description
-        %p
-          = f.fields_for :questions do |q|
-            = render "questions_fields", :q => q
-        %p
-          = f.link_to_add "Add a question", :questions
-      = f.submit 'Save'
-
-
+      = f.label "Quizz Title"
+      = f.text_field :description
+      = f.fields_for :questions do |q|
+        = render "questions_fields", :q => q
+      = f.link_to_add "Add a question", :questions
+      %br
+    = f.submit 'Save'

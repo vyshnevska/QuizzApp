@@ -1,16 +1,44 @@
+:javascript
+  jQuery(function() {
+    $(function() {
+      $('#progress').css('width', "900px");
+    });
+
+    $("input").click(function(){
+      parent_tag = $(this).parent();
+      value = $(parent_tag[0]).attr("data-checked")
+      if (value == 0) {
+      //pulling current width
+        var w =$('#myprogress').css("width") ;
+        x = w.indexOf('p');
+        width = parseInt(w.substring(0, x));
+      //get weight for each answer
+        var we =$('#progress').css("width") ;
+        y = we.indexOf('p');
+        count = $("#qns-list li").size();
+        weight = parseInt(we.substring(0, y))/count;
+      //updated with new value
+        $('#myprogress').css('width', width + parseInt(weight) +"px");
+        $(parent_tag[0]).attr("data-checked", 1);
+      }
+    });
+  });
+
 %h3 Start a quizz
+%div{ :id => "progress", :class => "progress progress-warning progress-striped active" }
+  %div{ :id => "myprogress", :class => "bar", :style =>"width:0px" }
+
 %form{ :action => "finish", :method => "post"}
   %fieldset
-    %ul
+    %ul{:id => "qns-list"}
       %p.temp= @quizz.id
       %h5= @quizz.description
       - @quizz.questions.each do |q|
-        %li
+        %li{:data => {:checked => 0 }}
           %h6= q.title
           %p.temp=q.id
           - q.answers.each do |a|
-            -#%input{:name => "option", :type => "radio", :value => "answer"}
-            %input{:type => "radio", :name => "answers[#{q.id}]", :id =>"ids", :value => a.id}
+            %input{:type => "radio", :name => "answers[#{q.id}]", :class =>"#{q.id}", :value => a.id}
             = a.content
             %p.temp=a.id
     %input{:type => "submit", :value => "Finish", :class => "button"}

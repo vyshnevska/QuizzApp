@@ -35,16 +35,26 @@ class QuizzsController < ApplicationController
   end
 
   def create
-    @quizz = Quizz.create!(params[:quizz])
-    flash[:notice] = "Thank you for creating this quizz"
+    #binding.pry
+    @quizz = Quizz.create(params[:quizz])
     respond_to do |format|
-      format.html { redirect_to @quizz}
-      format.js
+      if @quizz.save
+        flash[:notice] = "Thank you for creating this quizz"
+        if @quizz.update_attribute(:status, "editable")
+          flash[:notice] << "Editable mode."
+        end
+        format.html { redirect_to @quizz}
+        format.js
+      else
+        flash[:notice] = "Please fix below errors."
+        format.html { render action: "new" }
+        #format.json { render json: @quizz.errors.full_messages, status: :unprocessable_entity }
+      end
     end
   end
 
   def update
-    #binding.pry
+
     ids = []
     q_saved_ids = []
     a_saved_ids = []

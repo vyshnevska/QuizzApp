@@ -1,8 +1,7 @@
-%p
-  %p.temp= q.object.id
-  = q.label "Question:"
-  = q.text_field :title
-  = q.fields_for :answers do |a|
-    = render 'answers_fields', :a => a
-  = q.link_to_add "Add an answer", :answers
-  = q.link_to_remove "Remove Question"
+%p.temp= q.object.id
+= q.label "Question:"
+= q.text_field :title
+= q.fields_for :answers do |a|
+  = render 'answers_fields', :a => a
+= q.link_to_add "Add an answer", :answers
+= q.link_to_remove "Remove Question"

@@ -1,41 +1,36 @@
 :javascript
   jQuery(function() {
-    $("input").click(function(){
-
-      var w =$('#myprogress').css("width") ;
-      x = w.indexOf('p');
-      width = parseInt(w.substring(0, x));
-      //alert(width);
-      //alert($(this).attr("value"));
-      alert(parseInt(10)+ parseInt($(this).attr("value")));
-       $('#myprogress').css('width', width + parseInt($(this).attr("value")) +"px");
-      //var currRbtn = this;
-      //var
-      //  element = document.getElementById('myprogress');
-      //  style = window.getComputedStyle(element);
-      //  w = style.getPropertyValue('width');
-      //
-      //  q = $(this).attr("name");
-      //  x = q.indexOf(']');
-      //  q_id = q.substring(8, x);
-      //var $rbtns = $("input." + q_id);
-      //$rbtns.each(function(){
-      //  if($(this).attr("checked")=="false"){
-      //    //alert(($(this).attr("checked")=="false"));
-      //    $('#myprogress').css('width', w + 10 + "px");
-      //  }
-      //});
+    $(function() {
+      $('#progress').css('width', "900px");
     });
 
+    $("input").click(function(){
+      parent_tag = $(this).parent();
+      value = $(parent_tag[0]).attr("data-checked")
+      if (value == 0) {
+      //pulling current width
+        var w =$('#myprogress').css("width") ;
+        x = w.indexOf('p');
+        width = parseInt(w.substring(0, x));
+      //get weight for each answer
+        var we =$('#progress').css("width") ;
+        y = we.indexOf('p');
+        count = $("#qns-list li").size();
+        weight = parseInt(we.substring(0, y))/count;
+      //updated with new value
+        $('#myprogress').css('width', width + parseInt(weight) +"px");
+        $(parent_tag[0]).attr("data-checked", 1);
+      }
+    });
   });
 
 %h3 Start a quizz
-%div{:class => "progress progress-warning progress-striped active"}
-  %div{:id => "myprogress", :class => "bar", :style =>"width:0"}
+%div{ :id => "progress", :class => "progress progress-warning progress-striped active" }
+  %div{ :id => "myprogress", :class => "bar", :style =>"width:0px" }
 
 %form{ :action => "finish", :method => "post"}
   %fieldset
-    %ul
+    %ul{:id => "qns-list"}
       %p.temp= @quizz.id
       %h5= @quizz.description
       - @quizz.questions.each do |q|

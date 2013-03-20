@@ -5993,6 +5993,7 @@ a.thumbnail:hover {
 }
 
 .progress-warning {
+    width: 600px;
     /*background-color: #ff7518*/
 }
 

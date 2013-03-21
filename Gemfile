@@ -47,6 +47,8 @@ gem 'bootstrap-sass'
 # To use debugger
 # gem 'debugger'
 
+#gem 'rb-readline'
+
 # For testing
 group :test do
   gem "shoulda-matchers"

@@ -51,10 +51,9 @@
         wants to play game:
         %strong=game.quizz.description
     %tr
-      %td.col= link_to '|Started|', start_game_path(game)
+      %td.col= link_to '|Review|' #not implemented yet
       %td.col= link_to '|Show|', game
       %td.col= link_to '|Edit|', edit_game_path(game)
       %td.col= link_to '|Destroy|', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
 %br
 = link_to 'New Game', new_game_path

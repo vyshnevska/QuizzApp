@@ -1,12 +1,36 @@
 class GamesController < ApplicationController
   def index
-    #@games = Game.all
-    #binding.pry
+    @g = Game.all
     @user = current_user
+    @games_new = []
+    @games_passed = []
 
-    @games_new = Game.where('user_id != ?', @user.id)
-    @games_passed = Game.where('user_id = ?', @user.id)
+    if @user
+      #@g = Game.where('user_id != ?', @user.id)
 
+      #@d = @g.joins('INNER JOIN game_details ON games.id = game_details.game_id')
+      @g.each do |g|
+        @d = GameDetail.where(:game_id => g.id)
+        #binding.pry
+        if @d.empty?
+          @games_new << g #Game.where('points IS NULL')
+          #@games_passed = []
+        else
+          #@games_new = []
+          @games_passed << g
+        end
+      end
+    else
+      @games_new << @g
+      #@games_passed = []
+    end
+
+
+    #@games_new = Game.where('points IS NULL and ')
+    #Game.where('user_id != ?', @user.id)
+    #@games_passed = Game.where('user_id = ?', @user.id)
+
+    #@games_passed = Game.where('points IS NOT NULL')
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @games }
@@ -24,7 +48,6 @@ class GamesController < ApplicationController
 
   def new
     @game = Game.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @game }
@@ -74,7 +97,7 @@ class GamesController < ApplicationController
   end
 
   def start
-    @game = Game.find_by_id(params[:id]).where('user_id != ?', @user.id)
+    @game = Game.find_by_id(params[:id])
     @quizz = Quizz.where(:id => @game.quizz_id).first
   end
 

@@ -39,22 +39,21 @@ class QuizzsController < ApplicationController
     @quizz = Quizz.create(params[:quizz])
     respond_to do |format|
       if @quizz.save
-        flash[:notice] = "Thank you for creating this quizz"
+        flash[:notice] = "Thank you for creating this quizz. "
         if @quizz.update_attribute(:status, "editable")
           flash[:notice] << "Editable mode."
         end
         format.html { redirect_to @quizz}
         format.js
       else
-        flash[:notice] = "Please fix below errors."
         format.html { render action: "new" }
-        #format.json { render json: @quizz.errors.full_messages, status: :unprocessable_entity }
+        flash[:error] = "Please fix below errors."
       end
     end
   end
 
   def update
-
+    #binding.pry
     ids = []
     q_saved_ids = []
     a_saved_ids = []
@@ -67,29 +66,29 @@ class QuizzsController < ApplicationController
         a_saved_ids << a.id
       end
     end
-
-    ids = params[:correct_ids].keys.collect {|k| k.to_i}
-
-    ids.each do |id|
-      @ca = Answer.find_by_id(id)
-      @ca.mark_as_correct
-      if @ca.save
-        flash[:notice] = 'Answer was successfully marked.' #bug here
+    if !params[:correct_ids].nil?
+      ids = params[:correct_ids].keys.collect {|k| k.to_i}
+      ids.each do |id|
+        @ca = Answer.find_by_id(id)
+        @ca.mark_as_correct
+        if @ca.save
+          flash[:notice] = 'Answer was successfully marked. ' #bug here
+        end
       end
-    end
-    (a_saved_ids - ids).each do |e|
-      @ia = Answer.find_by_id(e)
-      @ia.mark_as_incorrect
-      if @ia.save
-        flash[:notice] = 'Answer was successfully unmarked.' #bug here
+      (a_saved_ids - ids).each do |e|
+        @ia = Answer.find_by_id(e)
+        @ia.mark_as_incorrect
+        if @ia.save
+          flash[:notice] = 'Answer was successfully unmarked. ' #bug here
+        end
       end
+    else
+      flash[:notice] = 'No answer was marked. '
     end
-
     respond_to do |format|
       if @quizz.update_attributes(params[:quizz])
         flash[:notice] << 'Quizz was successfully updated.'
-        format.html { redirect_to @quizz } #, :notice << 'Quizz was successfully updated.'}
-        #' Answer was successfully marked.' }
+        format.html { redirect_to @quizz }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

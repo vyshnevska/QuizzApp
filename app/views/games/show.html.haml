@@ -1,4 +1,3 @@
-%p#notice= notice
 %p
   =@game.id
 %p
@@ -13,8 +12,9 @@
   -else
     %strong=@game.points
 %br
-= link_to 'Start', start_game_path(@game)
-\|
+-if @game.points.nil?
+  = link_to 'Start', start_game_path(@game)
+  \|
 = link_to 'Edit', edit_game_path(@game)
 \|
 = link_to 'Back', games_path

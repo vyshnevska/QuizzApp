@@ -74,12 +74,24 @@ class GamesController < ApplicationController
   end
 
   def finish
+
     @game = Game.find(params[:id])
-    details =params[:answers]
+    details = params[:answers]
     details.each do |q, a|
       @g_d = GameDetail.new(:game_id => params[:id], :question_id => q, :answer_id => a)
       @g_d.save
     end
+    det = GameDetail.where(:game_id => params[:id])
+    @game.points = 0
+    det.each do |d|
+      @ans = Answer.where(:id => d.answer_id)
+      #binding.pry
+      if @ans.first.is_correct?
+        @game.points += 10
+      end
+    end
+
+    @game.save
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: "You have finished this game successfully!" }
@@ -87,4 +99,5 @@ class GamesController < ApplicationController
       end
     end
   end
+
 end

@@ -6,7 +6,13 @@
   %strong=@game.user.name
   wants to play game:
   %strong=@game.quizz.description
-
+%p
+  Points:
+  -if @game.points.nil?
+    %strong 0
+  -else
+    %strong=@game.points
+%br
 = link_to 'Start', start_game_path(@game)
 \|
 = link_to 'Edit', edit_game_path(@game)

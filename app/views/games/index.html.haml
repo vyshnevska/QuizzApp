@@ -1,6 +1,8 @@
 -#%link{:href => "/assets/stylesheets/my_bootstrap.css", :rel => "stylesheet"}
 %h1 Listing games
-- @games.each do |game|
+
+%h3 Available games
+- @games_new.each do |game|
   %table
     %tr
       %th
@@ -22,6 +24,34 @@
         %strong=game.quizz.description
     %tr
       %td.col= link_to '|Start|', start_game_path(game)
+      %td.col= link_to '|Show|', game
+      %td.col= link_to '|Edit|', edit_game_path(game)
+      %td.col= link_to '|Destroy|', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+%h3 Passed games
+- @games_passed.each do |game|
+  %table
+    %tr
+      %th
+        Game:
+        %strong=game.id
+      %th
+      %th
+        Points:
+        -if game.points.nil?
+          %strong 0
+        -else
+          %strong=game.points
+      %th
+    %tr
+      %td{:colspan => 4}
+        Player
+        %strong=game.user.name
+        wants to play game:
+        %strong=game.quizz.description
+    %tr
+      %td.col= link_to '|Started|', start_game_path(game)
       %td.col= link_to '|Show|', game
       %td.col= link_to '|Edit|', edit_game_path(game)
       %td.col= link_to '|Destroy|', game, :method => :delete, :data => { :confirm => 'Are you sure?' }

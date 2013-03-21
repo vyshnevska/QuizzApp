@@ -1,6 +1,11 @@
 class GamesController < ApplicationController
   def index
-    @games = Game.all
+    #@games = Game.all
+    #binding.pry
+    @user = current_user
+
+    @games_new = Game.where('user_id != ?', @user.id)
+    @games_passed = Game.where('user_id = ?', @user.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -69,7 +74,7 @@ class GamesController < ApplicationController
   end
 
   def start
-    @game = Game.find_by_id(params[:id])
+    @game = Game.find_by_id(params[:id]).where('user_id != ?', @user.id)
     @quizz = Quizz.where(:id => @game.quizz_id).first
   end
 
@@ -85,7 +90,7 @@ class GamesController < ApplicationController
     @game.points = 0
     det.each do |d|
       @ans = Answer.where(:id => d.answer_id)
-      #binding.pry
+
       if @ans.first.is_correct?
         @game.points += 10
       end

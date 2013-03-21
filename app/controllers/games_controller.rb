@@ -1,6 +1,11 @@
 class GamesController < ApplicationController
   def index
-    @games = Game.all
+    #@games = Game.all
+    #binding.pry
+    @user = current_user
+
+    @games_new = Game.where('user_id != ?', @user.id)
+    @games_passed = Game.where('user_id = ?', @user.id)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -69,17 +74,29 @@ class GamesController < ApplicationController
   end
 
   def start
-    @game = Game.find_by_id(params[:id])
+    @game = Game.find_by_id(params[:id]).where('user_id != ?', @user.id)
     @quizz = Quizz.where(:id => @game.quizz_id).first
   end
 
   def finish
+
     @game = Game.find(params[:id])
-    details =params[:answers]
+    details = params[:answers]
     details.each do |q, a|
       @g_d = GameDetail.new(:game_id => params[:id], :question_id => q, :answer_id => a)
       @g_d.save
     end
+    det = GameDetail.where(:game_id => params[:id])
+    @game.points = 0
+    det.each do |d|
+      @ans = Answer.where(:id => d.answer_id)
+
+      if @ans.first.is_correct?
+        @game.points += 10
+      end
+    end
+
+    @game.save
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: "You have finished this game successfully!" }
@@ -87,4 +104,5 @@ class GamesController < ApplicationController
       end
     end
   end
+
 end

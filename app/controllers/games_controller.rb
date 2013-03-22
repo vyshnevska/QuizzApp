@@ -4,25 +4,24 @@ class GamesController < ApplicationController
     @user = current_user
     @games_new = []
     @games_passed = []
+    #@q_new = []
+    #@q_passed = []
 
     if @user
-      #@g = Game.where('user_id != ?', @user.id)
-
-      #@d = @g.joins('INNER JOIN game_details ON games.id = game_details.game_id')
       @g.each do |g|
         @d = GameDetail.where(:game_id => g.id)
         #binding.pry
         if @d.empty?
           @games_new << g #Game.where('points IS NULL')
-          #@games_passed = []
+          #@q_new = Quizz.where(:id => g.quizz_id)
         else
-          #@games_new = []
           @games_passed << g
+          #@q_passed = Quizz.where(:id => g.quizz_id)
         end
       end
     else
       @games_new << @g
-      #@games_passed = []
+      #@q_new = Quizz.where(:id => @g.quizz_id)
     end
 
 

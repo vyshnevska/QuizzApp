@@ -1,5 +1,5 @@
 -#%link{:href => "/assets/stylesheets/my_bootstrap.css", :rel => "stylesheet"}
-%h1 Listing games
+%h2 Listing games
 
 %h3 Available games
 - @games_new.each do |game|
@@ -26,8 +26,10 @@
       %td.col= link_to '|Start|', start_game_path(game)
       %td.col= link_to '|Show|', game
       %td.col= link_to '|Edit|', edit_game_path(game)
-      %td.col= link_to '|Destroy|', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+      -if current_user.admin
+        %td.col= link_to '|Destroy|', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      -else
+        %td.col
 %br
 %h3 Passed games
 - @games_passed.each do |game|
@@ -54,6 +56,9 @@
       %td.col= link_to '|Review|' #not implemented yet
       %td.col= link_to '|Show|', game
       %td.col= link_to '|Edit|', edit_game_path(game)
-      %td.col= link_to '|Destroy|', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      -if current_user.admin
+        %td.col= link_to '|Destroy|', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      -else
+        %td.col
 %br
 = link_to 'New Game', new_game_path

@@ -2,6 +2,7 @@ require "pry"
 
 class QuizzsController < ApplicationController
   def index
+    #binding.pry
     @quizzs = Quizz.all
 
     respond_to do |format|

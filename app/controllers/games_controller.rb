@@ -20,7 +20,10 @@ class GamesController < ApplicationController
         end
       end
     else
-      @games_new << @g
+      @g.each do |g2|
+        #binding.pry
+        @games_new << g2
+      end
       #@q_new = Quizz.where(:id => @g.quizz_id)
     end
 

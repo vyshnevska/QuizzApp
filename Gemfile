@@ -28,6 +28,7 @@ gem "haml-rails", :group => :development
 gem "nested_form"
 
 gem 'bootstrap-sass'
+gem "heroku"
 #gem "mailcatcher"
 
 #gem 'rb-readline'

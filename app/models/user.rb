@@ -17,11 +17,9 @@ class User < ActiveRecord::Base
   after_create :assign_role
 
   def assign_role
-    binding.pry
     if self.name == "nvyshnev"
       self.admin = true
     end
     self.save
   end
-
 end

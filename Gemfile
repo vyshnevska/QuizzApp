@@ -39,3 +39,4 @@ group :test, :development do
 end
 
 gem "pry", :group => :development
+gem "pry"

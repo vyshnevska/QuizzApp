@@ -20,6 +20,7 @@ gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 gem 'devise'
 gem "haml-rails", :group => :development
+gem "haml-rails", :group => :production
 gem "nested_form"
 
 gem 'bootstrap-sass'

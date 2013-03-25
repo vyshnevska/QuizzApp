@@ -2,8 +2,8 @@
 %h2 Listing games
 
 %h3 Available games
-- @games_new.each do |game|
-  %table
+%table
+  - @games_new.each do |game|
     %tr
       %th
         Game:
@@ -32,6 +32,7 @@
         %td.col
 %br
 %h3 Passed games
+
 - @games_passed.each do |game|
   %table
     %tr

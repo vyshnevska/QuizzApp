@@ -29,12 +29,11 @@
 
 = form_for @game, :url => finish_game_path(@game) do |f|
   .actions
-    =f.label "Quizz"
-    =@quizz.description
+    %h5=@quizz.description
     %ul{:id => "qns-list"}
       -@quizz.questions.each do |q|
         %li{:data => {:checked => 0 }}
-          =f.label "#{q.title}"
+          %h6="#{q.title}"
           -q.answers.each do |a|
             %div
               =radio_button_tag "answers[#{q.id}]", "#{a.id}", false, :class =>"#{q.id}"

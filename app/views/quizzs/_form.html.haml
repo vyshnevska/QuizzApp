@@ -1,5 +1,5 @@
 = javascript_include_tag "nested_form"
--#= javascript_include_tag :defaults, "nested_form"
+
 = nested_form_for @quizz do |f|
   - if @quizz.errors.any?
     #error_explanation
@@ -14,5 +14,5 @@
       = f.fields_for :questions do |q|
         = render "questions_fields", :q => q
       = f.link_to_add "Add a question", :questions
-      %br
+    %br
     = f.submit 'Save'

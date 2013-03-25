@@ -1,7 +1,11 @@
 QuizzApp::Application.routes.draw do
   resources :games do
     get 'start', :on => :member
-    post 'finish', :on => :member
+    put 'finish', :on => :member
+    get "welcome", :on => :collection
+    #member do
+    #  put :finish
+    #end
     resources :game_details
   end
 
@@ -13,7 +17,7 @@ QuizzApp::Application.routes.draw do
 
   #resources :users
   devise_for :users do get '/users/sign_out' => 'devise/sessions#destroy' end
-  root :to => "quizzs#index"
+  root :to => "games#welcome"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

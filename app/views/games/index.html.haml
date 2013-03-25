@@ -45,6 +45,9 @@
           %strong 0
         -else
           %strong=game.points
+        (of
+        =game.quizz.questions.count*10
+        )
       %th
     %tr
       %td{:colspan => 4}

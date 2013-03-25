@@ -3,7 +3,8 @@
     $('#progress').css('width', "900px");
 
     $("input").click(function(){
-      parent_tag = $(this).parent();
+      parent_div = $(this).parent();
+      parent_tag = parent_div.parent();
       value = $(parent_tag[0]).attr("data-checked")
       if (value == 0) {
       //pulling current width
@@ -26,17 +27,17 @@
 %div{ :id => "progress", :class => "progress progress-warning progress-striped active" }
   %div{ :id => "myprogress", :class => "bar", :style =>"width:0px" }
 
-%form{ :action => "finish", :method => "post"}
-  %fieldset
+= form_for @game, :url => finish_game_path(@game) do |f|
+  .actions
+    =f.label "Quizz"
+    =@quizz.description
     %ul{:id => "qns-list"}
-      %p.temp= @quizz.id
-      %h5= @quizz.description
-      - @quizz.questions.each do |q|
+      -@quizz.questions.each do |q|
         %li{:data => {:checked => 0 }}
-          %h6= q.title
-          %p.temp=q.id
-          - q.answers.each do |a|
-            %input{:type => "radio", :name => "answers[#{q.id}]", :class =>"#{q.id}", :value => a.id}
-            = a.content
-            %p.temp=a.id
-    %input{:type => "submit", :value => "Finish", :class => "button"}
+          =f.label "#{q.title}"
+          -q.answers.each do |a|
+            %div
+              =radio_button_tag "answers[#{q.id}]", "#{a.id}", false, :class =>"#{q.id}"
+              =f.label "#{a.content}"
+    %br
+  = f.submit 'Save'

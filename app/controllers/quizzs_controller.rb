@@ -24,10 +24,11 @@ class QuizzsController < ApplicationController
     @quizz = Quizz.new
     question = @quizz.questions.build
     question.answers.build
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @quizz }
-    end
+   render :action => "edit"
+    #respond_to do |format|
+    #  format.html # new.html.erb
+    #  format.json { render json: @quizz }
+    #end
   end
 
   def edit

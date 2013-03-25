@@ -1,3 +1,9 @@
+- if @game.errors.any?
+  #error_explanation
+    %div{:class=> "alert alert-error"}
+      - @game.errors.full_messages.each do |msg|
+        = msg
+
 %p
   =@game.id
 %p
@@ -11,10 +17,12 @@
     %strong 0
   -else
     %strong=@game.points
+    (of
+    =@game.quizz.questions.count*10
+    )
 %br
 -if @game.points.nil?
   = link_to 'Start', start_game_path(@game)
   \|
-= link_to 'Edit', edit_game_path(@game)
-\|
+-#= link_to 'Edit', edit_game_path(@game)
 = link_to 'Back', games_path

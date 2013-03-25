@@ -1,16 +1,19 @@
 class GamesController < ApplicationController
+  #before_filter :authenticate_user!
+  skip_before_filter :authenticate_user!, :only => :welcome
+
+  def welcome
+    #do nothing
+  end
   def index
+    #binding.pry
     @g = Game.all
     @user = current_user
     @games_new = []
     @games_passed = []
-    #@q_new = []
-    #@q_passed = []
-
     if @user
       @g.each do |g|
         @d = GameDetail.where(:game_id => g.id)
-        #binding.pry
         if @d.empty?
           @games_new << g #Game.where('points IS NULL')
           #@q_new = Quizz.where(:id => g.quizz_id)
@@ -21,18 +24,9 @@ class GamesController < ApplicationController
       end
     else
       @g.each do |g2|
-        #binding.pry
-        @games_new << g2
+         @games_new << g2
       end
-      #@q_new = Quizz.where(:id => @g.quizz_id)
     end
-
-
-    #@games_new = Game.where('points IS NULL and ')
-    #Game.where('user_id != ?', @user.id)
-    #@games_passed = Game.where('user_id = ?', @user.id)
-
-    #@games_passed = Game.where('points IS NOT NULL')
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @games }
@@ -100,32 +94,34 @@ class GamesController < ApplicationController
 
   def start
     @game = Game.find_by_id(params[:id])
-    @quizz = Quizz.where(:id => @game.quizz_id).first
+    @quizz = @game.quizz
   end
 
   def finish
-
     @game = Game.find(params[:id])
-    details = params[:answers]
-    details.each do |q, a|
-      @g_d = GameDetail.new(:game_id => params[:id], :question_id => q, :answer_id => a)
-      @g_d.save
-    end
-    det = GameDetail.where(:game_id => params[:id])
-    @game.points = 0
-    det.each do |d|
-      @ans = Answer.where(:id => d.answer_id)
-
-      if @ans.first.is_correct?
-        @game.points += 10
+    if GameDetail.where(:game_id => @game.id).blank?
+      @answers = params[:answers]
+      @game.points = 0
+      @answers.each do |q_id, a_id|
+        @game.game_details.create(:question_id => q_id, :answer_id => a_id)
+        if Answer.find_by_id(a_id).is_correct?
+          @game.points += 10
+        end
       end
+    else
+      flash[:error] = "Can't run the same game twice. This game was already finished!"
+      @game.errors.add(:base, "Can't run the same game twice. Game #{@game.id} was already finished!")
     end
-
-    @game.save
+    #binding.pry
     respond_to do |format|
-      if @game.save
+      if !@game.errors.any?
+        @game.save
         format.html { redirect_to @game, notice: "You have finished this game successfully!" }
         format.json { head :no_content }
+
+      else
+        format.html {redirect_to games_path }
+
       end
     end
   end

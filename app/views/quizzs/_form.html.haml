@@ -1,18 +1,16 @@
 = javascript_include_tag "nested_form"
-
+-@quizz= Quizz.new if @quizz.nil?
 = nested_form_for @quizz do |f|
   - if @quizz.errors.any?
     #error_explanation
     %div{:class=> "alert alert-error"}
       - @quizz.errors.full_messages.each do |msg|
         = msg
-
   .actions
-    = nested_form_for(@quizz) do |f|
-      = f.label "Quizz Title"
-      = f.text_field :description
-      = f.fields_for :questions do |q|
-        = render "questions_fields", :q => q
-      = f.link_to_add "Add a question", :questions
-    %br
-    = f.submit 'Save'
+    = f.label "Quizz Title"
+    = f.text_field :description
+    = f.fields_for :questions do |q|
+      = render "quizzs/questions_fields", :q => q
+    = f.link_to_add "Add a question", :questions
+  %br
+  = f.submit 'Save'

@@ -1,21 +1,21 @@
--#%link{:href => "/assets/stylesheets/my_bootstrap.css", :rel => "stylesheet"}
 %h2 Listing games
-
-%h3 Available games
 %table
+  %tr
+    %td{:colspan => 4} 
+      %h3 Available games
   - @games_new.each do |game|
     %tr
-      %th
+      %td
         Game:
         %strong=game.id
-      %th
-      %th
+      %td.date= game.created_at.to_formatted_s(:short)
+      %td.date= game.updated_at.to_formatted_s(:short)
+      %td
         Points:
         -if game.points.nil?
           %strong 0
         -else
           %strong=game.points
-      %th
     %tr
       %td{:colspan => 4}
         Player
@@ -30,17 +30,17 @@
         %td.col= link_to '|Destroy|', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
       -else
         %td.col
-%br
-%h3 Passed games
-
-%table
+  %tr
+    %td{:colspan => 4}
+      %h3 Passed games
   - @games_passed.each do |game|
     %tr
-      %th
+      %td
         Game:
-        %strong=game.id
-      %th
-      %th
+        %strong= game.id
+      %td.date= game.created_at.to_formatted_s(:short)
+      %td.date= game.updated_at.to_formatted_s(:short)
+      %td
         Points:
         -if game.points.nil?
           %strong 0
@@ -49,7 +49,7 @@
         (of
         =game.quizz.questions.count*10
         )
-      %th
+     
     %tr
       %td{:colspan => 4}
         Player

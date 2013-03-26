@@ -24,5 +24,7 @@
 -if @game.points.nil?
   = link_to 'Start', start_game_path(@game)
   \|
--#= link_to 'Edit', edit_game_path(@game)
+-else
+  =render :partial =>"games/details", :locals => {:game => @game}
 = link_to 'Back', games_path
+

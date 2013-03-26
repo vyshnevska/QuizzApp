@@ -1,0 +1,12 @@
+-game.quizz.questions.each do |q|
+  %ul
+    %h5= q.title
+    -q.answers.each do |a|
+      %li
+        / -game.game_details.each do |det|
+        -if a.is_correct?
+          -if game.game_details.include?(a)
+            %strong= a.content
+          %p.temp= a.content
+        - else
+          %p= a.content

@@ -25,6 +25,6 @@
   = link_to 'Start', start_game_path(@game)
   \|
 -else
-  =render :partial =>"games/details", :locals => {:game => @game}
+  =render :partial =>"games/details", :locals => {:game => @game, :answers => @answers}
 = link_to 'Back', games_path
 

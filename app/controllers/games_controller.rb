@@ -35,6 +35,14 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    details = GameDetail.where(:game_id => params[:id])
+    @answers = []
+    if !details.blank?
+      details.each do |d|
+        @answers << d.answer_id
+      end
+    end
+    #binding.pry
 
     respond_to do |format|
       format.html # show.html.erb

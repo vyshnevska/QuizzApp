@@ -1,7 +1,4 @@
 class User < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :token_authenticatable, :confirmable,
-  # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -10,16 +7,15 @@ class User < ActiveRecord::Base
 
   has_many :games
   has_many :quizzs, :through => :games
-
   ROLES = %w[admin guest]
-
   validates :name, :presence => true, :uniqueness => true
   after_create :assign_role
 
+private
   def assign_role
-    if self.name == "nvyshnev"
-      self.admin = true
+    if name == "nvyshnev"
+      admin = true
     end
-    self.save
+    save
   end
 end

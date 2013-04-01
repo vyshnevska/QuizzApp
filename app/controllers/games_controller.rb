@@ -5,31 +5,15 @@ class GamesController < ApplicationController
   def welcome
     #do nothing
   end
+
   def index
-    #binding.pry
-    @g = Game.all
-    @user = current_user
-    @games_new = []
-    @games_passed = []
-    if @user
-      @g.each do |g|
-        @d = GameDetail.where(:game_id => g.id)
-        if @d.empty?
-          @games_new << g #Game.where('points IS NULL')
-          #@q_new = Quizz.where(:id => g.quizz_id)
-        else
-          @games_passed << g
-          #@q_passed = Quizz.where(:id => g.quizz_id)
-        end
-      end
-    else
-      @g.each do |g2|
-         @games_new << g2
-      end
-    end
+    # @user_games = Game.user_games current_user
+    @games_new = current_user.games.created_games
+    @games_passed = current_user.games.passed_games
+    
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @games }
+      format.json { render json: @games_new + @games_passed }
     end
   end
 

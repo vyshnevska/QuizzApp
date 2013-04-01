@@ -10,6 +10,7 @@
           -if answers.include?(a.id)
             %strong= a.content
           -else
-            %p.temp= a.content
+            %strong
+              %p.temp= a.content
         - else
           %p= a.content

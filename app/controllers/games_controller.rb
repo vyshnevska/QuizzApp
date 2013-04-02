@@ -34,6 +34,11 @@ class GamesController < ApplicationController
     end
   end
 
+  def review
+    @game = Game.find(params[:id])
+    render :show, :game => @game #:locals => {:params => params }
+  end
+
   def new
     @game = Game.new
     respond_to do |format|

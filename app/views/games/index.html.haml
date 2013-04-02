@@ -57,7 +57,7 @@
         wants to play game:
         %strong=game.quizz.description
     %tr
-      %td.col= link_to '|Review|' #not implemented yet
+      %td.col= link_to '|Review|', review_game_path(game)
       %td.col= link_to '|Show|', game
       %td.col= link_to '|Edit|', edit_game_path(game)
       -if current_user.admin

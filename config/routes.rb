@@ -3,6 +3,7 @@ QuizzApp::Application.routes.draw do
     get 'start', :on => :member
     put 'finish', :on => :member
     get "welcome", :on => :collection
+    get 'review', :on => :member
     #member do
     #  put :finish
     #end

@@ -5,6 +5,15 @@ p.temp, *.temp{
   color: red;
   font-style:italic;
 }
+p.user_answer{
+  color: mediumvioletred;
+  font-style:italic;
+}
+p.correct_answer{
+  color: green;
+  font-style:italic;
+}
+
 h5, h6 {
   font-weight: 10;
 }

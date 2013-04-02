@@ -2,15 +2,14 @@
   %ul
     %h5= q.title
     -q.answers.each do |a|
-      =a.id
-      =answers
       %li
-        / -game.game_details.each do |det|
-        -if a.is_correct?
-          -if answers.include?(a.id)
-            %strong= a.content
+        -if answers.include?(a.id)
+          -if a.is_correct?
+            %p.correct_answer= a.content
           -else
-            %strong
-              %p.temp= a.content
+            %p.user_answer= a.content
         - else
-          %p= a.content
+          -if a.is_correct?
+            %p.correct_answer= a.content
+          -else
+            %p= a.content

@@ -2,34 +2,19 @@ require "pry"
 
 class QuizzsController < ApplicationController
   def index
-    #binding.pry
     @quizzs = Quizz.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @quizzs }
-    end
   end
 
   def show
     @quizz = Quizz.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @quizz }
-    end
   end
 
  def new
-    @quizz = Quizz.new
-    question = @quizz.questions.build
-    question.answers.build
-   render :action => "edit"
-    #respond_to do |format|
-    #  format.html # new.html.erb
-    #  format.json { render json: @quizz }
-    #end
-  end
+   @quizz = Quizz.new
+   question = @quizz.questions.build
+   question.answers.build
+   #render :edit
+ end
 
   def edit
     @quizz = Quizz.find(params[:id])
@@ -37,25 +22,20 @@ class QuizzsController < ApplicationController
   end
 
   def create
-    #binding.pry
     @quizz = Quizz.create(params[:quizz])
-    respond_to do |format|
-      if @quizz.save
-        flash[:notice] = "Thank you for creating this quizz. "
-        if @quizz.update_attribute(:status, "editable")
-          flash[:notice] << "Editable mode."
-        end
-        format.html { redirect_to @quizz}
-        format.js
-      else
-        format.html { render action: "new" }
-        flash[:error] = "Please fix below errors."
+    if @quizz.save
+      flash[:notice] = "Thank you for creating this quizz. "
+      if @quizz.update_attribute(:status, "editable")
+        flash[:notice] << "Editable mode."
       end
+      redirect_to @quizz
+    else
+      render :new
+      flash[:error] = "Please fix below errors."
     end
   end
 
   def update
-    #binding.pry
     ids = []
     q_saved_ids = []
     a_saved_ids = []
@@ -87,25 +67,17 @@ class QuizzsController < ApplicationController
     else
       flash[:notice] = 'No answer was marked. '
     end
-    respond_to do |format|
-      if @quizz.update_attributes(params[:quizz])
+    if @quizz.update_attributes(params[:quizz])
         flash[:notice] << 'Quizz was successfully updated.'
-        format.html { redirect_to @quizz }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @quizz.errors, status: :unprocessable_entity }
-      end
+        redirect_to @quizz
+    else
+      render :edit
     end
   end
 
   def destroy
     @quizz = Quizz.find(params[:id])
     @quizz.destroy
-
-    respond_to do |format|
-      format.html { redirect_to quizzs_url }
-      format.json { head :no_content }
-    end
+    redirect_to quizzs_url
   end
 end

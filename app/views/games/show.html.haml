@@ -3,9 +3,11 @@
     %div{:class=> "alert alert-error"}
       - @game.errors.full_messages.each do |msg|
         = msg
+-if @answers
+  %h4 Reviewing game
+-else
+  %h4 Showing game
 
-%p
-  =@game.id
 %p
   Player
   %strong=@game.user.name
@@ -25,6 +27,7 @@
   = link_to 'Start', start_game_path(@game)
   \|
 -else
-  =render :partial =>"games/details", :locals => {:game => @game, :answers => @answers}
+  -if @answers
+    =render :partial =>"games/details", :locals => {:game => @game, :answers => @answers}
 = link_to 'Back', games_path
 

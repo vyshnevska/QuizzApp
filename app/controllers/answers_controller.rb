@@ -1,3 +1,2 @@
 class AnswersController < ApplicationController
-
 end

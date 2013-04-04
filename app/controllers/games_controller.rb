@@ -7,44 +7,42 @@ class GamesController < ApplicationController
   end
 
   def index
-    # @user_games = Game.user_games current_user
-    @games_new = current_user.games.created_games
-    @games_passed = current_user.games.passed_games
-    
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @games_new + @games_passed }
+    if current_user.is_admin
+      @games_new = Game.created_games
+      @games_passed = Game.passed_games
+    else
+      @games_new = current_user.games.created_games
+      @games_passed = current_user.games.passed_games
     end
   end
 
   def show
     @game = Game.find(params[:id])
-    details = GameDetail.where(:game_id => params[:id])
+    #details = GameDetail.where(:game_id => params[:id])
+    #details = @game.game_details
+    #@answers = []
+    #if !details.blank?
+    #  details.each do |d|
+    #    @answers << d.answer_id
+    #  end
+    #end
+  end
+
+  def review
+    @game = Game.find(params[:id])
+    details = @game.game_details
     @answers = []
     if !details.blank?
       details.each do |d|
         @answers << d.answer_id
       end
     end
-    #binding.pry
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @game }
-    end
-  end
-
-  def review
-    @game = Game.find(params[:id])
-    render :show, :game => @game #:locals => {:params => params }
+    flash[:notice] = 'You are reviewing...'
+    render :show, :game => @game , :answers => @answers
   end
 
   def new
     @game = Game.new
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @game }
-    end
   end
 
   def edit
@@ -53,40 +51,26 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.new(params[:game])
-
-    respond_to do |format|
-      if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
-        format.json { render json: @game, status: :created, location: @game }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
+    if @game.save
+      redirect_to @game, notice: 'Game was successfully created.'
+    else
+      render :new
     end
   end
 
   def update
     @game = Game.find(params[:id])
-
-    respond_to do |format|
-      if @game.update_attributes(params[:game])
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
+    if @game.update_attributes(params[:game])
+      redirect_to @game, notice: 'Game was successfully updated.'
+    else
+      render :edit
     end
   end
 
   def destroy
     @game = Game.find(params[:id])
     @game.destroy
-
-    respond_to do |format|
-      format.html { redirect_to games_url }
-      format.json { head :no_content }
-    end
+    redirect_to games_url
   end
 
   def start
@@ -96,30 +80,22 @@ class GamesController < ApplicationController
 
   def finish
     @game = Game.find(params[:id])
-    if GameDetail.where(:game_id => @game.id).blank?
+    if @game.game_details.blank?
       @answers = params[:answers]
       @game.points = 0
       @answers.each do |q_id, a_id|
         @game.game_details.create(:question_id => q_id, :answer_id => a_id)
-        if Answer.find_by_id(a_id).is_correct?
-          @game.points += 10
-        end
+        @game.get_points a_id
       end
     else
       flash[:error] = "Can't run the same game twice. This game was already finished!"
       @game.errors.add(:base, "Can't run the same game twice. Game #{@game.id} was already finished!")
     end
-    #binding.pry
-    respond_to do |format|
-      if !@game.errors.any?
-        @game.save
-        format.html { redirect_to @game, notice: "You have finished this game successfully!" }
-        format.json { head :no_content }
-
-      else
-        format.html {redirect_to games_path }
-
-      end
+    if !@game.errors.any?
+      @game.save
+      redirect_to @game, notice: "You have finished this game successfully!"
+    else
+      redirect_to games_path
     end
   end
 

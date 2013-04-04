@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :admin
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me
 
   has_many :games
   has_many :quizzs, :through => :games
@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
   after_create :assign_role
 
+  def is_admin
+    admin
+  end
 private
   def assign_role
     if name == "nvyshnev"
@@ -18,4 +21,6 @@ private
     end
     save
   end
+
+
 end

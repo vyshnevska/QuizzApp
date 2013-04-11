@@ -7,7 +7,7 @@
     %meta{:content => "", :name => "description"}
     %meta{:content => "", :name => "author"}
     = stylesheet_link_tag "my_bootstrap"
-    = stylesheet_link_tag "quizzs", "navigation_bar"
+    = stylesheet_link_tag "quizzs", "navigation_bar", "layout"
     /
     :css
       body {
@@ -18,7 +18,7 @@
         padding: 9px 0;
       } /
     -#    %link{:href => "/assets/stylesheets/bootstrap-responsive.css", :rel => "stylesheet"}/
-    = javascript_include_tag "application" , "jquery", "games"
+    = javascript_include_tag "application" , "jquery", "games", "quizzes"
     = csrf_meta_tags
 
     = yield(:head)

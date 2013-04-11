@@ -3,5 +3,5 @@
 = q.text_field :title
 = q.fields_for :answers do |a|
   = render 'quizzs/answers_fields', :a => a
-= q.link_to_add "Add an answer", :answers
-= q.link_to_remove "Remove Question"
+= q.link_to_add image_tag('add_icon.png'), :answers , {:class=> "add_el_icon"}
+/ = q.link_to_remove image_tag('delete_icon.png'), {:class=> "remove_el_icon"}

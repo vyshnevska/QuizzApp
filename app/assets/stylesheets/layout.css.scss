@@ -5,6 +5,10 @@
 	/*background: url('/assets/add_icon.png');*/
 	opacity: 0.5;
 }
+#add_answer{
+	margin-left:  15px;
+}
+
 .add_el_icon:hover{
 	width: 45px;
 	height: 45px;
@@ -21,4 +25,7 @@
 	width: 45px;
 	height: 45px;
 	opacity: 1;
+}
+#rem_qstn{
+	display: block;
 }

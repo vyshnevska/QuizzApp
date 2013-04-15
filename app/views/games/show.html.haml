@@ -28,6 +28,6 @@
   \|
 -else
   -if @answers
-    =render :partial =>"games/details", :locals => {:game => @game, :answers => @answers}
+    = render :partial =>"games/details", :locals => {:game => @game, :answers => @answers}
 = link_to 'Back', games_path
 

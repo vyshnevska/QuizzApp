@@ -1,0 +1,35 @@
+%table
+  %tr
+    %td{:colspan => 4}
+      %h3 Passed games
+  - @games_passed.each do |game|
+    %tr
+      %td
+        Game:
+        %strong= game.id
+      %td.date= game.created_at.to_formatted_s(:short)
+      %td.date= game.updated_at.to_formatted_s(:short)
+      %td
+        Points:
+        -if game.points.nil?
+          %strong 0
+        -else
+          %strong=game.points
+        (of
+        =game.quizz.questions.count*10
+        )
+     
+    %tr
+      %td{:colspan => 4}
+        Player
+        %strong=game.user.name
+        wants to play game:
+        %strong=game.quizz.description
+    %tr
+      %td.col= link_to '|Review|', review_game_path(game)
+      %td.col= link_to '|Show|', game
+      %td.col= link_to '|Edit|', edit_game_path(game)
+      -if current_user.admin
+        %td.col= link_to '|Destroy|', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      -else
+        %td.col

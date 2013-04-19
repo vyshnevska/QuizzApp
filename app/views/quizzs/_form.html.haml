@@ -11,6 +11,8 @@
     = f.text_field :description
     = f.fields_for :questions do |q|
       = render "quizzs/questions_fields", :q => q
-    = f.link_to_add image_tag('add_qstn.png'), :questions , {:class=> "add_el_icon", :id => "add_qstn"}
+    = f.label "Add question", {:class => "add_qstn"}
+    = f.link_to_add image_tag('add_qstn.png'), :questions , {:class => "add_el_icon", :id => "add_qstn"}
+  
   %br
   = f.submit 'Save'

@@ -1,0 +1,89 @@
+<!-- <html>
+<body>
+<canvas id="myCanvas"></canvas>
+<script>
+var canvas = document.getElementById('myCanvas');
+canvas.width = width = 470;
+var context = canvas.getContext('2d');
+var drawCircle = function(color, x, y, radius){
+  context.arc(x, y, radius, 0, Math.PI*2, 0);
+  context.fillStyle = '#' + 'ceff99ff78f86eeaaffffd45333'.substr(color*3,3);
+  context.fill();
+  context.beginPath();
+};
+for(i=0; i<7; i++){
+    drawCircle(i%7, width/2, width/2, 250-15*(i+1));
+}
+</script>
+</body> -->
+<!DOCTYPE html>
+<html>
+<!--
+ 
+Created using JS Bin
+Source can be edited via /ecekaw/8/edit
+ 
+-->
+<head>
+<script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<meta charset=utf-8 />
+<title>Artsy</title>
+<!--[if IE]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<style>
+article, aside, figure, footer, header, hgroup,
+menu, nav, section { display: block; }
+</style>
+</head>
+<body>
+<canvas id="canvas" width="320" height="356"></canvas>
+<br/>
+<button id="outputButton">output</button>
+<button id="clearButton">clear</button>
+<p/>
+<div id="output"></div>
+<script>
+ 
+ 
+$(function(){
+ 
+var ctx = $('#canvas')[0].getContext("2d");
+var WIDTH = $("#canvas").width();
+var HEIGHT = $("#canvas").height();
+var CENTER_Y = HEIGHT / 2;
+var CENTER_X = WIDTH / 2;
+var clear = (function clear () {
+ctx.save();
+ctx.fillStyle = 'white';
+ctx.fillRect(0, 0, WIDTH, HEIGHT);
+ctx.strokeRect(0.5, 0.5, WIDTH - 0.5, HEIGHT - 0.5);
+ctx.restore();
+return clear;
+})();
+var draw = function(x, y) {
+ctx.beginPath();
+ctx.moveTo(CENTER_X, CENTER_Y);
+ctx.lineTo(x, y);
+ctx.stroke();
+};
+$('#canvas').mousemove(function(e) {
+var offset = $(this).offset();
+var coords = {};
+coords.x = e.clientX - $(this).offset().left;
+coords.y = e.clientY - $(this).offset().top;
+ 
+draw(coords.x, coords.y);
+});
+$('#outputButton').click(function () {
+var img = $('#canvas')[0].toDataURL("image/png");
+$('#output').prepend($('<img src="'+img+'"/><p/>'));
+});
+$('#clearButton').click(function () {
+clear();
+});
+ 
+});
+</script>
+</body>
+</html>

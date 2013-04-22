@@ -27,7 +27,7 @@ gem 'bootstrap-sass'
 #gem "heroku"
 #gem "mailcatcher"
 
-gem 'rb-readline'
+# gem 'rb-readline'
 
 # For testing
 group :test do

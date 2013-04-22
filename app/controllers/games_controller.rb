@@ -6,6 +6,10 @@ class GamesController < ApplicationController
     #do nothing
   end
 
+  def canvas
+    #do nothing
+  end
+
   def index
     if current_user.is_admin
       @games_new = Game.created_games

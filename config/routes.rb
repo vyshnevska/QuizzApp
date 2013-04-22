@@ -1,6 +1,7 @@
 QuizzApp::Application.routes.draw do
   resources :games do
     get 'start', :on => :member
+    get 'canvas', :on => :collection
     put 'finish', :on => :member
     get "welcome", :on => :collection
     get 'review', :on => :member

@@ -2,3 +2,5 @@
   = render :partial =>"created_games_show", :locals => { :games_new => @games_new }
 -if @games_passed
   = render :partial =>"passed_games_show", :locals => { :games_passed => @games_passed }
+
+= link_to 'New', new_game_path

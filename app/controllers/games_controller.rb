@@ -3,7 +3,15 @@ class GamesController < ApplicationController
   skip_before_filter :authenticate_user!, :only => :welcome
 
   def welcome
-    #do nothing
+    if current_user
+      @count_games = current_user.games.count
+      @c_p = 0
+      @score = 0
+      current_user.games.passed_games.each do |game|
+        @c_p+= game.points
+        @score += game.total_score
+      end 
+    end
   end
 
   def canvas

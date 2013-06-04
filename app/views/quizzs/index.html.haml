@@ -12,10 +12,12 @@
       %td
     %tr.bottom
       %td.col= link_to '|Show|', quizz
-      %td.col= link_to '|Edit|', edit_quizz_path(quizz)
+      -if can? :update, quizz
+        %td.col= link_to '|Edit|', edit_quizz_path(quizz)
       -if current_user.admin
         %td.col= link_to '|Destroy|', quizz, :method => :delete, :data => { :confirm => 'Are you sure?' }
       -else
         %td.col
 %br
+-if can? :create, Quizz.new
   = link_to 'New Quizz', new_quizz_path

@@ -11,11 +11,13 @@ class GamesController < ApplicationController
         @c_p+= game.points
         @score += game.total_score
       end 
+      # UserMailer.welcome_email(current_user).deliver
+      # UserMailer.test_email.deliver
     end
   end
 
   def index
-    if current_user.is_admin
+    if current_user.role == "admin"
       @games_new = Game.created_games
       @games_passed = Game.passed_games
     else

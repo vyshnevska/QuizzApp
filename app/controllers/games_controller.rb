@@ -10,8 +10,10 @@ class GamesController < ApplicationController
       current_user.games.passed_games.each do |game|
         @c_p+= game.points
         @score += game.total_score
-      end 
+      end
+      binding.pry
     end
+
   end
 
   def index

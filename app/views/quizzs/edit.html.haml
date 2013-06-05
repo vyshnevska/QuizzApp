@@ -1,6 +1,10 @@
 %h1 Editing quizz
+-unless @quizz.is_complete?
+  = render 'form'
 
-= render 'form'
-=link_to 'Cancel', quizzs_path
-
-= link_to 'Show', @quizz
+.buttons{:style => "margin: 9px 0 5px;"} 
+  %button.btn.btn-info
+    = link_to 'Show', @quizz, :style => "text-decoration: none; color: #ffffff;"
+  %button.btn.btn-warning
+    =link_to 'Cancel', quizzs_path, :style => "text-decoration: none; color: #ffffff;"
+  

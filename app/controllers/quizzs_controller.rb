@@ -19,15 +19,18 @@ class QuizzsController < ApplicationController
   def edit
     @quizz = Quizz.find(params[:id])
     flash[:notice] = "Please add question and answers for #{@quizz.description}. Mark correct answers."
+    if @quizz.is_draft?
+      flash[:notice] << "This quizz is in editable mode."
+    else
+      flash[:notice] << "You can't edit this quizz."
+     end
+    
   end
 
   def create
     @quizz = Quizz.create(params[:quizz])
     if @quizz.save
       flash[:notice] = "Thank you for creating this quizz. "
-      if @quizz.update_attribute(:status, "editable")
-        flash[:notice] << "Editable mode."
-      end
       redirect_to @quizz
     else
       render :new

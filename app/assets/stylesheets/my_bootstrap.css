@@ -2769,7 +2769,8 @@ button.close {
     *margin-left: .3em;
     font-size: 14px;
     line-height: 20px;
-    color: #999;
+    /*color: #999;*/
+    color: #555;
     text-align: center;
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
     vertical-align: middle;
@@ -5754,7 +5755,7 @@ div.subnav-fixed {
     text-shadow: none
 }
 
-.btn {
+/*.btn {
     padding: 5px 12px;
     text-shadow: none;
     background-image: none;
@@ -5765,7 +5766,7 @@ div.subnav-fixed {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none
-}
+}*/
 
 .btn.disabled {
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05)

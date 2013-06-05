@@ -13,9 +13,10 @@
 
   <div><%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation %></div>
-
-  <div><%= f.label :role %><br />
-    <%= f.collection_select :role, User::ROLES, :to_s, :humanize %></div>
+  <% if can? :create, User.new %>
+    <div><%= f.label :role %><br />
+      <%= f.collection_select :role, User::ROLES, :to_s, :humanize %></div>
+  <% end %>
 
   <div><%= f.submit "Sign up" %></div>
 <% end %>

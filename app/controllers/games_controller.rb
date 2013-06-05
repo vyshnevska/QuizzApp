@@ -11,8 +11,9 @@ class GamesController < ApplicationController
         @c_p+= game.points
         @score += game.total_score
       end 
-      # UserMailer.welcome_email(current_user).deliver
-      # UserMailer.test_email.deliver
+       UserMailer.welcome_email(current_user).deliver
+       flash[:notice] = "Email is sent to #{current_user.name}"
+       # UserMailer.test_email.deliver
     end
 
   end

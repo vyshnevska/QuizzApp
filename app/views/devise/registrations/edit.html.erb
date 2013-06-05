@@ -21,7 +21,10 @@
   <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
   <%= f.password_field :current_password %></div>
 
-  <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
+   <% if can? :create, User.new %>
+    <div><%= f.label :role %><br />
+    <%= f.collection_select :role, User::ROLES, :to_s, :humanize %></div>
+   <% end %>
 
   <div><%= f.submit "Update" %></div>
 <% end %>

@@ -9,16 +9,13 @@ class User < ActiveRecord::Base
   has_many :quizzs, :through => :games
   ROLES = %w[admin guest simple_user]
   validates :name, :presence => true, :uniqueness => true
-  # after_create :assign_role
+  after_create :assign_role
 
 #   def is_admin
 #     admin
 #   end
-# private
-#   def assign_role
-#     if name == "nvyshnev"
-#       admin = true
-#     end
-#     save
-#   end
+private
+  def assign_role
+    self.role = "guest" unless role.nil?
+  end
 end

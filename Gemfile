@@ -7,7 +7,7 @@ gem 'rails', '3.2.9'
 
 
 gem "pg", :group => :production
-gem "sqlite3-ruby", :group => :development
+gem "sqlite3", :group => :development
 
 
 # Gems used only for assets and not required

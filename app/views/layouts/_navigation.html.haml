@@ -17,7 +17,7 @@
       = link_to("Games", games_path)
     %li.user_email
       %strong= current_user.email
-    - if current_user.admin
+    - if current_user.role == "admin"
       %li.user_a_role
         %strong Admin
     - else

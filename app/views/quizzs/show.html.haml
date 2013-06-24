@@ -2,15 +2,16 @@
 	-page_title @quizz.description, :action
 
 %ul
-	- @quizz.questions.each do |q|
-		%li
-			%h6= q.title
-			- q.answers.each do |a|
-				%ul
-					- if a.is_correct?
-						%p.temp= a.content
-					- else
-						%p= a.content
+  %h5= @quizz.description
+  - @quizz.questions.each do |q|
+    %li
+      %h6= q.title
+      - q.answers.each do |a|
+        %ul
+          - if a.is_correct?
+            %p.temp= a.content
+          - else
+            %p= a.content
 
 = link_to 'Edit', edit_quizz_path(@quizz)
 \|

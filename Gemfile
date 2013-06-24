@@ -21,6 +21,7 @@ gem 'jquery-rails'
 
 gem 'devise'
 gem "cancan"
+gem 'backbone-on-rails'
 
 gem "haml-rails", :group => :development
 gem "haml-rails", :group => :production

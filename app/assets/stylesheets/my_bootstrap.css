@@ -94,6 +94,15 @@ img {
     -ms-interpolation-mode: bicubic
 }
 
+.brand img {
+    width: auto\9;
+    height: 50px;
+    max-width: 100%;
+    vertical-align: middle;
+    border: 0;
+    -ms-interpolation-mode: bicubic
+}
+
 #map_canvas img, .google-maps img {
     max-width: none
 }
@@ -583,6 +592,10 @@ a:hover, a:focus {
     margin-right: auto;
     margin-left: auto;
     *zoom: 1
+}
+
+.content{
+    margin-top: 5px;
 }
 
 .container:before, .container:after {

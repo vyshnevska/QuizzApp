@@ -22,9 +22,11 @@ class GamesController < ApplicationController
     if current_user.role == "admin"
       @games_new = Game.created_games
       @games_passed = Game.passed_games
+      flash[:notice] = "There is no active game now. Please create new." unless Game.exists?
     else
       @games_new = current_user.games.created_games
       @games_passed = current_user.games.passed_games
+      flash[:notice] = "#{current_user.name}, there is no active game now. Please create new." unless current_user.games.exists?
     end
   end
 
@@ -55,6 +57,7 @@ class GamesController < ApplicationController
 
   def new
     @game = Game.new
+    flash[:notice] = nil
   end
 
   def edit

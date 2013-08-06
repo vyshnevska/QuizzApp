@@ -2,6 +2,7 @@ require "pry"
 
 class QuizzsController < ApplicationController
   def index
+    flash[:notice] = "There is no active quizz now. Please create new." unless Quizz.exists?
     @quizzs = Quizz.all
   end
 
@@ -10,6 +11,7 @@ class QuizzsController < ApplicationController
   end
 
  def new
+  flash[:notice]  = nil
    @quizz = Quizz.new
    question = @quizz.questions.build
    question.answers.build

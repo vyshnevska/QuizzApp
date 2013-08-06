@@ -22,3 +22,13 @@
 //= require_tree ./collections
 //= require_tree ./views
 //= require_tree ./routers
+$(function() {
+	
+	//$(".alert").slideUp("slow");
+	//$(".alert").slideDown("slow");
+	setTimeout(function() {
+      $(".alert").slideToggle(1000);
+	}, 2000);
+	 
+
+});

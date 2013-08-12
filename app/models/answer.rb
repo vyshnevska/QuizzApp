@@ -4,14 +4,14 @@ class Answer < ActiveRecord::Base
   validates :content, :presence => true
   
   def is_correct?
-    correct
+    self.correct
   end
 
   def mark_as_correct
-    correct = true
+    self.correct = true
   end
 
   def mark_as_incorrect
-    correct = false
+    self.correct = false
   end
 end

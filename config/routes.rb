@@ -1,16 +1,16 @@
 QuizzApp::Application.routes.draw do
   resources :games do
-    get 'start', :on => :member
-    put 'finish', :on => :member
+    member do
+      get 'start'
+      put 'finish'
+      get 'review'
+    end
+
     get "welcome", :on => :collection
-    get 'review', :on => :member
-    #member do
-    #  put :finish
-    #end
-    resources :game_details
+    resources :details, :controller => "game_details"
   end
 
-  resources :quizzs do
+  resources :quizzs, :shallow => true do
     resources :questions do
       resources :answers
     end

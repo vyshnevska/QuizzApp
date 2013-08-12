@@ -15,3 +15,6 @@
 /tmp
 
 .idea/
+/.bundle
+.DS_Store
+!/log/.gitkeep

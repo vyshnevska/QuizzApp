@@ -30,7 +30,7 @@
     %tr
       %td.col= link_to '|Review|', review_game_path(game)
       %td.col= link_to '|Show|', game
-      %td.col= link_to '|Edit|', edit_game_path(game)
+      %td.col
       -if current_user.admin
         %td.col= link_to '|Destroy|', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
       -else

@@ -1,4 +1,3 @@
-%p.temp= a.object.id
 = a.label "Answer:"
 = check_box_tag "correct_ids[#{a.object.id}]", a.object.id, a.object.is_correct?#, :onclick => "$('#rsvp').submit()" #, {:id => "correct_ids_#{a.object.id}"}
 = a.text_field :content

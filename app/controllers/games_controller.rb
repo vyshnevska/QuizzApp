@@ -110,7 +110,7 @@ class GamesController < ApplicationController
       @game.save
       redirect_to @game, notice: "You have finished this game successfully!"
     else
-      redirect_to games_path
+      redirect_to games_url
     end
   end
 

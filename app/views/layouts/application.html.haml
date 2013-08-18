@@ -31,6 +31,8 @@
       .container
         .content
           .row
+            = yield :page_title
+          .row
             .span12
               = render 'layouts/messages'
               = yield

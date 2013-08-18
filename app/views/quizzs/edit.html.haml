@@ -1,10 +1,12 @@
-%h1 Editing quizz
--unless @quizz.is_complete?
-  = render 'form'
+-content_for :page_title do
+	-page_title "Editing quizz "+ @quizz.description, :action
 
-.buttons{:style => "margin: 9px 0 5px;"} 
-  %button.btn.btn-info
-    = link_to 'Show', @quizz, :style => "text-decoration: none; color: #ffffff;"
-  %button.btn.btn-warning
-    =link_to 'Cancel', quizzs_path, :style => "text-decoration: none; color: #ffffff;"
-  
+-unless @quizz.is_complete?
+	= render 'form'
+
+/ .buttons{:style => "margin: 9px 0 5px;"} 
+/   %button.btn.btn-info
+/     = link_to 'Show', @quizz, :style => "text-decoration: none; color: #ffffff;"
+/   %button.btn.btn-warning
+/     =link_to 'Cancel', quizzs_path, :style => "text-decoration: none; color: #ffffff;"
+/   

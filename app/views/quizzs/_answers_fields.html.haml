@@ -1,5 +1,5 @@
-= a.label "Answer:"
+= a.label :name, "Answer:"
 = check_box_tag "correct_ids[#{a.object.id}]", a.object.id, a.object.is_correct?#, :onclick => "$('#rsvp').submit()" #, {:id => "correct_ids_#{a.object.id}"}
 = a.text_field :content
-= a.label "Remove answer", {:class => "rem_answer"}
+= a.label :name, "Remove answer", {:class => "rem_answer"}
 = a.link_to_remove image_tag('delete_icon.png'), {:class=> "remove_el_icon"}

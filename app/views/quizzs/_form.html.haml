@@ -1,19 +1,17 @@
-= javascript_include_tag "nested_form"
-
 -@quizz= Quizz.new if @quizz.nil?
 = nested_form_for @quizz do |f|
-  - if @quizz.errors.any?
-    #error_explanation
-    %div{:class=> "alert alert-error"}
-      - @quizz.errors.full_messages.each do |msg|
-        = msg
-  .actions
-    = f.label "Quizz Title"
-    = f.text_field :description
-    = f.fields_for :questions do |q|
-      = render "quizzs/questions_fields", :q => q
-    = f.label "Add question", {:class => "add_qstn"}
-    = f.link_to_add image_tag('add_qstn.png'), :questions , {:class => "add_el_icon", :id => "add_qstn"}
-  
-  %br
-  = f.submit 'Save'
+	- if @quizz.errors.any?
+		#error_explanation
+		%div{:class=> "alert alert-error"}
+			- @quizz.errors.full_messages.each do |msg|
+				= msg
+	.actions
+		= f.label :name, "Quizz Title"
+		= f.text_field :description
+		= f.fields_for :questions do |q|
+			= render "quizzs/questions_fields", :q => q
+		= f.label :name, "Add question", {:class => "add_qstn"}
+		= f.link_to_add image_tag('add_qstn.png'), :questions , {:class => "add_el_icon", :id => "add_qstn"}
+
+	%br
+	= f.submit 'Save'

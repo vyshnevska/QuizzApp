@@ -6,7 +6,7 @@ class Quizz < ActiveRecord::Base
   accepts_nested_attributes_for :questions, :allow_destroy => :true
   STATES = %w[draft complete]
 
-  validates :description, :presence => {:message => "Blank quizz name is not allowed." }, :uniqueness => {:message => "Quizz name must be unique." }
+  validates :description, :presence => {:message => I18n.translate('missed_descr') }, :uniqueness => {:message => "Quizz name must be unique." }
 
   before_create :assign_state
 

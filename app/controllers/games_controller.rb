@@ -11,9 +11,9 @@ class GamesController < ApplicationController
         @c_p+= game.points
         @score += game.total_score
       end 
-       UserMailer.welcome_email(current_user).deliver
-       flash[:notice] = "Email is sent to #{current_user.name}"
-       # UserMailer.test_email.deliver
+      UserMailer.welcome_email(current_user).deliver
+      flash[:notice] = I18n.translate('games.send_mail_msg', :current_user => current_user.name)
+      # UserMailer.test_email.deliver
     end
 
   end
@@ -22,11 +22,11 @@ class GamesController < ApplicationController
     if current_user.role == "admin"
       @games_new = Game.created_games
       @games_passed = Game.passed_games
-      flash[:notice] = "There is no active game now. Please create new." unless Game.exists?
+      flash[:notice] = I18n.translate('games.create_new_game_msg') unless Game.exists?
     else
       @games_new = current_user.games.created_games
       @games_passed = current_user.games.passed_games
-      flash[:notice] = "#{current_user.name}, there is no active game now. Please create new." unless current_user.games.exists?
+      flash[:notice] = I18n.translate('games.user_create_new_game_msg', :current_user => current_user.name)  unless current_user.games.exists?
     end
   end
 
@@ -51,7 +51,7 @@ class GamesController < ApplicationController
         @answers << d.answer_id
       end
     end
-    flash[:notice] = 'You are reviewing...'
+    flash[:notice] = I18n.translate('games.review_msg')
     render :show, :game => @game , :answers => @answers
   end
 
@@ -67,7 +67,7 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(params[:game])
     if @game.save
-      redirect_to @game, notice: 'Game was successfully created.'
+      redirect_to @game, notice: I18n.translate('games.successful_create_msg')
     else
       render :new
     end
@@ -76,7 +76,7 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     if @game.update_attributes(params[:game])
-      redirect_to @game, notice: 'Game was successfully updated.'
+      redirect_to @game, notice: I18n.translate('games.successful_update_msg')
     else
       render :edit
     end
@@ -103,12 +103,12 @@ class GamesController < ApplicationController
         @game.get_points a_id
       end
     else
-      flash[:error] = "Can't run the same game twice. This game was already finished!"
+      flash[:error] = I18n.translate('games.run_same_game_error')
       @game.errors.add(:base, "Can't run the same game twice. Game #{@game.id} was already finished!")
     end
     if !@game.errors.any?
       @game.save
-      redirect_to @game, notice: "You have finished this game successfully!"
+      redirect_to @game, notice: I18n.translate('games.successful_finish_msg')
     else
       redirect_to games_url
     end

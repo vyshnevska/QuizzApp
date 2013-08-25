@@ -13,9 +13,17 @@ class GamesController < ApplicationController
       end 
       UserMailer.welcome_email(current_user).deliver
       flash[:notice] = I18n.translate('games.send_mail_msg', :current_user => current_user.name)
-      # UserMailer.test_email.deliver
-    end
 
+      current_user.inverse_friends.each do |fs|
+        @inverse_friends  = fs.name
+      end
+
+      @users = User.without_user(current_user)
+      # UserMailer.test_email.deliver
+    else
+      @users = User.all
+    end
+    
   end
 
   def index

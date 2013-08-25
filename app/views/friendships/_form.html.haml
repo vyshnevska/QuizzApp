@@ -1,0 +1,7 @@
+= semantic_form_for @friendship do |f|
+  = f.inputs do
+    = f.input :user_id
+    = f.input :friend_id
+
+  = f.actions do
+    = f.action :submit, :as => :input

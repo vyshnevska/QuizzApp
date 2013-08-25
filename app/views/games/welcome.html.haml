@@ -7,7 +7,36 @@
     points in
     = @count_games
     games. Total score:
-    =@score
+    = @score
     -if @c_p !=0
       -if @c_p == @score
-        =image_tag "nut.png", :style => "width: 50px; height: 50px;"
+        = image_tag "nut.png", :style => "width: 50px; height: 50px;"
+%h4
+  All users:
+  %br
+  / -if current_user
+  -@users.each do|user|
+    %h5
+      = user.name
+      = user.email
+      = link_to "Add as a Friend", friendships_path(:friend_id => user.id), :method => :post 
+  / -else
+  /   -@users.each do|user|
+  /     = user.name
+  /     = user.email
+  /     %br
+-if current_user
+  %h4
+    Friended by Users:
+    %br
+    -unless current_user.inverse_friends.empty?
+      -current_user.inverse_friends.each do |f|
+        = f.name
+        %br
+    -else
+      %h4 No Friends. Plase Find them.
+      = link_to "Find Friends", root_path
+/ %h3 Friends with
+/ -@friends_with.each do |f|
+/   = f.name
+/   =f.email

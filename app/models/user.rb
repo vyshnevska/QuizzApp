@@ -8,12 +8,17 @@ class User < ActiveRecord::Base
   has_many :games
   has_many :quizzs, :through => :games
   ROLES = %w[admin guest simple_user]
+  
+  #Friendship
+  has_many :friendships
+  has_many :friends, :through => :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+
+  scope :without_user, lambda{|user| user ? {:conditions => ["id != ?", user.id]} : {} }
+
   validates :name, :presence => true, :uniqueness => true
   after_create :assign_role
-
-#   def is_admin
-#     admin
-#   end
 private
   def assign_role
     self.role = "guest" unless role.nil?

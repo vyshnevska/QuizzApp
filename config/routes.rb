@@ -1,4 +1,7 @@
 QuizzApp::Application.routes.draw do
+  resources :friendships
+
+
   resources :games do
     member do
       get 'start'

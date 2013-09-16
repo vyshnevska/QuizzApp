@@ -22,6 +22,7 @@ class GamesController < ApplicationController
       # UserMailer.test_email.deliver
     else
       @users = User.all
+      render 'viz.html'
     end
     
   end

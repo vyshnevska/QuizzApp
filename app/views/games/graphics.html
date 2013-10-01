@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Flower</title>
+	<link rel="stylesheet" href="style.css" type="text/css">
+	
+</head>
+<body>
+	<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://raw.github.com/samizdatco/arbor/master/lib/arbor.js"> </script>
+	<script type="text/javascript" src="https://raw.github.com/samizdatco/arbor/master/demos/_/graphics.js"></script>
+	<script type="text/javascript" src="https://raw.github.com/samizdatco/arbor/master/demos/halfviz/src/renderer.js"></script>-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+	<script src="/assets/arbor.js"></script>
+
+	<canvas id="viewport" width="800" height="600"></canvas>
+	<script language="javascript" type="text/javascript">
+		var sys = arbor.ParticleSystem(1000, 400,1);
+		sys.parameters({gravity:true});
+		sys.renderer = Renderer("#viewport");
+		var animals = sys.addNode('Animals',{'color':'red','shape':'dot','label':'Animals'});
+
+	</script>
+</body>
+</html>

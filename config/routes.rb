@@ -22,6 +22,7 @@ QuizzApp::Application.routes.draw do
   #resources :users
   devise_for :users do get '/users/sign_out' => 'devise/sessions#destroy' end
   root :to => "games#welcome"
+  mount Resque::Server, :at => "/resque"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

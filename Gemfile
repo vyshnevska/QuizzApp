@@ -30,6 +30,7 @@ gem "nested_form"
 gem 'bootstrap-sass'
 #gem "heroku"
 #gem "mailcatcher"
+gem 'resque', :require => "resque/server"
 
 gem 'rb-readline'
 

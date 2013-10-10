@@ -12,6 +12,17 @@ class UserMailer < ActionMailer::Base
     @to =  'ninawish@ukr.net'
     @subject = "This is test email"
     mail(:to => @to, :subject => @subject, :message => "It should get delivered to recipient inbox")
- end
+  end
 
+  def finish_game game_id
+    @mail = 'vyshnevska.n@gmail.com'
+    @subject =  "This game # #{game_id} is finished!"
+    mail(:to => @mail, :subject => @subject)    
+  end
+
+  def start_game game_id
+    @mail = 'vyshnevska.n@gmail.com'
+    @subject =  "This game # #{game_id} just started!"
+    mail(:to => @mail, :subject => @subject)    
+  end
 end

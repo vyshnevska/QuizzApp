@@ -99,6 +99,7 @@ class GamesController < ApplicationController
   def start
     @game = Game.find_by_id(params[:id])
     @quizz = @game.quizz
+    Resque.enqueue(GameStartNotification, @game.id)
   end
 
   def finish
@@ -116,6 +117,7 @@ class GamesController < ApplicationController
     end
     if !@game.errors.any?
       @game.save
+      Resque.enqueue(GameFinishNotification, @game.id)
       redirect_to @game, notice: I18n.translate('games.successful_finish_msg')
     else
       redirect_to games_url

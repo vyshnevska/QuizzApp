@@ -8,7 +8,6 @@ class Game < ActiveRecord::Base
   has_many :game_details
 
   scope :passed_games, joins(:game_details).where("points IS NOT NULL").group("games.id")
-  #scope :created_games, joins(:game_details).where("points IS NULL").group("games.id")
   scope :created_games, where("points IS NULL").group("id")
   
   attr_protected :state
@@ -20,11 +19,11 @@ class Game < ActiveRecord::Base
   aasm_state :finished
 
 
-  aasm_event :process do
+  aasm_event :set_to_started do
     transitions :from => :draft, :to => :started
   end
 
-  aasm_event :finish do
+  aasm_event :set_to_finished do
     transitions :from => :started, :to => :finished
   end
 

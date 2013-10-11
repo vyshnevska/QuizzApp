@@ -23,16 +23,14 @@ gem 'devise'
 gem "cancan"
 gem 'backbone-on-rails'
 
-gem "haml-rails", :group => :development
-gem "haml-rails", :group => :production
+gem "haml-rails"
 gem "nested_form"
 
 gem 'bootstrap-sass'
 #gem "heroku"
 #gem "mailcatcher"
 gem 'resque', :require => "resque/server"
-
-gem 'rb-readline'
+gem 'aasm', '2.2.0'
 
 # For testing
 group :test do
@@ -43,7 +41,8 @@ group :test, :development do
   gem "shoulda-matchers"
 end
 
-gem "pry", :group => :development
+# gem "pry", :group => :development
+gem 'rb-readline', '~> 0.4.2'
 gem "pry"
 
 #Run redis server

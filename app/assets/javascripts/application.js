@@ -22,6 +22,8 @@
 //= require_tree ./collections
 //= require_tree ./views
 //= require_tree ./routers
+
+
 $(function() {	
 	//$(".alert").slideUp("slow");
 	//$(".alert").slideDown("slow");
@@ -29,9 +31,9 @@ $(function() {
       $(".alert-success").slideToggle(1000);
 	}, 2000);
 	
-	$(".alert .close").live("click", function(){
+/*	$(".alert .close").live("click", function(){
 		alert("close");
 		$(".alert").hide();
 	});
-
+*/
 });

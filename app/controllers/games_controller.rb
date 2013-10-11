@@ -92,6 +92,7 @@ class GamesController < ApplicationController
     @game = Game.find_by_id(params[:id])
     @quizz = @game.quizz
     Resque.enqueue(GameStartNotification, @game.id)
+    @game.process!
   end
 
   def finish
@@ -110,6 +111,7 @@ class GamesController < ApplicationController
     if !@game.errors.any?
       @game.save
       Resque.enqueue(GameFinishNotification, @game.id)
+      @game.finish!
       redirect_to @game, :locals=> {:state => "finished"}, notice: I18n.translate('games.successful_finish_msg')
     else
       redirect_to games_url

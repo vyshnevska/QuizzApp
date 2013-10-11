@@ -16,11 +16,8 @@
         -if game.points.nil?
           %strong 0
         -else
-          %strong=game.points
-        (of
-        =game.quizz.questions.count*10
-        )
-     
+          %strong= "#{game.points} ( of #{game.total_score} )"
+    
     %tr
       %td{:colspan => 4}
         Player

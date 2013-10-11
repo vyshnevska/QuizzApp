@@ -8,26 +8,22 @@
 -else
   %h4 Showing game
 
-%p
-  Player
-  %strong=@game.user.name
-  wants to play game:
-  %strong=@game.quizz.description
+%p 
+  = "Player #{@game.user.name} wants to play game: #{@game.quizz.description}"
 %p
   Points:
   -if @game.points.nil?
     %strong 0
   -else
     %strong=@game.points
-    (of
-    =@game.quizz.questions.count*10
-    )
+    = "(of #{@game.total_score})"
 %br
 -if @game.points.nil?
   = link_to 'Start', start_game_path(@game)
   \|
 -else
-  -if @answers
-    = render :partial =>"games/details", :locals => {:game => @game, :answers => @answers}
+  -if @state = "finished"
+    /= render :partial =>"games/details", :locals => {:game => @game, :answers => @answers}
+    = render :partial =>"game_statisctics", :locals => { :game => @game}
 = link_to 'Back', games_path
 

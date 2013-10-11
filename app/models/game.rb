@@ -17,7 +17,11 @@ class Game < ActiveRecord::Base
   end
 
   def total_score
-    return self.quizz.questions.count*10
+    self.quizz.questions.count*10
   end
+
+  # def total
+  #   self.quizz.questions.count*10
+  # end
  
 end

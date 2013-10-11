@@ -45,3 +45,6 @@ end
 
 gem "pry", :group => :development
 gem "pry"
+
+#Run redis server
+# redis-server /usr/local/etc/redis.conf

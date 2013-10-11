@@ -40,14 +40,6 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    #details = GameDetail.where(:game_id => params[:id])
-    #details = @game.game_details
-    #@answers = []
-    #if !details.blank?
-    #  details.each do |d|
-    #    @answers << d.answer_id
-    #  end
-    #end
   end
 
   def review
@@ -118,7 +110,7 @@ class GamesController < ApplicationController
     if !@game.errors.any?
       @game.save
       Resque.enqueue(GameFinishNotification, @game.id)
-      redirect_to @game, notice: I18n.translate('games.successful_finish_msg')
+      redirect_to @game, :locals=> {:state => "finished"}, notice: I18n.translate('games.successful_finish_msg')
     else
       redirect_to games_url
     end

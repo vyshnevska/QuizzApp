@@ -1,7 +1,7 @@
 -content_for :page_title do
 	-page_title "Editing quizz "+ @quizz.description, :action
 
--unless @quizz.is_complete?
+-unless @quizz.completed?
 	= render 'form'
 
 / .buttons{:style => "margin: 9px 0 5px;"} 

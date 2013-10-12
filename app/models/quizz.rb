@@ -1,25 +1,25 @@
 class Quizz < ActiveRecord::Base
+  include AASM
   attr_accessible :questions_attributes, :description
+
   has_many :questions, :dependent => :destroy
   has_many :games
   has_many :users, :through => :games
   accepts_nested_attributes_for :questions, :allow_destroy => :true
-  STATES = %w[draft complete]
 
   validates :description, :presence => {:message => I18n.translate('missed_descr') }, :uniqueness => {:message => "Quizz name must be unique." }
 
-  before_create :assign_state
+  attr_protected :status
+  aasm_column :status
 
-  def is_draft?
-    status == "draft" ? true : false
+  aasm_initial_state :draft
+  aasm_state :draft
+  aasm_state :completed
+
+  aasm_event :set_to_completed do
+    transitions :from => :draft, :to => :completed
   end
 
-  def is_complete?
-    status == "complete" ? true : false
-  end
-
-  private
-  	def assign_state
-  		self.status = "draft"
-  	end
+  scope :draft,      where( status: 'draft'     )
+  scope :completed,  where( status: 'completed' )
 end

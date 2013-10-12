@@ -40,12 +40,20 @@ class Game < ActiveRecord::Base
   end
 
   def total_score
-    self.quizz.questions.count*10
+    self.quizz.questions.count * 10
   end
 
   def played_game
-    quizz_id = self.quizz.id
-    Game.where("quizz_id =?", quizz_id).count
+    Game.where("quizz_id =?", self.quizz.id).count
   end
+
+  def game_score_percent
+    (self.points * 100.0/self.total_score).round(2)
+  end
+
+  def other_games_by_quizz id
+    Game.where('quizz_id = ?', id)
+  end
+
  
 end

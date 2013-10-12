@@ -10,18 +10,26 @@ class QuizzsController < ApplicationController
     @quizz = Quizz.find(params[:id])
   end
 
- def new
-  flash[:notice]  = nil
-   @quizz = Quizz.new
-   question = @quizz.questions.build
-   question.answers.build
-   #render :edit
- end
+  def complete
+    @quizz = Quizz.find(params[:id])
+    if @quizz.set_to_completed!
+      flash[:notice] = "This quizz is completed!"
+      redirect_to  @quizz
+    end
+  end
+
+   def new
+    flash[:notice]  = nil
+     @quizz = Quizz.new
+     question = @quizz.questions.build
+     question.answers.build
+     #render :edit
+   end
 
   def edit
     @quizz = Quizz.find(params[:id])
     flash[:notice] = "Please add question and answers for #{@quizz.description}. Mark correct answers."
-    if @quizz.is_draft?
+    if @quizz.draft?
       flash[:notice] << "This quizz is in editable mode."
     else
       flash[:notice] << "You can't edit this quizz."

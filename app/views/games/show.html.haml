@@ -22,7 +22,7 @@
   = link_to 'Start', start_game_path(@game)
   \|
 -else
-  -if @state = "finished"
+  -if @game.finished?
     /= render :partial =>"games/details", :locals => {:game => @game, :answers => @answers}
     = render :partial =>"game_statisctics", :locals => { :game => @game}
 = link_to 'Back', games_path

@@ -3,18 +3,13 @@
     %td{:colspan => 4} 
       %h3 Available games
   - @games_new.each do |game|
+    - points = game.points.nil? ? 0 : game.points
     %tr
-      %td
-        Game:
-        %strong=game.id
+      %td.title{:style => "font-weight: bold;"}
+        = "Game: #{game.id}"
       %td.date= game.created_at.to_formatted_s(:short)
       %td.date= game.updated_at.to_formatted_s(:short)
-      %td
-        Points:
-        -if game.points.nil?
-          %strong 0
-        -else
-          %strong=game.points
+      %td= "Points: #{points}"
     %tr
       %td{:colspan => 4}
         Player

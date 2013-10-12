@@ -19,6 +19,11 @@ QuizzApp::Application.routes.draw do
     end
   end
 
+  resources :quizzs do
+    member do
+      get 'complete'
+    end
+  end
   #resources :users
   devise_for :users do get '/users/sign_out' => 'devise/sessions#destroy' end
   root :to => "games#welcome"

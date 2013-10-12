@@ -41,6 +41,21 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
+    if @game.finished?
+      @scores = []
+      quizz_id = @game.quizz.id
+      # binding.pry
+      games = @game.other_games_by_quizz quizz_id
+      games.finished.each do |game|
+        if game.id != @game.id
+          @scores<< game.game_score_percent
+        end
+      end
+
+      #Statistic info
+      @total_quizz_points =  @game.total_score
+      @user_result = @game.game_score_percent
+    end
   end
 
   def review

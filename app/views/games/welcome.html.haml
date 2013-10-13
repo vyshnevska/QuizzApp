@@ -15,18 +15,18 @@
       %span= "Draft: #{@draft}  |"
       %span= "Started: #{@started}  |"
       %span= "Finished: #{@finished}"
-
-  %h4 User Friendship:
-  .details{:style =>"margin-left: 20px;"}
-    -unless current_user.inverse_friends.empty?
-      -current_user.inverse_friends.each do |f|
-        = f.name
-    -else
-      %h4 No Friends. Plase Find them.
-      = link_to "Find Friends", root_path
-  %h4 Other users:
-  -@users.each do|user|
+  -if current_user.admin?
+    %h4 User Friendship:
     .details{:style =>"margin-left: 20px;"}
-      = user.name
-      = user.email
-      = link_to "Add as a Friend", friendships_path(:friend_id => user.id), :method => :post 
+      -unless current_user.inverse_friends.empty?
+        -current_user.inverse_friends.each do |f|
+          = f.name
+      -else
+        %h4 No Friends. Plase Find them.
+        = link_to "Find Friends", root_path
+    %h4 Other users:
+    -@users.each do|user|
+      .details{:style =>"margin-left: 20px;"}
+        = user.name
+        = user.email
+        = link_to "Add as a Friend", friendships_path(:friend_id => user.id), :method => :post 

@@ -9,7 +9,7 @@
       .item{:style =>"width: 900px;"}
         .game_detail{:style=>"display: inline-block; width: 350px;"}
           %strong="Game # #{game.id}"
-          %strong=game.quizz.description
+          %strong=game.try(:quizz).try(:description)
           %p.date= "Created At #{game.created_at.to_formatted_s(:short)}"
           %p.date= "Updated At #{game.updated_at.to_formatted_s(:short)}"
           %p

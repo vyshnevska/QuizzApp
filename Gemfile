@@ -48,3 +48,5 @@ gem "pry"
 
 #Run redis server
 # redis-server /usr/local/etc/redis.conf
+#Start resque queue
+#rake resque:work QUEUE='*'

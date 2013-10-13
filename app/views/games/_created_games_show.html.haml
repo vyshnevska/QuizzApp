@@ -1,26 +1,15 @@
-%table
-  %tr
-    %td{:colspan => 4} 
-      %h3 Available games
+.games.not_finished
+  .section
+    %h3= "Not finished games for #{current_user.try(:name)}"
+    %hr.section_caption
   - @games_new.each do |game|
-    - points = game.points.nil? ? 0 : game.points
-    %tr
-      %td.title{:style => "font-weight: bold;"}
-        = "Game: #{game.id}"
-      %td.date= game.created_at.to_formatted_s(:short)
-      %td.date= game.updated_at.to_formatted_s(:short)
-      %td= "Points: #{points}"
-    %tr
-      %td{:colspan => 4}
-        Player
-        %strong=game.user.name
-        wants to play game:
-        %strong=game.quizz.description
-    %tr
-      %td.col= link_to '|Start|', start_game_path(game)
-      %td.col= link_to '|Show|', game
-      %td.col= link_to '|Edit|', edit_game_path(game)
-      -if current_user.admin
-        %td.col= link_to '|Destroy|', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
-      -else
-        %td.col
+    .details{:style=>"border-left: thin solid #333; border-right: thin solid #333; padding:10px;"}
+      .item
+        .quizz
+          %strong Game #
+          = "#{game.id}   #{game.quizz.description}  ( #{game.state} )"
+        .actions
+          = link_to 'Start', {:controller => "games", :action => "new", :quizz_id => game.quizz_id }
+
+  .section
+    %hr

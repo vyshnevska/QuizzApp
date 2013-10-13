@@ -1,0 +1,15 @@
+.games.available
+  .section
+    %h3 Available games
+    %hr.section_caption
+  - @quizzes.each do |quizz|
+    .details{:style=>"border-left: thin solid #333; border-right: thin solid #333; padding:10px;"}
+      .item
+        .quizz
+          %strong Caption
+          = "#{quizz.description}"
+        .actions
+          = link_to 'Start', {:controller => "games", :action => "new", :quizz_id => quizz.id }
+
+  .section
+    %hr

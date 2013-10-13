@@ -7,7 +7,7 @@
       .item
         .quizz
           %strong Game #
-          = "#{game.id}   #{game.quizz.description}  ( #{game.state} )"
+          = "#{game.id}   #{game.try(:quizz).try(:description)}  ( #{game.state} )"
         .actions
           = link_to 'Start', {:controller => "games", :action => "new", :quizz_id => game.quizz_id }
 

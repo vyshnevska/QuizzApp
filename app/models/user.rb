@@ -19,6 +19,7 @@ class User < ActiveRecord::Base
 
   validates :name, :presence => true, :uniqueness => true
   after_create :assign_role
+
 private
   def assign_role
     self.role = "guest" unless role.nil?

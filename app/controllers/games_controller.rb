@@ -107,7 +107,9 @@ class GamesController < ApplicationController
   def start
     @game = Game.find_by_id(params[:id])
     @quizz = @game.quizz
-    Resque.enqueue(GameStartNotification, @game.id)
+    # Resque.enqueue(GameStartNotification, @game.id)
+    UserMailer.start_game(@game.id).deliver
+    @game.update_attribute(:emailed, true)
     @game.set_to_started! if @game.draft?
   end
 
@@ -126,7 +128,9 @@ class GamesController < ApplicationController
     end
     if !@game.errors.any?
       @game.save
-      Resque.enqueue(GameFinishNotification, @game.id)
+      # Resque.enqueue(GameFinishNotification, @game.id)
+      UserMailer.finish_game(@game.id).deliver
+      @game.update_attribute(:emailed, true)
       @game.set_to_finished!
       redirect_to @game, :locals=> {:state => "finished"}, notice: I18n.translate('games.successful_finish_msg')
     else

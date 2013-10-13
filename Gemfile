@@ -7,6 +7,7 @@ gem 'rails', '3.2.9'
 
 
 gem "pg", :group => :production
+gem 'rails_12factor', group: :production
 gem "sqlite3", :group => :development
 
 
@@ -29,7 +30,7 @@ gem "nested_form"
 gem 'bootstrap-sass'
 #gem "heroku"
 #gem "mailcatcher"
-gem 'resque', :require => "resque/server"
+gem 'resque', :require => "resque/server", :group => :development
 gem 'aasm', '2.2.0'
 
 # For testing

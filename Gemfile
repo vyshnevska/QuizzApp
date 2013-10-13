@@ -43,7 +43,7 @@ group :test, :development do
 end
 
 # gem "pry", :group => :development
-gem 'rb-readline', '~> 0.4.2'
+# gem 'rb-readline', '~> 0.4.2'
 gem "pry"
 
 #Run redis server

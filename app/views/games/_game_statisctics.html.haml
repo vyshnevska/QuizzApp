@@ -3,7 +3,7 @@
   = "Game # #{@game.id } statistics"
 .statistics{:style=>"margin-left:10px;"}
   %p= "People who played this game: #{@game.played_game}"
-  %p= "Your score is #{@game.total_score}"
+  %p= "Maximum game score is #{@game.total_score}"
   %p= "User result is : #{@user_result} %"
   %ul{:style=>"margin:0px;"}
     = "Other #{@scores.length} results: "

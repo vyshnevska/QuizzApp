@@ -55,5 +55,16 @@ class Game < ActiveRecord::Base
     Game.where('quizz_id = ?', id)
   end
 
+  def other_games_scores game_id, quizz_id
+    @scores = []
+    games = self.other_games_by_quizz quizz_id
+    games.finished.each do |game|
+      if game.id != game_id
+        @scores<< game.game_score_percent
+      end
+    end
+    return @scores
+  end
+
  
 end

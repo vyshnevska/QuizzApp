@@ -15,7 +15,7 @@
     %tr
       %td{:colspan => 4}
         Player
-        %strong=game.user.name
+        %strong=game.try(:user).try(:name)
         wants to play game:
         %strong=game.quizz.description
     %tr

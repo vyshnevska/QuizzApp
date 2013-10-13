@@ -28,8 +28,10 @@ class GamesController < ApplicationController
   end
 
   def index
+    @quizzes = Quizz.completed
     if current_user.role == "admin"
-      @games_new = Game.created_games
+      # @games_new = Game.created_games
+      @games_new = current_user.games.created_games
       @games_passed = Game.passed_games
       flash[:notice] = I18n.translate('games.create_new_game_msg') unless Game.exists?
     else
@@ -75,20 +77,17 @@ class GamesController < ApplicationController
 
   def new
     @game = Game.new
-    flash[:notice] = nil
+    @game.quizz_id = params[:quizz_id]
+    @game.user_id = current_user.id
+    if @game.save
+      start @game.id
+    else
+      render :new
+    end
   end
 
   def edit
     @game = Game.find(params[:id])
-  end
-
-  def create
-    @game = Game.new(params[:game])
-    if @game.save
-      redirect_to @game, notice: I18n.translate('games.successful_create_msg')
-    else
-      render :new
-    end
   end
 
   def update
@@ -106,11 +105,12 @@ class GamesController < ApplicationController
     redirect_to games_url
   end
 
-  def start
-    @game = Game.find_by_id(params[:id])
+  def start game_id
+    @game = Game.find_by_id(game_id)
     @quizz = @game.quizz
-    Resque.enqueue(GameStartNotification, @game.id)
+    # Resque.enqueue(GameStartNotification, @game.id)
     @game.set_to_started! if @game.draft?
+    render :start
   end
 
   def finish
@@ -128,7 +128,7 @@ class GamesController < ApplicationController
     end
     if !@game.errors.any?
       @game.save
-      Resque.enqueue(GameFinishNotification, @game.id)
+      # Resque.enqueue(GameFinishNotification, @game.id)
       @game.set_to_finished!
       redirect_to @game, :locals=> {:state => "finished"}, notice: I18n.translate('games.successful_finish_msg')
     else

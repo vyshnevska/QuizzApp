@@ -1,6 +1,11 @@
--if @games_new
+-content_for :page_styles do
+  -stylesheet_link_tag "games"
+
+- if @quizzes 
+  = render :partial =>"available_games", :locals => { :quizzes => @quizzes }
+- if @games_new
   = render :partial =>"created_games_show", :locals => { :games_new => @games_new }
--if @games_passed
+- if @games_passed
   = render :partial =>"passed_games_show", :locals => { :games_passed => @games_passed }
 
-= link_to 'New', new_game_path
+/ = link_to 'New', new_game_path

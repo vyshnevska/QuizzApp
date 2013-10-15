@@ -1,6 +1,27 @@
 -content_for :page_title do
-	-page_title "New quizz"
+    -page_title "New quizz"
+= javascript_include_tag "quizzes"
 
-= render 'form'
+.errors{:style=>": height:20px; color: red; margin: 15px 0 25px; display: none;"}
+
+/ = render 'form'
+
+= form_tag :controller => 'quizzs', :action => "create", :method => :put, :data=> {remote: true} do
+    .quizz
+        %span.caption Quizz Title
+        = text_field_tag "quizz_title", ""
+        = submit_tag "Add", :id=> "add_quizz", :type => 'button', :disabled=> false
+        / = button_tag(type: 'button', :onclick=> "show_questions();" ) do
+        /     = content_tag(:strong, 'Add!')
+        #questions{:style=>"display:none; margin-left: 20px;"}
+            %span.caption Question
+            = text_field_tag "question[description]", "quest1"
+        #answers{:style=>"display:none; margin-left: 40px;"}
+            %span.caption Answers
+            = text_field_tag "answers[content]", "answ1"
+            %br
+            = text_field_tag "answers[content]", "answ2", :style=>"margin-left: 73px;"
+
+    = submit_tag "Submit Quizz", :id=> "submit", :style=>"margin-top: 10px;", :disabled=> true
 
 = link_to 'Cancel', quizzs_path

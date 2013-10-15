@@ -1,15 +1,15 @@
 // Place all the styles related to the Quizzs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-p.temp, *.temp{
+p.temp, *.temp {
   color: red;
   font-style:italic;
 }
-p.user_answer{
+p.user_answer {
   color: mediumvioletred;
   font-style:italic;
 }
-p.correct_answer{
+p.correct_answer {
   color: green;
   font-style:italic;
 }
@@ -17,10 +17,10 @@ p.correct_answer{
 h5, h6 {
   font-weight: 10;
 }
-td.col{
+td.col {
   text-align: center;
 }
-tr.bottom{
+tr.bottom {
   border-bottom: 1px solid #007fff;
 }
 .navbar .brand {
@@ -32,7 +32,7 @@ tr.bottom{
 .nav li {
   line-height: 25px;
 }
-div.hamster{
+div.hamster {
   background-image: url(/assets/cute.jpg);
   background-size: 350px 270px;
   background-repeat: no-repeat;
@@ -40,28 +40,38 @@ div.hamster{
   height: 270px;
   border-bottom: 2px solid saddlebrown;
 }
-div.fields{
+div.fields {
   margin-left: 15px;
 }
-.alert, .alert-success, .alert-error{
+.alert, .alert-success, .alert-error {
   opacity: 0.8;
 }
 #qns-list label {
   display: inline;
   margin-bottom: 5px
 }
-td.date{
+td.date {
   color: #ffa365;
   font-style:italic;
 }
-.fields label{
+.fields label {
   margin: 0;
   font-size: 13px;
   line-height: 15px;
 }
-.fields input{
+.fields input {
   margin-bottom: 8px;
 }
-label.add_qstn,label.add_answer, label.rem_answer{
+label.add_qstn,label.add_answer, label.rem_answer {
   display: inline-block;
 }
+
+span.caption{
+  font-weight: bold;
+  margin-right: 10px;
+}
+.quizz input[type=button]{
+  height: 25px;
+  vertical-align: text-bottom;
+}
+

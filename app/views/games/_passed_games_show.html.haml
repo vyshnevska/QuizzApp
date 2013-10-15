@@ -5,19 +5,19 @@
   - @games_passed.each do |game|
     - points = game.points.nil? ? 0 : game.points
 
-    .details{:style=>"border-left: thin solid #333; border-right: thin solid #333; padding:10px;"}
-      .item{:style =>"width: 900px;"}
-        .game_detail{:style=>"display: inline-block; width: 350px;"}
+    .details
+      .item
+        .game_detail
           %strong="Game # #{game.id}"
           %strong=game.try(:quizz).try(:description)
           %p.date= "Created At #{game.created_at.to_formatted_s(:short)}"
           %p.date= "Updated At #{game.updated_at.to_formatted_s(:short)}"
           %p
             %strong=game.try(:user).try(:name)
-        .quizz{:style=>"display: inline-block; width: 350px;"}   
-          =image_tag "nut.png", :style => "width: 50px; height: 50px;"
+        .quizz
+          =image_tag "nut.png", :alt=> "nut", :class=> "nut_image"
           ="Points: #{points} ( of #{game.total_score} )"
-        .actions{:style =>"width: 185px;"}
+        .actions
           = link_to '|Review|', review_game_path(game)
           = link_to '|Show|', game
           -if current_user.admin

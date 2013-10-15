@@ -1,12 +1,12 @@
 %hr
 %h4
   = "Game # #{@game.id } statistics"
-.statistics{:style=>"margin-left:10px;"}
+.statistics
   %p= "People who played this game: #{@game.played_game}"
   %p= "Maximum game score is #{@game.total_score}"
   %p= "User result is : #{@user_result} %"
-  %ul{:style=>"margin:0px;"}
+  %ul
     = "Other #{@scores.length} results: "
     -@scores.each do |score|
-      %li{:style=>"line-height: 20px; margin-left: 20px;"}
+      %li
         = "#{score} %"

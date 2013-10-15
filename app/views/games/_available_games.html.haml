@@ -3,11 +3,11 @@
     %h3 Available games
     %hr.section_caption
   - @quizzes.each do |quizz|
-    .details{:style=>"border-left: thin solid #333; border-right: thin solid #333; padding:10px;"}
+    .details
       .item
         .quizz
-          %strong Caption
-          = "#{quizz.try(:description)}"
+          Quizz
+          %strong= "#{quizz.try(:description)}"
         .actions
           = link_to 'Start', {:controller => "games", :action => "new", :quizz_id => quizz.id }
 

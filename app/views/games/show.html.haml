@@ -1,29 +1,28 @@
+-content_for :page_styles do
+  -stylesheet_link_tag "games"
+- points = @game.points.nil? ? 0 : @game.points
 - if @game.errors.any?
   #error_explanation
     %div{:class=> "alert alert-error"}
       - @game.errors.full_messages.each do |msg|
         = msg
--if @answers
-  %h4 Reviewing game
--else
-  %h4 Showing game
-
-%p 
-  = "Player #{@game.user.name} wants to play game: #{@game.quizz.description}"
-%p
-  Points:
-  -if @game.points.nil?
-    %strong 0
+.game
+  -if @answers
+    %h4= "Reviewing game # #{@game.id}"
+    .details
+      %p= "Player #{@game.user.name} played game: #{@game.quizz.description}"
   -else
-    %strong=@game.points
-    = "(of #{@game.total_score})"
-%br
--if @game.points.nil?
-  = link_to 'Start', start_game_path(@game)
-  \|
--else
-  -if @game.finished?
-    /= render :partial =>"games/details", :locals => {:game => @game, :answers => @answers}
-    = render :partial =>"game_statisctics", :locals => { :game => @game}
+    %h4= "Showing game # #{@game.id}"
+    .details
+      %p= "Player #{@game.user.name} wants to play game: #{@game.quizz.description}"
+  .details
+    %p="Points: #{points} (of #{@game.total_score})"
+  %br
+  -if @game.points.nil?
+    = link_to 'Start', start_game_path(@game)
+    \|
+  -else
+    -if @game.finished?
+      = render :partial =>"game_statisctics", :locals => { :game => @game}
 = link_to 'Back', games_path
 

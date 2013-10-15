@@ -3,11 +3,12 @@
     %h3= "Not finished games for #{current_user.try(:name)}"
     %hr.section_caption
   - @games_new.each do |game|
-    .details{:style=>"border-left: thin solid #333; border-right: thin solid #333; padding:10px;"}
+    .details
       .item
         .quizz
-          %strong Game #
-          = "#{game.id}   #{game.try(:quizz).try(:description)}  ( #{game.state} )"
+          Game
+          %strong=" # #{game.id}"
+          = " #{game.try(:quizz).try(:description)}  ( #{game.state} )"
         .actions
           = link_to 'Start', {:controller => "games", :action => "new", :quizz_id => game.quizz_id }
 

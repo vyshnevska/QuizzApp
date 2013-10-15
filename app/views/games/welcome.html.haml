@@ -1,32 +1,37 @@
+-content_for :page_styles do
+  -stylesheet_link_tag "games"
+
 %h2
   Welcome Page
 -if current_user
-  %h4 User statistic:
-  .details{:style =>"margin-left: 20px;"}
-    ="#{@c_p } points in #{@count_games} games."
+  .statistic_info
+    %h4 User statistic:
+    .details
+      ="#{@c_p } points in #{@count_games} games."
 
-  %h4= "Total score: #{@score}"
-  -if @c_p !=0
-    -if @c_p == @score
-      = image_tag "nut.png", :style => "width: 50px; height: 50px;"
-  -if current_user.admin
-    %h4 Total games:
-    .details{:style =>"margin-left: 20px;"}
-      %span= "Draft: #{@draft}  |"
-      %span= "Started: #{@started}  |"
-      %span= "Finished: #{@finished}"
+    %h4= "Total score: #{@score}"
+    -if @c_p !=0
+      -if @c_p == @score
+        = image_tag "nut.png", :class=> "nut_image"
+    -if current_user.admin
+      %h4 Total games:
+      .details
+        %span= "Draft: #{@draft}  |"
+        %span= "Started: #{@started}  |"
+        %span= "Finished: #{@finished}"
   -if current_user.admin?
-    %h4 User Friendship:
-    .details{:style =>"margin-left: 20px;"}
-      -unless current_user.inverse_friends.empty?
-        -current_user.inverse_friends.each do |f|
-          = f.name
-      -else
-        %h4 No Friends. Plase Find them.
-        = link_to "Find Friends", root_path
-    %h4 Other users:
-    -@users.each do|user|
-      .details{:style =>"margin-left: 20px;"}
-        = user.name
-        = user.email
-        = link_to "Add as a Friend", friendships_path(:friend_id => user.id), :method => :post 
+    .friendship
+      %h4 User Friendship:
+      .details
+        -unless current_user.inverse_friends.empty?
+          -current_user.inverse_friends.each do |f|
+            = f.name
+        -else
+          %h4 No Friends. Plase Find them.
+          = link_to "Find Friends", root_path
+      %h4 Other users:
+      -@users.each do|user|
+        .details
+          = user.name
+          = user.email
+          = link_to "Add as a Friend", friendships_path(:friend_id => user.id), :method => :post 

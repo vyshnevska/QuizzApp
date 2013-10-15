@@ -1,29 +1,44 @@
 // Place all the styles related to the Games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
-.games{
-	line-height: 16px;
+.statistic_info, .friendship, .game {
 	.details{
+		margin-left: 20px;
+	}
+}
+.statistics {
+	margin-left: 20px;
+	ul {
+		margin:0px;
+		li {
+			line-height: 20px;
+			margin-left: 40px;
+		}
+	}
+}
+
+.games {
+	line-height: 16px;
+	.details {
 		border-left: thin solid #333;
 		border-right: thin solid #333;
 		padding:10px;
 		margin-top: -10px;
 	}
-	.item{
+	.item {
 		display: block;	
 	}
-	.quizz{
+	.quizz {
 		display: inline-block;
 		width: 300px;
 	}
-	.actions{
+	.actions {
 		display: inline-block;
 		margin-left: 30px;
 		width: 300px;
 	}
 
-	hr{
+	hr {
 		border: 0;
 		height: 1px;
 		margin-top: 5px;
@@ -34,11 +49,17 @@
 	}
 }
 
-.games.available h3{
+.games.details {
+	border-left: thin solid #333;
+	border-right: thin solid #333;
+	padding:10px;
+}
+
+.games.available h3 {
 	color: #2F4F4F;
 }
 
-.games.not_finished h3{
+.games.not_finished h3 {
 	color: #708090;
 }
 
@@ -50,8 +71,26 @@
 		line-height: 10px;
 		margin: 7px;
 	}
-	.actions{
+	.item {
+		width: 900px;
+		.game_detail {
+			display: inline-block;
+			width: 330px;
+		}
+		.quizz {
+			display: inline-block;
+			width: 350px;
+		}
+		.actions {
+			width: 210px;
+		}
+	}
+	.actions {
 		margin: 0px;
 		padding: 0px;
 	}
+}
+.nut_image {
+	width: 50px;
+	height: 50px;
 }

@@ -1,26 +1,32 @@
 -content_for :page_title do
     -page_title "New quizz"
-= javascript_include_tag "quizzes"
 
 .errors{:style=>": height:20px; color: red; margin: 15px 0 25px; display: none;"}
 
 / = render 'form'
 
-= form_tag :controller => 'quizzs', :action => "create", :method => :put, :data=> {remote: true} do
+= form_tag :controller => 'quizzs', :action => "create", :method => :put, :data => {remote: true} do
     .quizz
         %span.caption Quizz Title
-        = text_field_tag "quizz_title", ""
-        = submit_tag "Add", :id=> "add_quizz", :type => 'button', :disabled=> false
-        / = button_tag(type: 'button', :onclick=> "show_questions();" ) do
-        /     = content_tag(:strong, 'Add!')
-        #questions{:style=>"display:none; margin-left: 20px;"}
-            %span.caption Question
-            = text_field_tag "question[description]", "quest1"
-        #answers{:style=>"display:none; margin-left: 40px;"}
-            %span.caption Answers
-            = text_field_tag "answers[content]", "answ1"
-            %br
-            = text_field_tag "answers[content]", "answ2", :style=>"margin-left: 73px;"
+        = text_field_tag "quizz_title", "quizzzzz111111", :style=> "width:350px;"
+        .questions{:style=>"display:none; margin-left: 20px;"}
+            = image_tag "expand.png", :alt=> "Expand Btn", :id => "expand"
+            = image_tag "collapse.png", :alt=> "Collapse Btn", :id => "collapse"
+            .details
+                %span.caption Question
+                = text_field_tag "question[description]", "quest1", :style=> "width:300px;"
+                .answers{:style=>"display:none; margin-left: 44px;"}
+                    %span.caption Answers
+                    = image_tag "add.png", :alt=> "Add Answer", :id=>"add_answer", :style=>"position: relative; top: 30px; left: -70px;"
+                    .line{ :style=>"margin-left: 112px;", :id =>'1' }
+                        = text_field_tag "answers[content]", "answ1", :style=>"margin-left: -39px;"
+                        = image_tag "cancel.png", :alt=> "Delete Answer", :class=>"remove_answer"
+                    .line{ :id =>'2' }
+                        = text_field_tag "answers[content]", "answ2", :style=>"margin-left: 73px;"
+                        = image_tag "cancel.png", :alt=> "Delete Answer", :class=>"remove_answer"
+                
+                /=submit_tag "Add Answ", :type=>"button", :id=>"add_ans"
+        /=submit_tag "Add Qst", :type=>"button", :id=>"add_qst"
 
     = submit_tag "Submit Quizz", :id=> "submit", :style=>"margin-top: 10px;", :disabled=> true
 

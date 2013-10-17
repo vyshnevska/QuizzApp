@@ -5,5 +5,5 @@ class Question < ActiveRecord::Base
 
   accepts_nested_attributes_for :answers, :allow_destroy => :true
 
-  validates :title, :presence => {:message => "Blank question's title is not allowed."}
+  validates :title, :presence => {:message => "Question can't be blank."}
 end

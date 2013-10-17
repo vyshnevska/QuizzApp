@@ -62,15 +62,15 @@ td.date {
 .fields input {
   margin-bottom: 8px;
 }
-label.add_qstn,label.add_answer, label.rem_answer {
+label.add_qstn, label.add_answer, label.rem_answer {
   display: inline-block;
 }
 
-span.caption{
+span.caption {
   font-weight: bold;
   margin-right: 10px;
 }
-.quizz input[type=button]{
+.quizz input[type=button] {
   height: 25px;
   vertical-align: text-bottom;
 }
@@ -79,4 +79,53 @@ span.caption{
   width: 20px;
   vertical-align: baseline;
 }
+/* New Quizz */
+.quizz {
+  #quizz_description { width:350px; }
+  .question-section {
+    display: none;
+    margin-left: 20px;
+    .section { 
+      img { position: inline-block; }
+      .caption {
+        vertical-align: top;
+        margin-left: 20px;
+      }
+      hr {
+        width: 450px;
+        margin-bottom: 10px;
+        margin-top: 0;
+      }
+    }
+    .question {
+        margin-left: 20px;
+        #questions__title { width:300px; }
+        .answers {
+          margin-left: 44px;
+          img.add_answer {
+            position: relative;
+            top: 5px;
+            left: -95px;
+          }
+          .line.first {
+            margin-left: 112px;
+            input {
+              margin-left: -39px;
+            }
+          }
+          .line input {
+            margin-left: 73px;
+          }
+        }
+      }
+  }
+}
+
+form #submit {
+  margin-top: 30px;
+}
+
+
+
+
 

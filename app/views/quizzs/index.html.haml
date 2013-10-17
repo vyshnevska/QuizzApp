@@ -8,7 +8,7 @@
   - @quizzs.each do |quizz|
     %tr
       %td= quizz.description
-      %td.temp= quizz.status
+      %td.temp=  current_user.admin ? quizz.status : ""
       %td
     %tr.bottom
       %td.col= link_to '|Show|', quizz

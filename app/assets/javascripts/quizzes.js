@@ -1,5 +1,5 @@
 jQuery(function() {
-	$(".alert .close").click(function() {
+	$(".alert .close").click( function() {
 		$(".alert-success").hide();
 	});
 
@@ -10,9 +10,12 @@ jQuery(function() {
 	$(".questions").show();
 	$(".answers").show();
 
-	$("#quizz_title").focusout(function() {
-		enableQuizzBtn();	
+	$("#quizz_title").focusout( function() {
+		enableQuizzBtn();
+		//TODO inplement saving to db
+		//$.post("/quizzs", $('form').serialize());
 	});
+
 	function enableQuizzBtn() {
 		if($("#quizz_title").val() != "") {
 			// $("#add_quizz").removeAttr("disabled");
@@ -28,43 +31,46 @@ jQuery(function() {
 			errors = $(".errors");
 		if(title != "") {
 			errors.hide();
-			$(".questions").show();
+			$(".question-section").show();
 			$(".answers").show();
-			// $("#add_quizz").attr("disabled", "disabled");//Do not work properly
 		} else {
 			errors.html("Quizz Title can't be blank!");
 			errors.show();
 		}
 	};
 
-	$("#collapse").click(function() {
+	$("#collapse").click( function() {
 		$(".answers").hide();
-		$(".questions").addClass("collapsed");
+		$(".question-section").addClass("collapsed");
 		$("#expand").attr("display", "inline-block");
 		$("#collapse").css("opacity", "0.5");
 		$("#expand").css("opacity", "1");
 	});
 
-	$("#expand").click(function() {
+	$("#expand").click( function() {
 		$(".answers").show();
-		$(".questions").addClass("expanded");
+		$(".question-section").addClass("expanded");
 		$("#collapse").attr("display", "inline-block");
 		$("#expand").css("opacity", "0.5");
 		$("#collapse").css("opacity", "1");
 	});
 
-	$("#add_answer").click(function(){
-		var id = $(".answers input").length +1;
-		$answer = $('<div class="line" id =' + id +'><input id="answers_content" type="text" value="answ77" style="margin-left: 73px;" name="answers[content]"/><img src="/assets/cancel.png" alt="Delete Answer" class="remove_answer"></div>');
-		$('.answers').append($answer);
+	$(document).on('click', ".add_answer", function(){
+		$answer = $('<div class="line"><input type="text" value="answ77" style="margin-left: 73px;" name="questions[][answers][]"/><img src="/assets/cancel.png" alt="Delete Answer" class="remove_answer"></div>');
+		$(this).parent().append($answer);
 	});
 
 	$('.line').on('click', ".remove_answer", function(){
 		$(this).parent().empty();
 	});
 
-	$("#add_qst").click(function(){
+	$("#add_qst").click( function(){
 		//TODO: implement this
+		var $question = $('<div class ="question" style="margin-left: 20px;"> <span class="caption">Question</span> <input type="text" value="quest1" style="width:300px;" name="questions[][description]"></div>'),
+			$answer = $('<div class="answers" style="margin-left: 44px;"><span class="caption">Answers</span><img class="add_answer" src="/assets/add.png" alt="Add Answer" style="position: relative; top: 30px; left: -57px;"></div>');
+	
+		$('.question-section').append($question);
+		$('.question').last().append($answer);
 	});
 
 });

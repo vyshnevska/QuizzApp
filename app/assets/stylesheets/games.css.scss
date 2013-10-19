@@ -30,12 +30,13 @@
 	}
 	.quizz {
 		display: inline-block;
-		width: 300px;
+		width: 60%;
+		margin-left: 20px;
 	}
 	.actions {
 		display: inline-block;
 		margin-left: 30px;
-		width: 300px;
+		width: 30%;
 	}
 }
 
@@ -52,7 +53,7 @@
 .games.details {
 	border-left: thin solid #333;
 	border-right: thin solid #333;
-	padding:10px;
+	padding: 10px;
 }
 
 .games.available h3 {
@@ -75,14 +76,14 @@
 		width: 900px;
 		.game_detail {
 			display: inline-block;
-			width: 330px;
+			width: 40%;
 		}
 		.quizz {
 			display: inline-block;
-			width: 350px;
+			width: 30%;
 		}
 		.actions {
-			width: 210px;
+			width: 25%;
 		}
 	}
 	.actions {

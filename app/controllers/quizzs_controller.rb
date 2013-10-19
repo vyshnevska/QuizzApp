@@ -3,18 +3,14 @@ require "pry"
 class QuizzsController < ApplicationController
   def index
     flash[:notice] = "There is no active quizz now. Please create new." unless Quizz.exists?
-    @quizzs = Quizz.all
-  end
-
-  def show
-    @quizz = Quizz.find(params[:id])
+    @quizzes = Quizz.all
   end
 
   def complete
     @quizz = Quizz.find(params[:id])
     if @quizz.set_to_completed!
-      flash[:notice] = "This quizz is completed!"
-      redirect_to  @quizz
+      flash[:notice] = "Quizz# #{@quizz.id} is completed!"
+      redirect_to  quizzs_path
     end
   end
 
@@ -58,7 +54,7 @@ class QuizzsController < ApplicationController
 
     if @quizz.errors.empty? && @errors.empty?
       flash[:error] = []
-      redirect_to @quizz
+      redirect_to quizzs_path
     else
       flash[:error] = @errors
       render :new 
@@ -84,22 +80,22 @@ class QuizzsController < ApplicationController
         @ca = Answer.find_by_id(id)
         @ca.mark_as_correct
         if @ca.save
-          flash[:notice] = 'Answer was successfully marked. ' #bug here
+          flash[:notice] = 'Answer is  marked. ' #bug here
         end
       end
       (a_saved_ids - ids).each do |e|
         @ia = Answer.find_by_id(e)
         @ia.mark_as_incorrect
         if @ia.save
-          flash[:notice] = 'Answer was successfully unmarked. ' #bug here
+          flash[:notice] = 'Answer is unmarked. ' #bug here
         end
       end
     else
-      flash[:notice] = 'No answer was marked. '
+      flash[:notice] = 'No answer is marked. '
     end
     if @quizz.update_attributes(params[:quizz])
-        flash[:notice] << 'Quizz was successfully updated.'
-        redirect_to @quizz
+        flash[:notice] << "Quizz# #{@quizz.id} is updated."
+        redirect_to quizzs_path
     else
       render :edit
     end
@@ -108,6 +104,7 @@ class QuizzsController < ApplicationController
   def destroy
     @quizz = Quizz.find(params[:id])
     @quizz.destroy
-    redirect_to quizzs_url
+    flash[:notice] = "Quizz# #{@quizz.id} is deleted."
+    redirect_to quizzs_path
   end
 end

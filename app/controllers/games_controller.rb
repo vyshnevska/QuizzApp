@@ -13,7 +13,7 @@ class GamesController < ApplicationController
       end
       # UserMailer.welcome_email(current_user).deliver
 
-      flash[:notice] = I18n.translate('games.send_mail_msg', :current_user => current_user.name)
+      # flash[:notice] = I18n.translate('games.send_mail_msg', :current_user => current_user.name)
       current_user.inverse_friends.each do |fs|
         @inverse_friends  = fs.name
       end

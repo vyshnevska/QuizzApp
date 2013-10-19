@@ -1,23 +1,25 @@
--content_for :page_title do
-  -page_title "Listing quizzs"
-%table
-  %tr
-    %th Quizz ID
-    %th Quizz Descr
-    %th
-  - @quizzs.each do |quizz|
-    %tr
-      %td= quizz.description
-      %td.temp=  current_user.admin ? quizz.status : ""
-      %td
-    %tr.bottom
-      %td.col= link_to '|Show|', quizz
-      -if can? :update, quizz
-        %td.col= link_to '|Edit|', edit_quizz_path(quizz) unless quizz.completed?
-      -if current_user.admin
-        %td.col= link_to '|Destroy|', quizz, :method => :delete, :data => { :confirm => 'Are you sure?' }
-      -else
-        %td.col
-%br
+-content_for :page_styles do
+  -stylesheet_link_tag "quizzs"
+
+.quizzes
+  .section
+    %h3 Listing quizzs
+    %hr.section_caption
+  - @quizzes.each do |quizz|
+    .details
+      .item
+        .quizz
+          Quizz
+          %strong= "#{quizz.try(:description)}"
+          %span.temp= current_user.admin ? quizz.status : ""
+        .actions
+          = link_to '|Edit|', edit_quizz_path(quizz) unless quizz.completed?
+          = link_to 'Complete', complete_quizz_path(quizz) unless quizz.completed?
+
+          = link_to '|Destroy|', quizz, :method => :delete, :data => { :confirm => 'Are you sure?' } if current_user.admin
+
+  .section
+    %hr
+
 -if can? :create, Quizz.new
   = link_to 'New Quizz', new_quizz_path

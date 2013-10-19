@@ -40,7 +40,11 @@ class Game < ActiveRecord::Base
   end
 
   def total_score
-    self.quizz.questions.count * 10
+    if self.quizz
+      self.quizz.questions.count * 10
+    else
+      1000000
+    end
   end
 
   def played_game
@@ -56,14 +60,14 @@ class Game < ActiveRecord::Base
   end
 
   def other_games_scores game_id, quizz_id
-    @scores = []
+    scores = []
     games = self.other_games_by_quizz quizz_id
     games.finished.each do |game|
       if game.id != game_id
-        @scores<< game.game_score_percent
+        scores<< game.game_score_percent
       end
     end
-    return @scores
+    scores
   end
 
  

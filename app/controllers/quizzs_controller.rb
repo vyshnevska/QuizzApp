@@ -34,29 +34,13 @@ class QuizzsController < ApplicationController
   end
 
   def create
-    @errors = []
-    @quizz = Quizz.new(params[:quizz])
-    if @quizz.save
-      params["questions"].each do |question|
-        new_quest = @quizz.questions.build(:title => question["title"])
-        question["answers"].each do |answer|
-          new_quest.answers.build(:content => answer)
-        end
-        if !new_quest.save
-          # TODO: refactor this
-          flash[:error] = new_quest.errors.values.join("\n")
-          @errors = new_quest.errors.values.join("\n")          
-        end
-      end
-    else
-      @errors = @quizz.errors.values.join("\n")
-    end
-
-    if @quizz.errors.empty? && @errors.empty?
-      flash[:error] = []
+    @quizz = Quizz.create(params[:quizz])
+    
+    if @quizz.errors.empty?
+      flash[:notice] = "Thank you for creating this quizz"
       redirect_to quizzs_path
     else
-      flash[:error] = @errors
+      flash[:error] = @quizz.errors.values.join("\n")
       render :new 
     end
   end

@@ -17,54 +17,7 @@ p.correct_answer {
 h5, h6 {
   font-weight: 10;
 }
-td.col {
-  text-align: center;
-}
-tr.bottom {
-  border-bottom: 1px solid #007fff;
-}
-.navbar .brand {
-  padding: 5px 10px 5px;
-  margin-left: -20px;
-  width: 90px;
-  height: 50px;
-}
-.nav li {
-  line-height: 25px;
-}
-div.hamster {
-  background-image: url(/assets/cute.jpg);
-  background-size: 350px 270px;
-  background-repeat: no-repeat;
-  background-position: center;
-  height: 270px;
-  border-bottom: 2px solid saddlebrown;
-}
-div.fields {
-  margin-left: 15px;
-}
-.alert, .alert-success, .alert-error {
-  opacity: 0.8;
-}
-#qns-list label {
-  display: inline;
-  margin-bottom: 5px
-}
-td.date {
-  color: #ffa365;
-  font-style:italic;
-}
-.fields label {
-  margin: 0;
-  font-size: 13px;
-  line-height: 15px;
-}
-.fields input {
-  margin-bottom: 8px;
-}
-label.add_qstn, label.add_answer, label.rem_answer {
-  display: inline-block;
-}
+
 
 span.caption {
   font-weight: bold;
@@ -100,7 +53,7 @@ span.caption {
     }
     .question {
         margin-left: 20px;
-        #questions__title { width:300px; }
+        .qst_title{ width:300px; }
         .answers {
           margin-left: 44px;
           img.add_answer {

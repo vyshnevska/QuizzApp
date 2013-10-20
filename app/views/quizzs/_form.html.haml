@@ -1,17 +1,21 @@
--@quizz= Quizz.new if @quizz.nil?
-= nested_form_for @quizz do |f|
-	- if @quizz.errors.any?
-		#error_explanation
-		%div{:class=> "alert alert-error"}
-			- @quizz.errors.full_messages.each do |msg|
-				= msg
-	.actions
-		= f.label :name, "Quizz Title"
-		= f.text_field :description
-		= f.fields_for :questions do |q|
-			= render "quizzs/questions_fields", :q => q
-		= f.label :name, "Add question", {:class => "add_qstn"}
-		= f.link_to_add image_tag('add_qstn.png'), :questions , {:class => "add_el_icon", :id => "add_qstn"}
+-content_for :page_styles do
+    -stylesheet_link_tag "quizzs"
 
-	%br
-	= f.submit 'Save'
+-@quizz= Quizz.new if @quizz.nil?
+
+= nested_form_for @quizz do |f|
+    .quizz
+        %span.caption Quizz Title
+        = f.text_field :description
+        .question-section
+            .section
+                = image_tag "expand.png", :alt => "Expand Btn", :id => "expand"
+                = image_tag "collapse.png", :alt => "Collapse Btn", :id => "collapse"
+                = image_tag "add.png", :alt => "Add Answer", :id => "add_qst"
+                %strong.caption
+                    = "Question Section"
+                %hr
+                = f.fields_for :questions do |q|
+                    = render "quizzs/questions_fields", :q => q
+
+    = f.submit "Submit Quizz", :id=> "submit", :disabled=> true

@@ -3,7 +3,6 @@ jQuery(function() {
 		$(".alert-success").hide();
 	});
 
-	enableQuizzBtn();
 	$("#expand").css("opacity", "0.5");
 
 	//Temporary
@@ -11,33 +10,56 @@ jQuery(function() {
 
 
 	$("#quizz_description").focusout( function() {
-		enableQuizzBtn();
-		//TODO implement saving to db
-		//$.post("/quizzs", $('form').serialize());
+		validateQuizz();
 	});
 
-	function enableQuizzBtn() {
-		if($("#quizz_description").val() != "") {
-			// $("#add_quizz").removeAttr("disabled");
-			$("#submit").removeAttr("disabled");
-		} else {
-			$("#submit").attr("disabled", "disabled");
-		}
+	$(document).on('focusout', ".qst_title", function() {
 		validateQuizz();
+	});
+
+	$(document).on('focusout', ".ans_content", function() {
+		validateQuizz();
+	});
+
+	function validateQuizz() {
+		var valid = validateQuizzFields();
+
+		if (!valid) {
+			disableQuizzBtn();
+		} else {
+			enableQuizzBtn();
+		}
+	};
+
+	function validateQuizzFields() {
+		var descr = $("#quizz_description").val(),
+			title = $(".qst_title"),
+			content = $(".ans_content"),
+			errors = 0;
+
+		title.each( function() {
+			if ($(this).val() == "") {
+				errors += 1;
+			}
+		});
+		content.each( function() {
+			if ($(this).val() == "") {
+				errors += 1;
+			}
+		});
+		if (descr == "") {
+			errors += 1;
+		}
+
+		return errors >0 ? false : true;
+	};
+
+	function enableQuizzBtn() {
+		$("#submit").removeAttr("disabled");
 	};
 	
-	//TODO: refactor this validation
-	function validateQuizz() {
-		var title = $("#quizz_description").val(),
-			errors = $(".errors");
-		if(title != "") {
-			errors.hide();
-			$(".question-section").show();
-			$(".answers").show();
-		} else {
-			//errors.html("Quizz Title can't be blank!");
-			//errors.show();
-		}
+	function disableQuizzBtn(){
+	 	$("#submit").attr("disabled", "disabled");
 	};
 
 	$("#collapse").click( function() {
@@ -57,7 +79,7 @@ jQuery(function() {
 	});
 
 	$(document).on('click', ".add_answer", function(){
-		$answer = $('<div class="line"><input type="text" value="" " name="questions[][answers][]"/><img src="/assets/cancel.png" alt="Delete Answer" class="remove_answer"></div>');
+		$answer = $('<div class="line"><input class="ans_content" type="text" value="" " name="questions[][answers][]"/><img src="/assets/cancel.png" alt="Delete Answer" class="remove_answer"></div>');
 		$(this).parent().append($answer);
 	});
 
@@ -66,7 +88,7 @@ jQuery(function() {
 	});
 
 	$("#add_qst").click( function(){
-		var $question = $('<div class ="question"> <span class="caption">Question</span> <input type="text" value="" name="questions[][title]"></div>'),
+		var $question = $('<div class ="question"> <span class="caption">Question</span> <input class="qst_title" type="text" value="" name="questions[][title]"></div>'),
 			$answer = $('<div class="answers"><span class="caption">Answers</span><img class="add_answer" src="/assets/add.png" alt="Add Answer"></div>');
 	
 		$('.question-section').append($question);

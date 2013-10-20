@@ -4,6 +4,9 @@ class QuizzsController < ApplicationController
   def index
     flash[:notice] = "There is no active quizz now. Please create new." unless Quizz.exists?
     @quizzes = Quizz.all
+    Quizz.where('status=?', "editable").each do |quizz|
+      quizz.update_attribute(:status, "draft")
+    end
   end
 
   def complete

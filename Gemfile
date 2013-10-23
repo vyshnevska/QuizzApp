@@ -21,6 +21,10 @@ gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'oauth2'
+
 gem "cancan"
 gem 'backbone-on-rails'
 

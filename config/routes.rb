@@ -1,11 +1,6 @@
 QuizzApp::Application.routes.draw do
   resources :friendships
 
-  match '/auth/:provider/callback' => 'sessions#create'
-  match '/signout' => 'sessions#destroy', :as => :signout
-  match '/signin' => 'sessions#new', :as => :signin
-
-
   resources :games do
     member do
       get 'start'
@@ -28,8 +23,9 @@ QuizzApp::Application.routes.draw do
       get 'complete'
     end
   end
-  #resources :users
-  devise_for :users do get '/users/sign_out' => 'devise/sessions#destroy' end
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+
   root :to => "games#welcome"
   mount Resque::Server, :at => "/resque"
 

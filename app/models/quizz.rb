@@ -5,6 +5,7 @@ class Quizz < ActiveRecord::Base
   has_many :questions, :dependent => :destroy
   has_many :games
   has_many :users, :through => :games
+
   accepts_nested_attributes_for :questions, :allow_destroy => :true
 
   validates :description, :presence => {:message => I18n.translate('missed_descr') }, :uniqueness => {:message => "Quizz name must be unique." }

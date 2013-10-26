@@ -1,7 +1,7 @@
 class Game < ActiveRecord::Base
   include AASM
 
-  attr_accessible :user_id, :quizz_id#, :points
+  attr_accessible :user_id, :quizz_id
 
   belongs_to :user
   belongs_to :quizz
@@ -35,10 +35,6 @@ class Game < ActiveRecord::Base
     self.points += (game_details.joins(:answer).where("answers.id= ? AND answers.correct = ?", user_answer_id, true).count) *10
   end
 
-  def is_passed? game
-    # TODO
-  end
-
   def total_score
     if self.quizz
       self.quizz.questions.count * 10
@@ -69,6 +65,5 @@ class Game < ActiveRecord::Base
     end
     scores
   end
-
  
 end

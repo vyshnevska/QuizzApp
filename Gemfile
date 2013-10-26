@@ -32,13 +32,11 @@ gem 'bootstrap-sass'
 gem 'resque', :require => "resque/server"
 gem 'aasm', '2.2.0'
 
-# For testing
-group :test do
-  gem "shoulda-matchers"
-end
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem "shoulda-matchers"
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'guard-rspec'
 end
 
 # gem "pry", :group => :development

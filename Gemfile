@@ -39,6 +39,9 @@ group :test, :development do
   gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'guard-rspec'
   gem 'guard-livereload', require: false
+  gem "spork", "> 0.9.0.rc"
+  gem "guard-spork"
+  # gem 'mocha', "0.13.3", :require => false
 end
 
 # gem "pry", :group => :development

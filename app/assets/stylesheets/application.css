@@ -25,7 +25,6 @@ div.hamster {
 /* --- User Account -- */
 .account {
   display: block;
-  /*float: left;*/
 }
 .account label {
   display: inline-block !important;
@@ -40,9 +39,6 @@ div.hamster {
   font-size: 11px;
 }
 .account_cancel {
-  /*position: relative;
-  right: 15px;
-  top: 20px;*/
   float: right;
   margin-right: 30%;
 }

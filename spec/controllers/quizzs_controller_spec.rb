@@ -1,4 +1,5 @@
 require 'spec_helper'
+# require "mocha/setup"
 
 describe QuizzsController do
   it "should redirect to sign in page" do
@@ -6,7 +7,7 @@ describe QuizzsController do
     response.should redirect_to(new_user_session_path)
   end
 
-  describe "GET #index" do
+  describe "GET #index" do # :focus
     before do
       @user = User.create!(:name =>"testUser", :email => "test@qwerty.com", :password=>"password")
       sign_in @user
@@ -32,6 +33,7 @@ describe QuizzsController do
         expect(assigns(:quizzes)).to match_array([quizz1, quizz2])
       end
     end
+
     context "GET #complete" do
       before do
         @quizz = Quizz.create(:description =>"testQuizz")

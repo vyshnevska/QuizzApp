@@ -1,12 +1,26 @@
 -content_for :page_title do
-    -page_title "Editing quizz "+ @quizz.description, :action
+    -page_title "Edit quizz"
+-content_for :page_styles do
+    -stylesheet_link_tag "quizzs"
 
--unless @quizz.completed?
-    = render 'form'
-
-/ .buttons{:style => "margin: 9px 0 5px;"} 
-/   %button.btn.btn-info
-/     = link_to 'Show', @quizz, :style => "text-decoration: none; color: #ffffff;"
-/   %button.btn.btn-warning
-/     =link_to 'Cancel', quizzs_path, :style => "text-decoration: none; color: #ffffff;"
-/   
+= form_tag quizz_path(@quizz), :method => :put do
+    .quizz
+        %span.caption Quizz Title
+        = text_field_tag "quizz[description]", ""
+        .question-section
+            .section
+                = image_tag "expand.png", :alt => "Expand Btn", :id => "expand"
+                = image_tag "collapse.png", :alt => "Collapse Btn", :id => "collapse"
+                %strong.caption
+                    = "Question Section"
+                %hr
+            - @quizz.questions.each do |question|
+                .question
+                    %span.caption Question
+                    = text_field_tag "questions[][title]", "#{question.title}"
+                    .answers
+                        %span.caption Answers
+                        - question.answers.each do |answer|
+                            .line.first
+                                = text_field_tag "questions[][answers][]", "#{answer.content}"
+    = submit_tag "Submit Quizz", :id=> "submit", :disabled=> true

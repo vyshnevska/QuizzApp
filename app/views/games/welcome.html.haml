@@ -5,7 +5,10 @@
   Welcome Page
 -if current_user
   .statistic_info
-    %h4 User statistic:
+    .caption
+      %h4 User statistic:
+    .bug_image
+      = image_tag "lady_bug.png", :alt=> "Lady Bug", :class=>"remove_answer"
     .details
       ="#{@c_p } points in #{@count_games} games."
 

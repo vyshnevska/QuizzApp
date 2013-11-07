@@ -5,12 +5,12 @@
         - @game.errors.full_messages.each do |msg|
           = msg
   .actions
-    =f.label "Choose a quizz"
-    =f.select :quizz_id, Quizz.all.map{ |q| [q.description, q.id] }
-    =f.label "Assign player"
-    -if current_user
-      =f.select :user_id, User.where(:id => current_user.id).map{|u| [u.name, u.id]}
-    -else
-      =f.select :user_id, User.all.map{ |u| [u.name, u.id] }
+    = f.label "Choose a quizz"
+    = f.select :quizz_id, Quizz.all.map{ |q| [q.description, q.id] }
+    = f.label "Assign player"
+    - if current_user
+      = f.select :user_id, User.where(:id => current_user.id).map{|u| [u.name, u.id]}
+    - else
+      = f.select :user_id, User.all.map{ |u| [u.name, u.id] }
   %br
     = f.submit 'Save'

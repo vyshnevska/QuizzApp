@@ -24,24 +24,40 @@ class QuizzsController < ApplicationController
 
   def edit
     @quizz = Quizz.find(params[:id])
+
     flash[:notice] = "Please add question and answers for #{@quizz.description}. Mark correct answers."
     if @quizz.draft?
       flash[:notice] << "This quizz is in editable mode."
     else
       flash[:notice] << "You can't edit this quizz."
-     end
-    
+    end
   end
 
   def create
-    @quizz = Quizz.create(params[:quizz])
-    
-    if @quizz.errors.empty?
-      flash[:notice] = "Thank you for creating this quizz"
+    @errors = []
+    @quizz = Quizz.new(params[:quizz])
+    if @quizz.save
+      params["questions"].each do |question|
+        new_quest = @quizz.questions.build(:title => question["title"])
+        question["answers"].each do |answer|
+          new_quest.answers.build(:content => answer)
+        end
+        if !new_quest.save
+          # TODO: refactor this
+          flash[:error] = new_quest.errors.values.join("\n")
+          @errors = new_quest.errors.values.join("\n")
+        end
+      end
+    else
+      @errors = @quizz.errors.values.join("\n")
+    end
+
+    if @quizz.errors.empty? && @errors.empty?
+      flash[:error] = []
       redirect_to quizzs_path
     else
-      flash[:error] = @quizz.errors.values.join("\n")
-      render :new 
+      flash[:error] = @errors
+      render :new
     end
   end
 
@@ -50,7 +66,7 @@ class QuizzsController < ApplicationController
     q_saved_ids = []
     a_saved_ids = []
     @quizz = Quizz.find(params[:id])
-    @q= Question.where(:quizz_id => params[:id])
+    @q = Question.where(:quizz_id => params[:id])
     @q.each do |q|
       q_saved_ids << q.id
       @a = Answer.where(:question_id => q.id)
@@ -78,8 +94,8 @@ class QuizzsController < ApplicationController
       flash[:notice] = 'No answer is marked. '
     end
     if @quizz.update_attributes(params[:quizz])
-        flash[:notice] << "Quizz# #{@quizz.id} is updated."
-        redirect_to quizzs_path
+      flash[:notice] << "Quizz# #{@quizz.id} is updated."
+      redirect_to quizzs_path
     else
       render :edit
     end

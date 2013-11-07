@@ -9,7 +9,7 @@
 = form_tag :controller => 'quizzs', :action => "create", :method => :post do
     .quizz
         %span.caption Quizz Title
-        = text_field_tag "quizz[description]", ""
+        = text_field_tag "quizz[description]", "descr"
         .question-section
             .section
                 = image_tag "expand.png", :alt => "Expand Btn", :id => "expand"
@@ -20,15 +20,15 @@
                 %hr
             .question
                 %span.caption Question
-                = text_field_tag "questions[][title]", ""
+                = text_field_tag "questions[][title]", "wrewrew"
                 .answers
                     %span.caption Answers
                     = image_tag "add.png", :alt => "Add Answer", :class => "add_answer"
                     .line.first
-                        = text_field_tag "questions[][answers][]", ""
+                        = text_field_tag "questions[][answers][]", "qw1"
                         = image_tag "cancel.png", :alt=> "Delete Answer", :class=>"remove_answer"
                     .line
-                        = text_field_tag "questions[][answers][]", ""
+                        = text_field_tag "questions[][answers][]", "sdf2"
                         = image_tag "cancel.png", :alt=> "Delete Answer", :class=>"remove_answer"
 
     = submit_tag "Submit Quizz", :id=> "submit", :disabled=> true

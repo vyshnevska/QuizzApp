@@ -1,12 +1,16 @@
 %hr
-%h4
-  = "Game # #{@game.id } statistics"
+.caption
+  %h4= "Game # #{@game.id } statistics"
+.bug_image
+  = image_tag "lady_bug.png", :alt=> "Lady Bug", :class=>"remove_answer"
 .statistics
-  %p= "People who played this game: #{@game.played_game}"
+  - if @game.try(:quizz)
+    %p= "People who played this game: #{@game.try(:played_game)}"
   %p= "Maximum game score is #{@game.total_score}"
   %p= "User result is : #{@user_result} %"
-  %ul
-    = "Other #{@scores.length} results: "
-    -@scores.each do |score|
-      %li
-        = "#{score} %"
+  - if @scores
+    %ul
+      = "Other #{@scores.length} results: "
+      - @scores.each do |score|
+        %li
+          = "#{score} %"

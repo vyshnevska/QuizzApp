@@ -1,15 +1,15 @@
--game.quizz.questions.each do |q|
+- game.quizz.questions.each do |q|
   %ul
     %h5= q.title
-    -q.answers.each do |a|
+    - q.answers.each do |a|
       %li
-        -if answers.include?(a.id)
-          -if a.is_correct?
+        - if answers.include?(a.id)
+          - if a.is_correct?
             %p.correct_answer= a.content
-          -else
+          - else
             %p.user_answer= a.content
         - else
-          -if a.is_correct?
+          - if a.is_correct?
             %p.correct_answer= a.content
-          -else
+          - else
             %p= a.content

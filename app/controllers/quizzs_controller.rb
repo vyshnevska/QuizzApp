@@ -24,6 +24,8 @@ class QuizzsController < ApplicationController
 
   def edit
     @quizz = Quizz.find(params[:id])
+    @questions = @quizz.questions
+
     flash[:notice] = "Please add question and answers for #{@quizz.description}. Mark correct answers."
     if @quizz.draft?
       flash[:notice] << "This quizz is in editable mode."
@@ -62,6 +64,7 @@ class QuizzsController < ApplicationController
   end
 
   def update
+    binding.pry
     ids = []
     q_saved_ids = []
     a_saved_ids = []

@@ -9,4 +9,8 @@ class Question < ActiveRecord::Base
 
   validates :title, :presence => {:message => "Question title can't be blank."}
 
+  def answers_by_qst
+    Answer.where("question_id = ?", self.id)
+  end
+
 end

@@ -61,37 +61,11 @@ class QuizzsController < ApplicationController
   end
 
   def update
-    ids = []
-    q_saved_ids = []
-    a_saved_ids = []
     @quizz = Quizz.find(params[:id])
-    @q = Question.where(:quizz_id => params[:id])
-    @q.each do |q|
-      q_saved_ids << q.id
-      @a = Answer.where(:question_id => q.id)
-      @a.each do |a|
-        a_saved_ids << a.id
-      end
-    end
-
-    if !params[:correct_ids].nil?
-      ids = params[:correct_ids].values.collect {|v| v.to_i}
-      ids.each do |id|
-        @ca = Answer.find_by_id(id)
-        @ca.mark_as_correct
-        if @ca.save
-          flash[:notice] = 'Answer is  marked. ' #bug here
-        end
-      end
-      (a_saved_ids - ids).each do |e|
-        @ia = Answer.find_by_id(e)
-        @ia.mark_as_incorrect
-        if @ia.save
-          flash[:notice] = 'Answer is unmarked. ' #bug here
-        end
-      end
+    if params[:correct_ids]
+      @quizz.mark_answers params[:correct_ids].values.collect {|v| v.to_i}
     else
-      flash[:notice] = 'No answer is marked. '
+      flash[:notice] = 'No answer is marked.'
     end
 
     if @quizz.update_attributes(params[:quizz])

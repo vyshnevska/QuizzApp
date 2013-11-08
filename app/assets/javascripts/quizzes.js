@@ -8,6 +8,10 @@ jQuery(function() {
 	//Temporary
 	$(".question-section").show();
 
+	if (typeof action !== 'undefined' && action == "edit"){
+		enableQuizzBtn();
+	}
+
 
 	$("#quizz_description").focusout( function() {
 		validateQuizz();

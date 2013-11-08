@@ -9,7 +9,7 @@
     .details
       .item
         .quizz
-          Quizz
+          = "# #{quizz.id}  Quizz"
           %strong= "#{quizz.try(:description)}"
           %span.temp= current_user.admin ? quizz.status : ""
         .actions

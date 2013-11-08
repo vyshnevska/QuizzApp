@@ -40,7 +40,7 @@ gem 'aasm', '2.2.0'
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
   gem "shoulda-matchers"
-  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  # gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'guard-rspec'
 end
 

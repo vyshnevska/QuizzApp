@@ -247,7 +247,6 @@ DEPENDENCIES
   pry
   rails (= 3.2.14)
   rails_12factor
-  rb-fsevent
   resque
   rspec-rails (~> 2.0)
   sass-rails (~> 3.2.3)

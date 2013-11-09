@@ -24,35 +24,13 @@ jQuery(function() {
 	$(document).on('focusout', ".ans_content", function() {
 		validateQuizz();
 	});
-
+	
 	function validateQuizz() {
 		var valid = validateQuizzFields();
-
-		if (!valid) {
+	   	if (!valid) {
 			disableQuizzBtn();
 		} else {
-			enableQuizzBtn();
-		}
-	};
-
-	function validateQuizzFields() {
-		var descr = $("#quizz_description").val(),
-			title = $(".qst_title"),
-			content = $(".ans_content"),
-			errors = 0;
-
-		title.each( function() {
-			if ($(this).val() == "") {
-				errors += 1;
-			}
-		});
-		content.each( function() {
-			if ($(this).val() == "") {
-				errors += 1;
-			}
-		});
-		if (descr == "") {
-			errors += 1;
+		    enableQuizzBtn();
 		}
 
 		return errors >0 ? false : true;
@@ -65,6 +43,36 @@ jQuery(function() {
 	function disableQuizzBtn(){
 	 	$("#submit").attr("disabled", "disabled");
 	};
+
+	function validateQuizzFields() {
+		var descr = $("#quizz_description").val(),
+			title = $(".qst_title"),
+			content = $(".ans_content"),
+			errors = 0;
+		title.each( function() {
+			if ($(this).val() == "") {
+				errors += 1;
+			}
+		});
+		content.each( function() {
+		    if ($(this).val() == "") {
+				errors += 1;
+			}
+		});
+		if (descr == "") {
+		   	errors += 1;
+		}
+
+		return errors >0 ? false : true;
+	};
+
+	function enableQuizzBtn() {
+		$("#submit").removeAttr("disabled");
+	};
+
+	function disableQuizzBtn(){
+		$("#submit").attr("disabled", "disabled");
+   	};
 
 	$("#collapse").click( function() {
 		$(".answers").hide();
@@ -83,7 +91,7 @@ jQuery(function() {
 	});
 
 	$(document).on('click', ".add_answer", function(){
-		$answer = $('<div class="line"><input class="ans_content" type="text" value="" " name="questions[][answers][]"/><img src="/assets/cancel.png" alt="Delete Answer" class="remove_answer"></div>');
+		var $answer = $('<div class="line"><input class="ans_content" type="text" value="" " name="questions[][answers][]"/><img src="/assets/cancel.png" alt="Delete Answer" class="remove_answer"></div>');
 		$(this).parent().append($answer);
 	});
 

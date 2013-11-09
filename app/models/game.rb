@@ -55,7 +55,7 @@ class Game < ActiveRecord::Base
   end
 
   def played_game
-    Game.where("quizz_id =?", self.quizz.id).count
+    Game.where("quizz_id = ?", self.quizz.id).count
   end
 
   def game_score_percent

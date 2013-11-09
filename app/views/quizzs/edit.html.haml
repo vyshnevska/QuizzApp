@@ -28,4 +28,5 @@
                                 = text_field_tag "questions[][answers][]", "#{answer.content}"
                             .correct{:style => "position:relative; top: -35px; left: 40px;"}
                                 = radio_button_tag "correct_ids[#{question.id}]", "#{answer.id}", answer.is_correct?
+
     = submit_tag "Submit Quizz", :id=> "submit", :disabled=> true

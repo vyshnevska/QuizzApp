@@ -3,7 +3,10 @@
 
 .quizzes
   .section
-    %h3 Listing quizzs
+    .caption
+      %h3 Listing quizzs
+    .bug_image
+      = image_tag "lady_bug.png", :alt=> "Lady Bug", :class=>"remove_answer"
     %hr.section_caption
   - @quizzes.each do |quizz|
     .details

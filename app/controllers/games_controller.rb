@@ -42,8 +42,8 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     if @game.finished?
-      quizz_id = @game.quizz.id
-      @scores = @game.other_games_scores @game.id, quizz_id
+      quizz_id = @game.try(:quizz).try(:id)
+      @scores = @game.other_games_scores @game.id, quizz_id if quizz_id
 
       #Statistic info
       @total_quizz_points =  @game.total_score
@@ -61,8 +61,8 @@ class GamesController < ApplicationController
       end
     end
     if @game.finished?
-      quizz_id = @game.quizz.id
-      @scores = @game.other_games_scores @game.id, quizz_id
+      quizz_id = @game.try(:quizz).try(:id)
+      @scores = @game.other_games_scores @game.id, quizz_id if quizz_id
 
       #Statistic info
       @total_quizz_points =  @game.total_score

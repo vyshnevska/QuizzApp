@@ -4,16 +4,14 @@ class GamesController < ApplicationController
 
   def welcome
     if current_user
-      @count_games = current_user.games.count
-      @c_p = 0
-      @score = 0
-      current_user.games.passed_games.each do |game|
-        @c_p+= game.points
-        @score += game.total_score
-      end
-      # UserMailer.welcome_email(current_user).deliver
+      @count_games = current_user.assigned_games
+      @count_passed_games = current_user.passed_games.count
+      @user_score = current_user.total_score
+      @max_score = current_user.maximum_score
 
+      # UserMailer.welcome_email(current_user).deliver
       # flash[:notice] = I18n.translate('games.send_mail_msg', :current_user => current_user.name)
+
       current_user.inverse_friends.each do |fs|
         @inverse_friends  = fs.name
       end

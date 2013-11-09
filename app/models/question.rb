@@ -1,5 +1,4 @@
 class Question < ActiveRecord::Base
-
   attr_accessible :answers_attributes, :title
 
   has_many :answers, :dependent => :destroy

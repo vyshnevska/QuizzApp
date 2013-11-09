@@ -7,14 +7,13 @@
   .statistic_info
     %h4 User statistic:
     .details
-      ="#{@c_p } points in #{@count_games} games."
+      ="#{@user_score} points in #{@count_passed_games} games (of #{@count_games})"
 
-    %h4= "Total score: #{@score}"
-    -if @c_p !=0
-      -if @c_p == @score
-        = image_tag "nut.png", :class=> "nut_image"
+    %h4= "Maximum score of passed games: #{@max_score}"
+    -if @user_score !=0 && @user_score == @max_score
+      = image_tag "nut.png", :class=> "nut_image"
     -if current_user.admin
-      %h4 Total games:
+      %h4 Total Hamster statistic:
       .details
         %span= "Draft: #{@draft}  |"
         %span= "Started: #{@started}  |"

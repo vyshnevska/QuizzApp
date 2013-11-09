@@ -20,9 +20,6 @@ class GamesController < ApplicationController
     else
       @users = User.all
     end
-    @draft = Game.draft.count
-    @started = Game.started.count
-    @finished = Game.finished.count
   end
 
   def index
@@ -85,29 +82,35 @@ class GamesController < ApplicationController
   end
 
   def edit
-    @game = Game.find(params[:id])
+    redirect_to games_path
+    # if current_user.role == "admin"
+    #   @game = Game.find(params[:id])
+    # else
+    #   redirect_to games_path
+    # end
   end
 
   def update
-    @game = Game.find(params[:id])
-    if @game.update_attributes(params[:game])
-      redirect_to @game, notice: I18n.translate('games.successful_update_msg')
-    else
-      render :edit
-    end
+    redirect_to games_path
+    # @game = Game.find(params[:id])
+    # if @game.update_attributes(params[:game])
+    #   redirect_to @game, notice: I18n.translate('games.successful_update_msg')
+    # else
+    #   render :edit
+    # end
   end
 
   def destroy
     @game = Game.find(params[:id])
     @game.destroy
-    redirect_to games_url
+    redirect_to games_path
   end
 
   def start game_id
     @game = Game.find_by_id(game_id)
     @quizz = @game.quizz
     # Resque.enqueue(GameStartNotification, @game.id)
-    @game.set_to_started! if @game.draft?
+    @game.set_to_started!
     render :start
   end
 

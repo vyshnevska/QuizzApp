@@ -18,9 +18,14 @@
     -if current_user.admin
       %h4 Total Hamster statistic:
       .details
-        %span= "Draft: #{@draft}  |"
-        %span= "Started: #{@started}  |"
-        %span= "Finished: #{@finished}"
+        %span= "Draft: "
+        = hamster_draft_games
+        |
+        %span= "Started: "
+        = hamster_started_games
+        |
+        %span= "Finished: "
+        = hamster_finished_games
   -if current_user.admin?
     .friendship
       %h4 User Friendship:

@@ -42,6 +42,7 @@ group :test, :development do
   gem 'guard-livereload', require: false
   gem "spork", "> 0.9.0.rc"
   gem "guard-spork"
+  gem "database_cleaner"
   # gem 'mocha', "0.13.3", :require => false
 end
 

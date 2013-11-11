@@ -28,11 +28,10 @@ describe User do
 
     describe "passed games" do
       before do
-        @game1 = Game.create(:user_id => @user.id, :quizz_id => @quizz.id, :points => 100)
+        @game1 = Game.create!(:user_id => @user.id, :quizz_id => @quizz.id, :points => 100)
         game_detail1 = GameDetail.create(:id => 1, :game_id => @game1.id, :question_id => 1, :answer_id => 1)
-        @game2 = Game.create(:user_id => @user.id, :quizz_id => @quizz.id, :points => 80)
-        game_detail2 = GameDetail.create(:id => 1, :game_id => @game2.id, :question_id => 1, :answer_id => 1)
-
+        @game2 = Game.create!(:user_id => @user.id, :quizz_id => @quizz.id, :points => 80)
+        game_detail2 = GameDetail.create(:id => 2, :game_id => @game2.id, :question_id => 1, :answer_id => 2)
       end
 
       it "user should have 2 passed games" do
@@ -44,11 +43,13 @@ describe User do
       end
 
       it "maximum score for usershould be 300" do
-        @game1.total_score = 200
-        @game1.total_score = 100
-        @user.total_score.should eql(300)
+        @user.maximum_score.should eql(300)
       end
-      
+
+      after do
+        @game1.destroy
+        @game2.destroy
+      end
     end
   end
 end

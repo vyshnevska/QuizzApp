@@ -10,7 +10,7 @@ describe Game do
   # it { should validate_presence_of(:user_id)}
   # it { should validate_presence_of(:quizz_id)}
 
-  context "for a created game" do
+  context "check states" do
     before do
       user = User.create!(:name =>"testUser", :email => "test@qwerty.com", :password=>"password")
       quizz = Quizz.create!(:description =>"testQuizz")
@@ -36,4 +36,19 @@ describe Game do
       @game.destroy
     end
   end
+
+  describe "check score" do
+    before do
+      user = User.create!(:name =>"user", :email => "user@qwerty.com", :password=>"password")
+      quizz = Quizz.create!(:description =>"testQuizz")
+      question1 = Question.create(:title => "testTitle1", :quizz_id => quizz.id)
+      question2 = Question.create(:title => "testTitle2", :quizz_id => quizz.id)
+      @game = Game.create(:user_id => user.id, :quizz_id => quizz.id)
+    end
+
+    it "should set maximum score to 20" do
+      @game.set_maximum_score.should eql(20)   
+    end    
+  end
+
 end

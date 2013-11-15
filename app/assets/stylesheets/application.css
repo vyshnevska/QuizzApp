@@ -42,3 +42,17 @@ div.hamster {
   float: right;
   margin-right: 30%;
 }
+.sigma {
+  margin-left:auto;
+  margin-top: 20px;
+  margin-right:auto;
+  position: relative;
+  border-radius: 4px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
+  background: #222;
+  width: 800px;
+  min-height: 300px;
+  top: 0;
+  left: 0;
+}

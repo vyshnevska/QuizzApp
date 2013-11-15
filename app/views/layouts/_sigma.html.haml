@@ -1,0 +1,27 @@
+/ = javascript_include_tag "sigma.parseGexf", "http://sigmajs.org/js/sigma.min.js", "http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"
+
+/ :javascript
+/   $(document).ready(function() {
+/     var sigRoot = document.getElementById('sig');
+/     var sigInst = sigma.init(sigRoot).drawingProperties({
+/       defaultLabelColor: '#ccc',
+/       font: 'Arial',
+/       edgeColor: 'source',
+/       defaultEdgeType: 'curve'
+/     }).graphProperties({
+/       minNodeSize: 1,
+/       maxNodeSize: 3
+/     });
+
+/     sigInst.addNode('hello',{
+/       label: 'Point 1',
+/       color: '#ff0000',
+/       x: 1
+/     }).addNode('world',{
+/       label: 'Point 2',
+/       color: '#00ff00',
+/       x: 2
+/     }).addEdge('hello_world','hello','world').draw();
+/   });
+%div.sigma#sig
+

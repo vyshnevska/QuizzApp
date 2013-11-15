@@ -9,7 +9,8 @@
     = stylesheet_link_tag "my_bootstrap", "navigation_bar", "layout", "application"
     = yield :page_styles
 
-    = javascript_include_tag "application", "games", "quizzes", "jquery"
+    = javascript_include_tag "application"
+    / , "games", "quizzes", "jquery"
     = csrf_meta_tags
 
     = yield(:head)
@@ -18,6 +19,7 @@
       %nav.navbar-inner
         .container
           = render 'layouts/navigation'
+
     #main{:role => "main"}
       .container
         .content
@@ -27,5 +29,7 @@
             .span12
               = render 'layouts/messages'
               = yield
+          .row
+            = render 'layouts/sigma'
           %footer
             %div.hamster

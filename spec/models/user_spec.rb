@@ -12,9 +12,9 @@ describe User do
 
   context "user games activity" do
     before do
-        @user = User.create!(:name =>"testUser", :email => "test@qwerty.com", :password=>"password")
-        @quizz = Quizz.create!(:description =>"testQuizz")
-      end
+      @user = User.create!(:name =>"testUser", :email => "test@qwerty.com", :password=>"password")
+      @quizz = Quizz.create!(:description =>"testQuizz")
+    end
 
     describe "assigned games" do
       before do
@@ -42,7 +42,8 @@ describe User do
         @user.total_score.should eql(180)
       end
 
-      it "maximum score for usershould be 300" do
+      it "maximum score for user should be 300" do
+        @user.stub(:maximum_score) {300}
         @user.maximum_score.should eql(300)
       end
 

@@ -62,6 +62,27 @@ describe QuizzsController do
       #   expect(assigns(:quizzes)).to match_array([quizz1, quizz2])
       # end
     end
+
+    context "PUT #update" do
+      before :each do
+        @q = Quizz.create(:description =>"testQuizz")
+        put :update, :id => @q.id, :correct_ids => {'1'=>'1', '2'=>'1'}
+      end
+
+      it "correct_ids parameters should not be blank" do
+        controller.params[:correct_ids].should_not be_nil
+      end
+
+      it "should have correct ids parameters in url" do
+        controller.params[:correct_ids].should eql({'1'=>'1', '2'=>'1'})
+      end
+
+      it "should have correct flash notice" do
+        flash[:notice].should == "Quizz# #{@q.id} is updated."
+      end
+
+    end
+
     after do 
       sign_out @user
       @user.destroy

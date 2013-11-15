@@ -69,7 +69,7 @@ class QuizzsController < ApplicationController
     end
 
     if @quizz.update_attributes(params[:quizz])
-      flash[:notice] << "Quizz# #{@quizz.id} is updated."
+      flash[:notice] = "Quizz# #{@quizz.id} is updated."
       redirect_to quizzs_path
     else
       render :edit

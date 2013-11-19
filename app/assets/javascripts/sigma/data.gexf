@@ -1,12 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gexf xmlns="http://www.gexf.net/1.2draft" version="1.2">
-    <graph mode="static" defaultedgetype="directed">
-        <nodes>
-            <node id="0" label="Point1" />
-            <node id="1" label="Point2" />
-        </nodes>
-        <edges>
-            <edge id="0" source="0" target="1" />
-        </edges>
-    </graph>
+<gexf xmlns="http://www.gexf.net/1.2draft" version="1.2" xmlns:viz="http://www.gexf.net/1.2draft/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.gexf.net/1.2draft http://www.gexf.net/1.2draft/gexf.xsd">
+  <meta lastmodifieddate="2012-05-20">
+    <creator>Gephi 0.8</creator>
+    <description></description>
+  </meta>
+  <graph defaultedgetype="undirected" timeformat="double" mode="dynamic">
+    <attributes class="node" mode="static">
+      <attribute id="modularity_class" title="Modularity Class" type="integer">
+        <default>0</default>
+      </attribute>
+      <attribute id="degree" title="Degree" type="integer">
+        <default>0</default>
+      </attribute>
+    </attributes>
+    <nodes>
+      <node id="0" label="1">
+        <attvalues>
+          <attvalue for="modularity_class" value="1"></attvalue>
+          <attvalue for="degree" value="11"></attvalue>
+        </attvalues>
+        <viz:size value="7.149254"></viz:size>
+        <viz:position x="75.811615" y="-264.29507"></viz:position>
+        <viz:color r="133" g="25" b="176"></viz:color>
+      </node>
+      <node id="1" label="2">
+        <attvalues>
+          <attvalue for="modularity_class" value="1"></attvalue>
+          <attvalue for="degree" value="14"></attvalue>
+        </attvalues>
+        <viz:size value="7.4626865"></viz:size>
+        <viz:position x="41.205692" y="-340.84763"></viz:position>
+        <viz:color r="133" g="25" b="176"></viz:color>
+      </node>
+      <node id="50" label="51">
+        <attvalues>
+          <attvalue for="modularity_class" value="2"></attvalue>
+          <attvalue for="degree" value="29"></attvalue>
+        </attvalues>
+        <viz:size value="9.029851"></viz:size>
+        <viz:position x="239.63326" y="-270.72385"></viz:position>
+        <viz:color r="25" g="111" b="176"></viz:color>
+      </node>
+      <node id="71" label="72">
+        <attvalues>
+          <attvalue for="modularity_class" value="3"></attvalue>
+          <attvalue for="degree" value="74"></attvalue>
+        </attvalues>
+        <viz:size value="13.731343"></viz:size>
+        <viz:position x="111.49893" y="125.918045"></viz:position>
+        <viz:color r="176" g="25" b="25"></viz:color>
+      </node>
+    </nodes>
+    <edges>
+     <edge id="0" source="0" target="50">
+        <attvalues>
+          <attvalue for="weight" value="1.0"></attvalue>
+        </attvalues>
+      </edge>
+      <edge id="1" source="0" target="71">
+        <attvalues>
+          <attvalue for="weight" value="1.0"></attvalue>
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
 </gexf>

@@ -18,7 +18,7 @@ function init() {
  
 	// Parse a GEXF encoded file to fill the graph
 	// (requires "sigma.parseGexf.js" to be included)
-	sigInst.parseGexf('assets/sigma/data.gexf');
+	sigInst.parseGexf('../assets/sigma/data.gexf');
  
 	// Bind events :
 	var greyColor = '#A271BB';

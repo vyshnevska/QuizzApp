@@ -51,8 +51,8 @@ div.hamster {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   background: #222;
-  width: 800px;
-  min-height: 300px;
+  min-width: 800px;
+  min-height: 600px;
   top: 0;
   left: 0;
 }

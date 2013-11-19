@@ -2,20 +2,25 @@
 
 / :javascript
 /   $(document).ready(function() {
-/     var sigRoot = document.getElementById('sig');
-/     var sigInst = sigma.init(sigRoot).drawingProperties({
-/       defaultLabelColor: '#ccc',
-/       font: 'Arial',
-/       edgeColor: 'source',
-/       defaultEdgeType: 'curve'
+/     var sigInst = sigma.init(document.getElementById('sig')).drawingProperties({
+/         defaultLabelColor: '#fff',
+/         defaultLabelSize: 14,
+/         defaultLabelBGColor: '#fff',
+/         defaultLabelHoverColor: '#000',
+/         labelThreshold: 6,
+/         defaultEdgeType: 'curve'
 /     }).graphProperties({
-/       minNodeSize: 1,
-/       maxNodeSize: 3
+/         minNodeSize: 0.5,
+/         maxNodeSize: 5,
+/         minEdgeSize: 1,
+/         maxEdgeSize: 1
+/     }).mouseProperties({
+/         maxRatio: 4
 /     });
 
 /     sigInst.addNode('hello',{
 /       label: 'Point 1',
-/       color: '#ff0000',
+/       color: '#A271BB',
 /       x: 1
 /     }).addNode('world',{
 /       label: 'Point 2',
@@ -25,3 +30,13 @@
 /   });
 %div.sigma#sig
 
+/ var sigRoot = document.getElementById('sig');
+/ var sigInst = sigma.init(sigRoot).drawingProperties({
+/   defaultLabelColor: '#A271BB',
+/   font: 'Arial',
+/   edgeColor: 'source',
+/   defaultEdgeType: 'curve'
+/ }).graphProperties({
+/   minNodeSize: 1,
+/   maxNodeSize: 3
+/ });

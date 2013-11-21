@@ -23,11 +23,11 @@ class GamesController < ApplicationController
   end
 
   def index
-    @quizzes = Quizz.completed
+    @quizzes = Quizz.completed.alphabetically.page(params[:page]).per(5)
     if current_user.role == "admin"
       # @games_new = Game.created_games
-      @games_new = current_user.games.created_games
-      @games_passed = Game.passed_games
+      @games_new = current_user.games.created_games.page(params[:page]).per(5)
+      @games_passed = Game.passed_games.page(params[:page]).per(5)
       flash[:notice] = I18n.translate('games.create_new_game_msg') unless Game.exists?
     else
       @games_new = current_user.games.created_games

@@ -23,6 +23,8 @@ class Quizz < ActiveRecord::Base
 
   scope :draft,      where( status: 'draft'     )
   scope :completed,  where( status: 'completed' )
+  scope :alphabetically, order("description ASC")
+  scope :by_state, order("status, updated_at ASC")
 
   def mark_answers ans_ids
     self.questions.each do |question|

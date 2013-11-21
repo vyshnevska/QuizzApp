@@ -32,6 +32,7 @@ gem 'bootstrap-sass'
 #gem "mailcatcher"
 gem 'resque', :require => "resque/server"
 gem 'aasm', '2.2.0'
+gem 'kaminari'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.0"

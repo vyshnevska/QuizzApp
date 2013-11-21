@@ -11,6 +11,7 @@
           = " #{game.try(:quizz).try(:description)}  ( #{game.state} )"
         .actions
           = link_to 'Start', {:controller => "games", :action => "new", :quizz_id => game.quizz_id }
-
+  .footer{:style=>"margin-left: 40%; margin-right: 30%;"}
+    = paginate @quizzes
   .section
     %hr

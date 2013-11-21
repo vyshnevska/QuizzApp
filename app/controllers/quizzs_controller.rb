@@ -3,7 +3,7 @@ require "pry"
 class QuizzsController < ApplicationController
   def index
     flash[:notice] = "There is no active quizz now. Please create new." unless Quizz.exists?
-    @quizzes = Quizz.all
+    @quizzes = Quizz.by_state
   end
 
   def complete

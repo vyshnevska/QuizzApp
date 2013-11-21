@@ -10,6 +10,8 @@
           %strong= "#{quizz.try(:description)}"
         .actions
           = link_to 'Start', {:controller => "games", :action => "new", :quizz_id => quizz.id }
+  .footer{:style=>"margin-left: 40%; margin-right: 30%;"}
+    = paginate @quizzes
 
   .section
     %hr

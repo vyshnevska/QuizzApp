@@ -22,5 +22,7 @@
           = link_to '|Show|', game
           -if current_user.admin
             = link_to '|Destroy|', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  .footer{:style=>"margin-left: 40%; margin-right: 30%;"}
+    = paginate @games_passed
   .section
     %hr

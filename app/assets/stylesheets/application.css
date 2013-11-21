@@ -1,6 +1,7 @@
 body{
-  padding-top: 60px;
-  padding-bottom: 40px;
+  padding: 0px;
+  margin: 0px;
+  height: auto;
 }
 .sidebar-nav {
 padding: 9px 0;
@@ -8,11 +9,14 @@ padding: 9px 0;
 .navbar .brand {
   padding: 5px 10px 5px;
   margin-left: -20px;
-  width: 90px;
+  width: 60px;
   height: 50px;
 }
 .nav li {
   line-height: 25px;
+}
+#main {
+  padding-top: 50px;
 }
 div.hamster {
   background-image: url(/assets/cute.jpg);

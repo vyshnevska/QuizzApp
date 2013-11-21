@@ -34,6 +34,22 @@ class User < ActiveRecord::Base
     user
   end
 
+  def assigned_games
+    self.games.count
+  end
+
+  def passed_games
+    Game.joins(:game_details).where("points IS NOT NULL AND user_id = ?", self.id)
+  end
+
+  def total_score
+    self.passed_games.map{|game| game.points}.inject {|sum, points| sum + points }
+  end
+
+  def maximum_score
+    self.passed_games.map{|game| game.total_score}.inject {|sum, score| sum + score }
+  end
+
 private
   def assign_role
     self.role = "guest" unless role.nil?

@@ -10,18 +10,22 @@
     .bug_image
       = image_tag "lady_bug.png", :alt=> "Lady Bug", :class=>"remove_answer"
     .details
-      ="#{@c_p } points in #{@count_games} games."
+      ="#{@user_score} points in #{@count_passed_games} games (of #{@count_games} assigned)"
 
-    %h4= "Total score: #{@score}"
-    -if @c_p !=0
-      -if @c_p == @score
-        = image_tag "nut.png", :class=> "nut_image"
+    %h4= "Maximum score of passed games: #{@max_score}"
+    -if @user_score !=0 && @user_score == @max_score
+      = image_tag "nut.png", :class=> "nut_image"
     -if current_user.admin
-      %h4 Total games:
+      %h4 Total Hamster statistic:
       .details
-        %span= "Draft: #{@draft}  |"
-        %span= "Started: #{@started}  |"
-        %span= "Finished: #{@finished}"
+        %span= "Draft: "
+        = hamster_draft_games
+        |
+        %span= "Started: "
+        = hamster_started_games
+        |
+        %span= "Finished: "
+        = hamster_finished_games
   -if current_user.admin?
     .friendship
       %h4 User Friendship:
@@ -37,4 +41,4 @@
         .details
           = user.name
           = user.email
-          = link_to "Add as a Friend", friendships_path(:friend_id => user.id), :method => :post 
+          = link_to "Add as a Friend", friendships_path(:friend_id => user.id), :method => :post

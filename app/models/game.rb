@@ -7,8 +7,8 @@ class Game < ActiveRecord::Base
   belongs_to :quizz
   has_many :game_details
 
-  scope :passed_games, joins(:game_details).where("points IS NOT NULL").group("games.id")
-  scope :created_games, where("points IS NULL").group("id")
+  scope :passed_games, joins(:game_details).where("points IS NOT NULL").group("games.id").order("games.created_at ASC")
+  scope :created_games, where("points IS NULL").group("id").order("games.created_at ASC")
   
   attr_protected :state
   aasm_column :state
@@ -31,15 +31,26 @@ class Game < ActiveRecord::Base
   scope :started,  where( state: 'started'  )
   scope :finished, where( state: 'finished' )
 
+  before_save :set_maximum_score
+
   def get_points user_answer_id
     self.points += (game_details.joins(:answer).where("answers.id= ? AND answers.correct = ?", user_answer_id, true).count) *10
   end
 
+  def set_maximum_score
+    self.max_score = self.quizz.questions.count * 10
+  end
+
   def total_score
-    if self.quizz
-      self.quizz.questions.count * 10
+    if self.max_score
+      self.quizz ? self.max_score : 1
     else
-      1000000
+      #TODO: Fix this
+      if self.quizz
+        self.quizz.questions.count * 10
+      else
+        10
+      end
     end
   end
 

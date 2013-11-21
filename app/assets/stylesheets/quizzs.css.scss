@@ -23,6 +23,7 @@ span.caption {
   font-weight: bold;
   margin-right: 10px;
 }
+
 .quizz input[type=button] {
   height: 25px;
   vertical-align: text-bottom;
@@ -78,6 +79,10 @@ span.caption {
 form #submit {
   margin-top: 30px;
 }
+
+.field_with_errors {
+  display: inline;
+}
 /* ---END NEW QUIZZ--- */
 
 /* ---Index--- */
@@ -104,6 +109,7 @@ form #submit {
     width: 30%;
   }
 }
+
 .quizzes .section {
   .caption { display: inline-block;}
   .bug_image {
@@ -112,4 +118,3 @@ form #submit {
     height: 50px;
   }
 }
-

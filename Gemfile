@@ -16,6 +16,7 @@ gem "sqlite3", :group => :development
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
 end
+
 gem 'coffee-rails', '~> 3.2.1'
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
@@ -36,12 +37,19 @@ gem 'bootstrap-sass'
 #gem "mailcatcher"
 gem 'resque', :require => "resque/server", :group => :development
 gem 'aasm', '2.2.0'
+gem 'kaminari'
 
 group :test, :development do
   gem "rspec-rails", "~> 2.0"
+  gem "rspec-mocks"
   gem "shoulda-matchers"
   # gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
   gem 'guard-rspec'
+  gem 'guard-livereload', require: false
+  gem "spork", "> 0.9.0.rc"
+  gem "guard-spork"
+  gem "database_cleaner"
+  # gem 'mocha', "0.13.3", :require => false
 end
 
 # gem "pry", :group => :development

@@ -10,6 +10,7 @@
     = yield :page_styles
 
     = javascript_include_tag "application"
+    /= javascript_include_tag "application", "games", "quizzes", "jquery"
     = csrf_meta_tags
 
     = yield(:head)

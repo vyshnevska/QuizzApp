@@ -23,4 +23,19 @@ class Quizz < ActiveRecord::Base
 
   scope :draft,      where( status: 'draft'     )
   scope :completed,  where( status: 'completed' )
+  scope :alphabetically, order("description ASC")
+  scope :by_state, order("status, updated_at ASC")
+
+  def mark_answers ans_ids
+    self.questions.each do |question|
+      question.answers_by_qst.each do |answer|
+        if ans_ids.include?(answer.id)
+          answer.mark_as_correct
+        else
+          answer.mark_as_incorrect
+        end
+      end
+    end
+  end
+
 end

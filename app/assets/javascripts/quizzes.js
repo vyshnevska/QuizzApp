@@ -8,6 +8,9 @@ jQuery(function() {
 	//Temporary
 	$(".question-section").show();
 
+	if (typeof action !== 'undefined' && action == "edit"){
+		enableQuizzBtn();
+	}
 
 	$("#quizz_description").focusout( function() {
 		validateQuizz();
@@ -23,12 +26,12 @@ jQuery(function() {
 	
 	function validateQuizz() {
 		var valid = validateQuizzFields();
+
 	   	if (!valid) {
 			disableQuizzBtn();
 		} else {
 		    enableQuizzBtn();
 		}
-
 		return errors > 0 ? false : true;
 	};
 
@@ -87,8 +90,7 @@ jQuery(function() {
 	});
 
 	$(document).on('click', ".add_answer", function(){
-		// $answer = $('<div class="line"><input type="text" value="" " name="questions[][answers][]"/><img src="/assets/cancel.png" alt="Delete Answer" class="remove_answer"></div>');
-		$answer = $('<div class="line"><input class="ans_content" type="text" value="" " name="questions[][answers][]"/><img src="/assets/cancel.png" alt="Delete Answer" class="remove_answer"></div>');
+		var $answer = $('<div class="line"><input class="ans_content" type="text" value="" " name="questions[][answers][]"/><img src="/assets/cancel.png" alt="Delete Answer" class="remove_answer"></div>');
 		$(this).parent().append($answer);
 	});
 
@@ -97,7 +99,6 @@ jQuery(function() {
 	});
 
 	$("#add_qst").click( function(){
-		//var $question = $('<div class ="question"> <span class="caption">Question</span> <input type="text" value="" name="questions[][title]"></div>'),
 		var $question = $('<div class ="question"> <span class="caption">Question</span> <input class="qst_title" type="text" value="" name="questions[][title]"></div>'),
 			$answer = $('<div class="answers"><span class="caption">Answers</span><img class="add_answer" src="/assets/add.png" alt="Add Answer"></div>');
 	

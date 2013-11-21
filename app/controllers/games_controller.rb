@@ -4,15 +4,12 @@ class GamesController < ApplicationController
 
   def welcome
     if current_user
-      @count_games = current_user.games.count
-      @c_p = 0
-      @score = 0
-      current_user.games.passed_games.each do |game|
-        @c_p+= game.points
-        @score += game.total_score
-      end
-      # UserMailer.welcome_email(current_user).deliver
+      @count_games = current_user.assigned_games
+      @count_passed_games = current_user.passed_games.count
+      @user_score = current_user.total_score
+      @max_score = current_user.maximum_score
 
+      # UserMailer.welcome_email(current_user).deliver
       # flash[:notice] = I18n.translate('games.send_mail_msg', :current_user => current_user.name)
       current_user.inverse_friends.each do |fs|
         @inverse_friends  = fs.name
@@ -22,17 +19,14 @@ class GamesController < ApplicationController
     else
       @users = User.all
     end
-    @draft = Game.draft.count
-    @started = Game.started.count
-    @finished = Game.finished.count
   end
 
   def index
-    @quizzes = Quizz.completed
+    @quizzes = Quizz.completed.alphabetically.page(params[:page]).per(5)
     if current_user.role == "admin"
       # @games_new = Game.created_games
-      @games_new = current_user.games.created_games
-      @games_passed = Game.passed_games
+      @games_new = current_user.games.created_games.page(params[:page]).per(5)
+      @games_passed = Game.passed_games.page(params[:page]).per(5)
       flash[:notice] = I18n.translate('games.create_new_game_msg') unless Game.exists?
     else
       @games_new = current_user.games.created_games
@@ -87,31 +81,35 @@ class GamesController < ApplicationController
   end
 
   def edit
-    @game = Game.find(params[:id])
+    redirect_to games_path
+    # if current_user.role == "admin"
+    #   @game = Game.find(params[:id])
+    # else
+    #   redirect_to games_path
+    # end
   end
 
   def update
-    @game = Game.find(params[:id])
-    if @game.update_attributes(params[:game])
-      redirect_to @game, notice: I18n.translate('games.successful_update_msg')
-    else
-      render :edit
-    end
+    redirect_to games_path
+    # @game = Game.find(params[:id])
+    # if @game.update_attributes(params[:game])
+    #   redirect_to @game, notice: I18n.translate('games.successful_update_msg')
+    # else
+    #   render :edit
+    # end
   end
 
   def destroy
     @game = Game.find(params[:id])
     @game.destroy
-    redirect_to games_url
+    redirect_to games_path
   end
 
   def start game_id
     @game = Game.find_by_id(game_id)
     @quizz = @game.quizz
     # Resque.enqueue(GameStartNotification, @game.id)
-    UserMailer.start_game(@game.id).deliver
-    @game.update_attribute(:emailed, true)
-    @game.set_to_started! if @game.draft?
+    @game.set_to_started!
     render :start
   end
 
@@ -131,8 +129,6 @@ class GamesController < ApplicationController
     if !@game.errors.any?
       @game.save
       # Resque.enqueue(GameFinishNotification, @game.id)
-      UserMailer.finish_game(@game.id).deliver
-      @game.update_attribute(:emailed, true)
       @game.set_to_finished!
       redirect_to @game, :locals=> {:state => "finished"}, notice: I18n.translate('games.successful_finish_msg')
     else

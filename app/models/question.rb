@@ -1,6 +1,5 @@
 class Question < ActiveRecord::Base
-
-  attr_accessible :answers_attributes, :title
+  attr_accessible :answers_attributes, :title, :quizz_id
 
   has_many :answers, :dependent => :destroy
   belongs_to :quizz
@@ -8,5 +7,9 @@ class Question < ActiveRecord::Base
   accepts_nested_attributes_for :answers, :allow_destroy => :true
 
   validates :title, :presence => {:message => "Question title can't be blank."}
+
+  def answers_by_qst
+    Answer.where("question_id = ?", self.id)
+  end
 
 end

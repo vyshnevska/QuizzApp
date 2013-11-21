@@ -13,3 +13,8 @@ en:
     successful_update_msg:    "Game was successfully updated."
     run_same_game_error:      "Can't run the same game twice. This game was already finished!"
     successful_finish_msg:    "You have finished this game successfully!"
+  views:
+    pagination:
+      previous: "&lt; Previous"
+      next: "Next &gt;"
+      truncate: "..."

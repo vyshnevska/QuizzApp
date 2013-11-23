@@ -17,6 +17,7 @@ padding: 9px 0;
 }
 #main {
   padding-top: 50px;
+  height: 100%;
 }
 div.hamster {
   background-image: url(/assets/cute.jpg);
@@ -25,6 +26,16 @@ div.hamster {
   background-position: center;
   height: 270px;
   border-bottom: 2px solid saddlebrown;
+  clear: both;
+}
+.foot{
+  background-color: #080808;
+    background-image: linear-gradient(to bottom, #080808, #080808);
+    background-repeat: repeat-x;
+    border: 1px solid rgba(0, 0, 0, 0);
+    border-radius: 0;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+    min-height: 50px;
 }
 /* --- User Account -- */
 .account {

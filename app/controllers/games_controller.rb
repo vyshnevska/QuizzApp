@@ -30,8 +30,8 @@ class GamesController < ApplicationController
       @games_passed = Game.passed_games.page(params[:page]).per(5)
       flash[:notice] = I18n.translate('games.create_new_game_msg') unless Game.exists?
     else
-      @games_new = current_user.games.created_games
-      @games_passed = current_user.games.passed_games
+      @games_new = current_user.games.created_games.page(params[:page]).per(5)
+      @games_passed = current_user.games.passed_games.page(params[:page]).per(5)
       flash[:notice] = I18n.translate('games.user_create_new_game_msg', :current_user => current_user.name)  unless current_user.games.exists?
     end
   end

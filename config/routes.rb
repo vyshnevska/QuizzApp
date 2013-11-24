@@ -8,7 +8,12 @@ QuizzApp::Application.routes.draw do
       get 'review'
     end
 
-    get "welcome", :on => :collection
+    collection do
+      get "welcome"
+      get 'paginate_available'
+      get 'paginate_created'
+      get 'paginate_passed'
+    end
     resources :details, :controller => "game_details"
   end
 

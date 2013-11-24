@@ -1,0 +1,2 @@
+$('#available_games').html("#{escape_javascript(render @quizzes)}");
+$('#paginator_available').html("#{escape_javascript(paginate(@quizzes, :params => {:controller => 'games', :action => 'paginate_available'}, :remote => true).to_s)}");

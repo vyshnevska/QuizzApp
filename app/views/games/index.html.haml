@@ -3,7 +3,7 @@
 
 - unless @quizzes.empty?
   = render :partial =>"available_games", :locals => { :quizzes => @quizzes }
-- unless @games_new.empty?
+- unless @new_games.empty?
   = render :partial =>"created_games_show", :locals => { :games_new => @games_new }
 - unless @games_passed.empty?
   = render :partial =>"passed_games_show", :locals => { :games_passed => @games_passed }

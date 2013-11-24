@@ -25,13 +25,37 @@ class GamesController < ApplicationController
     @quizzes = Quizz.completed.alphabetically.page(params[:page]).per(5)
     if current_user.role == "admin"
       # @games_new = Game.created_games
-      @games_new = current_user.games.created_games.page(params[:page]).per(5)
+      @new_games = current_user.games.created_games.page(params[:page]).per(5)
       @games_passed = Game.passed_games.page(params[:page]).per(5)
       flash[:notice] = I18n.translate('games.create_new_game_msg') unless Game.exists?
     else
-      @games_new = current_user.games.created_games.page(params[:page]).per(5)
+      @new_games = current_user.games.created_games.page(params[:page]).per(5)
       @games_passed = current_user.games.passed_games.page(params[:page]).per(5)
       flash[:notice] = I18n.translate('games.user_create_new_game_msg', :current_user => current_user.name)  unless current_user.games.exists?
+    end
+  end
+
+  def paginate_available
+    @quizzes = Quizz.completed.alphabetically.page(params[:page]).per(5)
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def paginate_created
+    @new_games = current_user.games.created_games.page(params[:page]).per(5)
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def paginate_passed
+    @games_passed = current_user.role == "admin" ? Game.passed_games.page(params[:page]).per(5) : current_user.games.passed_games.page(params[:page]).per(5)
+
+    respond_to do |format|
+      format.js
     end
   end
 

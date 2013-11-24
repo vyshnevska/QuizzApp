@@ -1,18 +1,20 @@
+:javascript
+  $(function() {
+    $(document).ajaxSuccess(function(settings) {
+      settings.responseText;
+    });
+  });
+
 .games.not_finished
   .section
     %h3= "Not finished games for #{current_user.try(:name)}"
     %hr.section_caption
-  - @games_new.each do |game|
-    .details
-      .item
-        .quizz
-          Game
-          %strong=" # #{game.id}"
-          = " #{game.try(:quizz).try(:description)}  ( #{game.state} )"
-        .actions
-          = link_to 'Start', {:controller => "games", :action => "new", :quizz_id => game.quizz_id }
+    #created_games
+      = render @new_games
+
   .footer{:style=>"margin-left: 40%; margin-right: 30%;"}
-    = paginate @quizzes
+    #paginator_created
+      = paginate @new_games, :params => {:controller => 'games', :action => 'paginate_created'}, :remote => true
 
   .section
     %hr

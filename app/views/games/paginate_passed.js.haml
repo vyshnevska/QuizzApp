@@ -1,0 +1,2 @@
+$('#passed_games').html("#{escape_javascript(render @games_passed)}");
+$('#paginator_passed').html("#{escape_javascript(paginate(@games_passed, :params => {:controller => 'games', :action => 'paginate_passed'}, :remote => true).to_s)}");

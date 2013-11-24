@@ -33,6 +33,10 @@ class Game < ActiveRecord::Base
 
   before_save :set_maximum_score
 
+  def passed?
+    self.finished? && self.game_details.any?
+  end
+
   def get_points user_answer_id
     self.points += (game_details.joins(:answer).where("answers.id= ? AND answers.correct = ?", user_answer_id, true).count) *10
   end

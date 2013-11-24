@@ -1,17 +1,19 @@
+:javascript
+  $(function() {
+    $(document).ajaxSuccess(function(settings) {
+      settings.responseText;
+    });
+  });
+
 .games.available
   .section
     %h3 Available games
     %hr.section_caption
-  - @quizzes.each do |quizz|
-    .details
-      .item
-        .quizz
-          Quizz
-          %strong= "#{quizz.try(:description)}"
-        .actions
-          = link_to 'Start', {:controller => "games", :action => "new", :quizz_id => quizz.id }
+    #available_games
+      = render @quizzes
   .footer{:style=>"margin-left: 40%; margin-right: 30%;"}
-    = paginate @quizzes
+    #paginator_available
+      = paginate @quizzes, :params => {:controller => 'games', :action => 'paginate_available'}, :remote => true
 
   .section
     %hr

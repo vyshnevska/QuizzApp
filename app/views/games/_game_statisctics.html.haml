@@ -8,6 +8,11 @@
     %p= "People who played this game: #{@game.try(:played_game)}"
   %p= "Maximum game score is #{@game.total_score}"
   %p= "User result is : #{@user_result} %"
+  - if @other_users
+    - if @other_users > 1
+      %p= "Other #{@other_users} users played this game"
+    - else
+      %p= "Other #{@other_users} user played this game"
   - if @scores
     %ul
       = "Other #{@scores.length} results: "

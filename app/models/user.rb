@@ -50,6 +50,23 @@ class User < ActiveRecord::Base
     self.passed_games.map{|game| game.total_score}.inject {|sum, score| sum + score }
   end
 
+  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    unless user
+      user = User.create(name:auth.extra.raw_info.name,
+                           provider:auth.provider,
+                           uid:auth.uid,
+                           email:auth.info.email,
+                           password:Devise.friendly_token[0,20]
+                           )
+    end
+    user
+  end
+
+  def rank
+    # TODO: implement this
+  end
+
 private
   def assign_role
     self.role = "guest" unless role.nil?

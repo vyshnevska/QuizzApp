@@ -87,6 +87,7 @@ class GamesController < ApplicationController
       #Statistic info
       @total_quizz_points =  @game.total_score
       @user_result = @game.game_score_percent
+      @other_users = @game.other_players
     end
 
     flash[:notice] = I18n.translate('games.review_msg')

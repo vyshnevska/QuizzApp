@@ -50,6 +50,10 @@ class User < ActiveRecord::Base
     user
   end
 
+  def rank
+    # TODO: implement this
+  end
+
 private
   def assign_role
     self.role = "guest" unless role.nil?

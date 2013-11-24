@@ -66,6 +66,12 @@ class Game < ActiveRecord::Base
     (self.points * 100.0/self.total_score).round(2)
   end
 
+  def other_players
+    games = self.other_games_by_quizz self.quizz_id
+    # Take only unique and exclude currecnt_user
+    players = games.finished.select{|game| self.user_id != game.user_id}.map{|g| g.user_id}.count#.uniq.count
+  end
+
   def other_games_by_quizz id
     Game.where('quizz_id = ?', id)
   end

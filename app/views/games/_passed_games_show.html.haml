@@ -1,28 +1,19 @@
+:javascript
+  $(function() {
+    $(document).ajaxSuccess(function(settings) {
+      settings.responseText;
+    });
+  });
+
 .games.passed
   .section
     %h3 Passed games
     %hr.section_caption
-  - @games_passed.each do |game|
-    - points = game.points.nil? ? 0 : game.points
-
-    .details
-      .item
-        .game_detail
-          %strong="Game # #{game.id}"
-          %strong=game.try(:quizz).try(:description)
-          %p.date= "Created At #{game.created_at.to_formatted_s(:short)}"
-          %p.date= "Updated At #{game.updated_at.to_formatted_s(:short)}"
-          %p
-            %strong=game.try(:user).try(:name)
-        .quizz
-          =image_tag "nut.png", :alt=> "nut", :class=> "nut_image"
-          ="Points: #{points} ( of #{game.total_score} )"
-        .actions
-          = link_to '|Review|', review_game_path(game)
-          = link_to '|Show|', game
-          -if current_user.admin
-            = link_to '|Destroy|', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
+    #passed_games
+      = render @games_passed
   .footer{:style=>"margin-left: 40%; margin-right: 30%;"}
-    = paginate @games_passed
+    #paginator_passed
+      = paginate @games_passed, :params => {:controller => 'games', :action => 'paginate_passed'}, :remote => true
+
   .section
     %hr

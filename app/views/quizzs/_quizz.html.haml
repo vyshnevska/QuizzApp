@@ -1,0 +1,8 @@
+.details
+  .item
+    .quizz
+      Quizz
+      %strong
+        = quizz.try(:description)
+    .actions
+      = link_to 'Start', {:controller => "games", :action => "new", :quizz_id => quizz.id }

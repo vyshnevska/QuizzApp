@@ -15,7 +15,7 @@
     %h4= "Maximum score of passed games: #{@max_score}"
     -if @user_score !=0 && @user_score == @max_score
       = image_tag "nut.png", :class=> "nut_image"
-    -if current_user.admin
+    -if current_user.has_access_to_view?
       %h4 Total Hamster statistic:
       .details
         %span= "Draft: "
@@ -26,7 +26,7 @@
         |
         %span= "Finished: "
         = hamster_finished_games
-  -if current_user.admin?
+  -if current_user.has_access_to_view?
     .friendship
       %h4 User Friendship:
       .details

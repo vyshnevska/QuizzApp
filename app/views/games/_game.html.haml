@@ -8,5 +8,7 @@
         Game
         %strong=" # #{game.id}"
         = " #{game.try(:quizz).try(:description)}  ( #{game.state} )"
+        %p
+        %strong=game.try(:user).try(:name)
       .actions
         = link_to 'Start', {:controller => "games", :action => "new", :quizz_id => game.quizz_id }

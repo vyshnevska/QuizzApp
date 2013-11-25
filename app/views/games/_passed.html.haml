@@ -14,5 +14,5 @@
     .actions
       = link_to '|Review|', review_game_path(game)
       = link_to '|Show|', game
-      -if current_user.admin
+      - if current_user.has_access_to_view?
         = link_to '|Destroy|', game, :method => :delete, :data => { :confirm => 'Are you sure?' }

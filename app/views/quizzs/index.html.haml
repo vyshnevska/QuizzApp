@@ -14,11 +14,11 @@
         .quizz
           = "# #{quizz.id}  Quizz"
           %strong= "#{quizz.try(:description)}"
-          %span.temp= current_user.admin ? quizz.status : ""
+          %span.temp= current_user.has_access_to_view? ? quizz.status : ""
         .actions
           = link_to '|Edit|', edit_quizz_path(quizz) unless quizz.completed?
           = link_to 'Complete', complete_quizz_path(quizz) unless quizz.completed?
-          - if current_user.admin
+          - if current_user.has_access_to_view?
             = link_to '|Destroy|', quizz, :method => :delete, :data => { :confirm => 'Are you sure?' }
             = "(#{quizz.updated_at.to_date})"
 

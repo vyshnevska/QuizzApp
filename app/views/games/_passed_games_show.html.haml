@@ -11,7 +11,7 @@
     %hr.section_caption
     #passed_games
       = render @games_passed
-  .footer{:style=>"margin-left: 40%; margin-right: 30%;"}
+  .footer
     #paginator_passed
       = paginate @games_passed, :params => {:controller => 'games', :action => 'paginate_passed'}, :remote => true
 

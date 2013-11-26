@@ -1,6 +1,9 @@
 class GamesController < ApplicationController
   #before_filter :authenticate_user!
-  skip_before_filter :authenticate_user!, :only => :welcome
+  skip_before_filter :authenticate_user!, :only => :home
+
+  def home
+  end
 
   def welcome
     if current_user
@@ -17,8 +20,6 @@ class GamesController < ApplicationController
       end
       @users = User.without_user(current_user)
       # UserMailer.test_email.deliver
-    else
-      @users = User.all
     end
   end
 

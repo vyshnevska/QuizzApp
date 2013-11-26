@@ -10,6 +10,7 @@ QuizzApp::Application.routes.draw do
 
     collection do
       get "welcome", :path => "user_activity"
+      get "home"
       get 'paginate_available'
       get 'paginate_created'
       get 'paginate_passed'
@@ -36,7 +37,7 @@ QuizzApp::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   # devise_for :users
 
-  root :to => "games#welcome", :path => "home"
+  root :to => "games#home"
 
   # mount Resque::Server, :at => "/resque"
 

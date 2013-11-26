@@ -12,7 +12,7 @@
     #created_games
       = render @new_games
 
-  .footer{:style=>"margin-left: 40%; margin-right: 30%;"}
+  .footer
     #paginator_created
       = paginate @new_games, :params => {:controller => 'games', :action => 'paginate_created'}, :remote => true
 

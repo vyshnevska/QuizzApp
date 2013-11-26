@@ -1,5 +1,5 @@
 !!!
-%html{:style => "height: 100%;"}
+%html
   %head
     %meta{:charset => "utf-8"}
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
@@ -14,8 +14,8 @@
     = csrf_meta_tags
 
     = yield(:head)
-  %body{:style => "height: 100%;"}
-    %section{:style => "height: auto; min-height: 100%;"}
+  %body
+    %section
       %header.navbar.navbar-fixed-top
         %nav.navbar-inner
           .container
@@ -31,7 +31,7 @@
                 = yield
 
         %div.hamster
-      .clear{:style => "clear: both; height: 50px;"}
+      .clear
 
-    %footer{:style => "height: 50px; margin-top: -52px;"}
+    %footer
       .foot

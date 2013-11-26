@@ -13,7 +13,7 @@
       = link_to("Games", games_path)
     %li.user_email
       %strong= current_user.email
-    - if current_user.role == "admin"
+    - if current_user.has_access_to_view?
       %li.user_a_role
         %strong Admin
     - else
@@ -28,3 +28,5 @@
       = link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook)
     %li
       = link_to('Sign up', new_user_registration_path)
+      = link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook)
+

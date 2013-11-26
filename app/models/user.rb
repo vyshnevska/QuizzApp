@@ -67,6 +67,10 @@ class User < ActiveRecord::Base
     # TODO: implement this
   end
 
+  def has_access_to_view?
+    self.admin?
+  end
+
 private
   def assign_role
     self.role = "guest" unless role.nil?

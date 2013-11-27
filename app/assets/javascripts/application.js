@@ -20,16 +20,16 @@
 //= require_tree .
 
 
-$(function() {	
-	//$(".alert").slideUp("slow");
-	//$(".alert").slideDown("slow");
-	setTimeout(function() {
-      $(".alert-success").slideToggle(1000);
-	}, 2000);
-	
-/*	$(".alert .close").live("click", function(){
-		alert("close");
-		$(".alert").hide();
-	});
-*/
+$(function() {
+    //========Manage displaying of flash messages
+    $(".alert-info, .alert-success, .alert-error").fadeIn(2000);
+
+    setTimeout(function() {
+        $(".alert-info, .alert-success, .alert-error").fadeOut(2000);
+    }, 6000);
+
+    $(".alert").on("click", ".close", function(event){
+        $(this).parent().hide();
+    });
+
 });

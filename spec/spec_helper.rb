@@ -2,6 +2,21 @@ require 'rubygems'
 require 'spork'
 #uncomment the following line to use spork with the debugger
 #require 'spork/ext/ruby-debug'
+require 'simplecov'
+
+SimpleCov.start do
+  # rules
+  add_filter '/spec/'
+  add_filter '/config/'
+  add_filter '/lib/'
+  add_filter '/vendor/'
+
+  add_group 'Controllers', 'app/controllers'
+  add_group 'Models', 'app/models'
+  add_group 'Helpers', 'app/helpers'
+  add_group 'Mailers', 'app/mailers'
+  add_group 'Views', 'app/views'
+end if ENV["COVERAGE"]
 
 Spork.prefork do
   # This file is copied to spec/ when you run 'rails generate rspec:install'

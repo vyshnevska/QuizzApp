@@ -1,8 +1,4 @@
 jQuery(function() {
-	$(".alert .close").click( function() {
-		$(".alert-success").hide();
-	});
-
 	$("#expand").css("opacity", "0.5");
 
 	//Temporary

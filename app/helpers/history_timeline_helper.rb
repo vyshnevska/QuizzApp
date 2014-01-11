@@ -1,0 +1,2 @@
+module HistoryTimelineHelper
+end

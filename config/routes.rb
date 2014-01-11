@@ -41,6 +41,10 @@ QuizzApp::Application.routes.draw do
 
   mount Resque::Server, :at => "/resque"
 
+  # History Module
+  resources :history_timelines
+  resources :century_timelines
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

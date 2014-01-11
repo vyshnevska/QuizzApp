@@ -47,7 +47,9 @@ padding: 9px 0;
 .nav li {
   line-height: 25px;
 }
-
+.nav li.history a {
+  color: #FFA365;
+}
 #main {
   padding-top: 50px;
   height: 100%;
@@ -83,4 +85,12 @@ div.hamster {
 .account_cancel {
   float: right;
   margin-right: 30%;
+}
+h1.timeline {
+ font-family: 'Shadows Into Light',cursive;
+  font-size: 55px;
+  line-height: 100%;
+  text-align: center;
+  text-shadow: 1px 1px #FFFFFF;
+  padding-top: 30px;
 }

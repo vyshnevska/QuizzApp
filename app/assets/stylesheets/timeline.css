@@ -1,0 +1,158 @@
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, p, blockquote, th, td {
+    font-size: 12px;
+    line-height: 21px;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, fieldset, p, blockquote, th, td {
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+}
+#timeline {
+    display: block;
+    /*height: 248px;*/
+    min-height: 540px;
+    overflow: hidden;
+    position: relative;
+}
+.dpSocialTimeline {
+    font-family: Arial,Helvetica,sans-serif;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0 0 10px;
+}
+.right_column .dpSocialTimeline_item{
+    left: 0;
+    /*position: absolute;*/
+    top: -9px !important;
+    transform: translate(297px, 10px) !important;
+    /*width: 260px;*/
+}
+
+.dpSocialTimeline_item {
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform: translate(7px, 0px);
+    width: 260px;
+    /**/
+    background: none no-repeat scroll 0 20px #FFFFFF;
+    border: 1px solid #E6E6E6;
+    box-shadow: 0 3px 2px #D6D6D6;
+    color: #666666;
+    /**/
+    font-size: 13px;
+    list-style: none outside none;
+    margin: 10px 5px 0;
+    padding: 1px
+}
+.dpSocialTimelineContentHead {
+    background: none repeat scroll 0 0 #F5F5F5;
+    border-bottom: 1px dashed #E6E6E6;
+    /**/
+    padding: 7px 10px;
+}
+span.favicon.twitter {
+    background: url("../assets/social_box/twitter.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+span.favicon {
+    display: block;
+    float: left;
+    height: 16px;
+    width: 16px;
+}
+.dpSocialTimeline_item .user {
+    color: #999999;
+    text-shadow: 0 1px 0 #FFFFFF;
+    /**/
+    display: inline;
+    float: left;
+    font-size: 11px;
+    line-height: 100%;
+    margin-left: 10px;
+    margin-top: 3px;
+    text-transform: uppercase;
+}
+.dpSocialTimeline_item a {
+    color: #6D84B4;
+}
+div.dpSocialTimeline .dpSocialTimeline_item a.permalink {
+    background: url("../assets/social_box/link.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+div.dpSocialTimeline .dpSocialTimeline_item a.permalink,
+div.dpSocialTimeline .dpSocialTimeline_item a.share_twitter,
+div.dpSocialTimeline .dpSocialTimeline_item a.share_facebook  {
+    display: block;
+    float: right;
+    height: 16px;
+    margin-left: 5px;
+    opacity: 0.7;
+    text-decoration: none;
+    width: 16px;
+}
+div.dpSocialTimeline .dpSocialTimeline_item div.dpSocialTimelineContent.dpSocialTimeline_noImage {
+    padding-top: 10px !important;
+}
+div.dpSocialTimeline .dpSocialTimeline_item div.dpSocialTimelineContent {
+    font-size: 11px;
+    padding: 20px 15px;
+    text-align: left;
+    word-wrap: break-word;
+}
+div.dpSocialTimeline .dpSocialTimeline_item div.dpSocialTimelineContentFoot {
+    background: url("../assets/social_box/clock.png") no-repeat scroll 5px 5px #F5F5F5;
+    border-top: 1px dashed #E6E6E6;
+}
+div.dpSocialTimeline .dpSocialTimeline_item div.dpSocialTimelineContentFoot {
+    line-height: 130%;
+    padding: 5px 10px;
+    text-align: left;
+    background-color: #F5F5F5;
+}
+div.light div.dpSocialTimeline .dpSocialTimeline_item span.time {
+    color: #999999;
+    text-shadow: 0 1px 0 #FFFFFF;
+}
+div.dpSocialTimeline .dpSocialTimeline_item span.time {
+    font-size: 9px;
+    margin-left: 15px;
+}
+div.dpSocialTimeline .dpSocialTimeline_item a.share_twitter {
+    background: url("../assets/social_box/twitter_grey.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+div.dpSocialTimeline .dpSocialTimeline_item a.share_facebook {
+    background: url("../assets/social_box/facebook_grey.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+}
+div.dpSocialTimeline .dpSocialTimeline_item div.dpSocialTimelineText {
+    margin-bottom: 10px;
+    text-align: left;
+    word-wrap: break-word;
+    min-height: 150px;
+}
+
+div.dpSocialTimeline .dpSocialTimeline_item div.dpSocialTimelineContent .dpSocialTimelineTwitterActions {
+    clear: both;
+    margin-top: 10px;
+    width: 100%;
+}
+div.dpSocialTimeline .dpSocialTimeline_item div.dpSocialTimelineContent .dpSocialTimelineTwitterActions a.tw_reply {
+    background: url("../assets/social_box/reply.png") no-repeat scroll 0 50% rgba(0, 0, 0, 0);
+}
+div.dpSocialTimeline .dpSocialTimeline_item div.dpSocialTimelineContent .dpSocialTimelineTwitterActions a.tw_retweet {
+    background: url("../assets/social_box/retweet.png") no-repeat scroll 0 50% rgba(0, 0, 0, 0);
+}
+div.dpSocialTimeline .dpSocialTimeline_item div.dpSocialTimelineContent .dpSocialTimelineTwitterActions a.tw_favorite {
+    background: url("../assets/social_box/favorite.png") no-repeat scroll 0 50% rgba(0, 0, 0, 0);
+}
+div.dpSocialTimeline .dpSocialTimeline_item div.dpSocialTimelineContent .dpSocialTimelineTwitterActions a {
+    color: #555555;
+    display: inline-block;
+    word-wrap: normal;
+}
+div.dpSocialTimeline .dpSocialTimeline_item div.dpSocialTimelineContent .dpSocialTimelineTwitterActions a {
+    font-size: 10px;
+    font-weight: bold;
+    margin-right: 10px;
+    padding-left: 20px;
+    text-transform: uppercase;
+}
+

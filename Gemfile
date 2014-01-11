@@ -19,6 +19,7 @@ end
 gem 'coffee-rails', '~> 3.2.1'
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
+gem 'nokogiri'
 
 gem 'devise'
 gem 'omniauth'

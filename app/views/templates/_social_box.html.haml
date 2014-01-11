@@ -1,0 +1,20 @@
+.dpSocialTimeline_item
+  .dpSocialTimelineContentHead
+    %span.favicon.twitter
+    %span.user=@name
+    %a.permalink{:href=>"#"}
+    .empty{:style => "clear: both;"}
+  .dpSocialTimelineContent.dpSocialTimeline_noImage
+    .dpSocialTimelineText
+      =@content
+      =link_to(@name, century_timelines_path)
+    .dpSocialTimelineTwitterActions
+      %a.tw_reply{:href=>"#"}="Reply"
+      %a.tw_retweet{:href=>"#"}="Retweet"
+      %a.tw_favorite{:href=>"#"}="Favorite"
+
+    .empty{:style => "clear: both;"}
+  .dpSocialTimelineContentFoot
+    %span.time="about a minute ago"
+    %a.share_twitter{:title => "Share in Twitter"}
+    %a.share_facebook{:title => "Share in Facebook"}

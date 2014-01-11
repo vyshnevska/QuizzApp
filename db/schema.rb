@@ -11,13 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131109201300) do
+ActiveRecord::Schema.define(:version => 20140110210937) do
 
   create_table "answers", :force => true do |t|
     t.string   "content"
     t.integer  "question_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.boolean  "correct"
+  end
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "token"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "century_timelines", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "person"
+    t.datetime "period"
+    t.string   "impact_type"
+    t.integer  "history_timeline_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "friendships", :force => true do |t|
@@ -44,6 +65,13 @@ ActiveRecord::Schema.define(:version => 20131109201300) do
     t.boolean  "emailed"
     t.string   "state"
     t.integer  "max_score"
+  end
+
+  create_table "history_timelines", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "questions", :force => true do |t|

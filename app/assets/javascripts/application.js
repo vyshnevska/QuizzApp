@@ -21,15 +21,21 @@
 
 
 $(function() {
-    //========Manage displaying of flash messages
-    $(".alert-info, .alert-success, .alert-error").fadeIn(2000);
+  //Manage displaying of flash messages
+  $(".alert-info, .alert-success, .alert-error").fadeIn(2000);
 
-    setTimeout(function() {
-        $(".alert-info, .alert-success, .alert-error").fadeOut(2000);
-    }, 6000);
+  setTimeout(function() {
+    $(".alert-info, .alert-success, .alert-error").fadeOut(2000);
+  }, 6000);
 
-    $(".alert").on("click", ".close", function(event){
-        $(this).parent().hide();
-    });
+  $(".alert").on("click", ".close", function(event){
+    $(this).parent().hide();
+  });
+
+  //FAYE
+  var faye = new Faye.Client('http://localhost:9292/faye');
+  faye.subscribe("/messages/new", function(data){
+    eval(data);
+  });
 
 });

@@ -1,0 +1,8 @@
+-content_for :page_styles do
+  -stylesheet_link_tag "messages"
+%h1.gorgeous Chat
+%ul#chat
+  =render @messages
+= form_for Message.new, :remote => true do |f|
+  = f.text_field :content
+  =f.submit "Send"

@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   has_many :games
   has_many :quizzs, :through => :games
+  has_many :messages
   ROLES = %w[admin guest simple_user]
   
   #Friendship

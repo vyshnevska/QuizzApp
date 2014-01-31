@@ -94,3 +94,12 @@ h1.timeline {
   text-shadow: 1px 1px #FFFFFF;
   padding-top: 30px;
 }
+/* -------------------- */
+h1.gorgeous {
+font-family: 'Shadows Into Light',cursive;
+font-size: 55px;
+line-height: 100%;
+text-align: left;
+text-shadow: 1px 1px #FFFFFF;
+padding-top: 30px;
+}

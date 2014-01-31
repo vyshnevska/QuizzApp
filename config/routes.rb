@@ -44,6 +44,8 @@ QuizzApp::Application.routes.draw do
   # History Module
   resources :history_timelines
   resources :century_timelines
+  
+  resources :messages
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,7 +1,7 @@
 -#= link_to "Home", root_path, :class => 'brand'
 = link_to image_tag("puzzle.png"), home_games_path , :class => 'brand'
 
-%ul.nav
+%ul.nav.main_main
   - if user_signed_in?
     %li
       = link_to('User Activity', welcome_games_path)
@@ -13,6 +13,8 @@
       = link_to("Games", games_path)
     %li.history
       = link_to("History Map", history_timelines_path)
+    %li
+      = link_to("Chat", messages_path)
     %li.user_email
       %strong= current_user.email
     - if current_user.has_access_to_view?

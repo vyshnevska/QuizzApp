@@ -11,8 +11,8 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131109201300) do
 
+ActiveRecord::Schema.define(:version => 20140131224354) do
   create_table "answers", :force => true do |t|
     t.string   "content"
     t.integer  "question_id"
@@ -45,6 +45,13 @@ ActiveRecord::Schema.define(:version => 20131109201300) do
     t.boolean  "emailed"
     t.string   "state"
     t.integer  "max_score"
+  end
+
+  create_table "messages", :force => true do |t|
+    t.string   "content"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
   end
 
   create_table "questions", :force => true do |t|

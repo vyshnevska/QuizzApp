@@ -1,0 +1,8 @@
+- color = current_user.name == message.user.name ? "orng" : "vlt"
+%li.message{:class => "#{color}"}
+  %span.created_at
+    = message.created_at.strftime("%H:%M:%S")  
+  %span.user_name
+    = message.user.name
+  %span.body
+    = message.content

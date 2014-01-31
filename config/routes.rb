@@ -34,6 +34,8 @@ QuizzApp::Application.routes.draw do
     get '/users/sign_out' => 'devise/sessions#destroy'
   end
 
+  resources :messages
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   # devise_for :users
 

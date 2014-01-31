@@ -7,7 +7,8 @@
 
 .games.not_finished
   .section
-    %h3= "Not finished games for #{current_user.try(:name)}"
+    %h1.gorgeous
+      = "Not finished games for #{current_user.try(:name)}"
     %hr.section_caption
     #created_games
       = render @new_games

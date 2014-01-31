@@ -25,6 +25,9 @@ gem 'devise'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'oauth2'
+gem 'faye'
+gem 'thin'
+gem 'foreman', '0.24.0'
 
 gem "cancan"
 gem 'backbone-on-rails'

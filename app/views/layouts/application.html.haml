@@ -8,9 +8,7 @@
     %meta{:content => "", :name => "author"}
     = stylesheet_link_tag "my_bootstrap", "navigation_bar", "layout", "application"
     = yield :page_styles
-
-    = javascript_include_tag "application"
-    /= javascript_include_tag "application", "games", "quizzes", "jquery"
+    = javascript_include_tag "application", "games", "quizzes", "jquery", "http://localhost:9292/faye.js"
     = csrf_meta_tags
 
     = yield(:head)

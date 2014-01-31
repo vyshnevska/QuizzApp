@@ -11,6 +11,8 @@
       = link_to("Quizzes", quizzs_path)
     %li
       = link_to("Games", games_path)
+    %li
+      = link_to("Chat", messages_path)
     %li.user_email
       %strong= current_user.email
     - if current_user.has_access_to_view?

@@ -57,6 +57,8 @@ end
 # gem "pry", :group => :development
 # gem 'rb-readline', '~> 0.4.2'
 gem "pry"
+gem 'thin'
+gem 'foreman', '0.24.0'
 
 #Run redis server
 # redis-server /usr/local/etc/redis.conf

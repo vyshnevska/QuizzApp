@@ -1,0 +1,4 @@
+en:
+  validation:
+    description: "Blank Quizz name is not allowed."
+    unique_description: "Quizz name must be unique."

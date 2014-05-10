@@ -1,0 +1,11 @@
+en:
+  index:
+    new_game:      "There is no active game now. Please create new game."
+    new_user_game: "%{current_user}, there is no active game now. Please create new."
+  review:          "You are reviewing this game."
+  finish:
+    same_game:     "Can't run the same game twice. Game %{game_id} was already finished!"
+    successfully:  "You have finished this game successfully!"
+  mail:
+    sent_notification: "Email is sent to %{current_user}"
+

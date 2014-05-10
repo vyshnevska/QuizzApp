@@ -8,7 +8,8 @@ class Quizz < ActiveRecord::Base
 
   accepts_nested_attributes_for :questions, :allow_destroy => :true
 
-  validates :description, :presence => {:message => I18n.translate('missed_descr') }, :uniqueness => {:message => "Quizz name must be unique." }
+  validates :description, :presence => { :message => I18n.translate('validation.description') },
+            :uniqueness => { :message => I18n.translate('validation.unique_description') }
 
   attr_protected :status
   aasm_column :status

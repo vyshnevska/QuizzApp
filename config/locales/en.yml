@@ -2,17 +2,9 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello:        "Hello world"
-  missed_descr: "Blank quizz name is not allowed."
   games:
-    create_new_game_msg:      "There is no active game now. Please create new game."
-    user_create_new_game_msg: "%{current_user}, there is no active game now. Please create new."
-    send_mail_msg:            "Email is sent to %{current_user}"
-    review_msg:               "You are reviewing this game."
     successful_create_msg:    "Game was successfully created."
     successful_update_msg:    "Game was successfully updated."
-    run_same_game_error:      "Can't run the same game twice. This game was already finished!"
-    successful_finish_msg:    "You have finished this game successfully!"
   views:
     pagination:
       previous: "&lt; Previous"

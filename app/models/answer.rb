@@ -1,7 +1,7 @@
 class Answer < ActiveRecord::Base
   attr_accessible :content
   belongs_to :question
-  validates :content, :presence => {:message => "Answer can't be blank."}
+  validates :content, :presence => {:message => I18n.translate('validation.content')}
   
   def is_correct?
     self.correct

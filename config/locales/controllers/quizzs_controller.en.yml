@@ -1,0 +1,12 @@
+en:
+  index:
+    no_active:    "There is no active quizz now. Please create new."
+  complete:
+    notification: "Quizz# %{quizz_id} is completed!"
+  edit:
+    mark_answers: "Please mark correct answers for Quizz # %{quizz_id} %{description}."
+    cant_edit:    "You can't edit this quizz."
+    no_marked:    " No answer is marked."
+  created:        "Quizz # %{quizz_id} was created."
+  updated:        "Quizz # %{quizz_id} was updated."
+  deleted:        "Quizz # %{quizz_id} was deleted."

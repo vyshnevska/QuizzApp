@@ -1,5 +1,4 @@
 class GamesController < ApplicationController
-  #before_filter :authenticate_user!
   skip_before_filter :authenticate_user!, :only => :home
 
   def home
@@ -13,7 +12,7 @@ class GamesController < ApplicationController
       @max_score = current_user.maximum_score
 
       # UserMailer.welcome_email(current_user).deliver
-      # flash[:notice] = I18n.translate('games.send_mail_msg', :current_user => current_user.name)
+      # flash[:notice] = I18n.translate('mail.sent_notification', :current_user => current_user.name)
 
       current_user.inverse_friends.each do |fs|
         @inverse_friends  = fs.name
@@ -26,14 +25,13 @@ class GamesController < ApplicationController
   def index
     @quizzes = Quizz.completed.alphabetically.page(params[:page]).per(5)
     if current_user.role == "admin"
-      # @games_new = Game.created_games
       @new_games = current_user.games.created_games.page(params[:page]).per(5)
       @games_passed = Game.passed_games.page(params[:page]).per(5)
-      flash[:notice] = I18n.translate('games.create_new_game_msg') unless Game.exists?
+      flash[:notice] = I18n.translate('index.new_game') unless Game.exists?
     else
       @new_games = current_user.games.created_games.page(params[:page]).per(5)
       @games_passed = current_user.games.passed_games.page(params[:page]).per(5)
-      flash[:notice] = I18n.translate('games.user_create_new_game_msg', :current_user => current_user.name) unless current_user.games.exists?
+      flash[:notice] = I18n.translate('index.new_user_game', :current_user => current_user.name) unless current_user.games.exists?
     end
   end
 
@@ -92,7 +90,7 @@ class GamesController < ApplicationController
       @other_users = @game.other_players
     end
 
-    flash[:notice] = I18n.translate('games.review_msg')
+    flash[:notice] = I18n.translate('review')
     render :show, :game => @game , :answers => @answers
   end
 
@@ -150,15 +148,17 @@ class GamesController < ApplicationController
         @game.get_points a_id
       end
     else
-      flash[:error] = I18n.translate('games.run_same_game_error')
-      @game.errors.add(:base, "Can't run the same game twice. Game #{@game.id} was already finished!")
+      #Should show in another place
+      # flash[:error] = I18n.translate('finish.same_game', :game_id => @game.id)
+      @game.errors.add(:base, I18n.translate('finish.same_game', :game_id => @game.id))
     end
     if !@game.errors.any?
       @game.save
       # Resque.enqueue(GameFinishNotification, @game.id)
       @game.set_to_finished!
-      redirect_to @game, :locals=> {:state => "finished"}, notice: I18n.translate('games.successful_finish_msg')
+      redirect_to @game, :locals=> {:state => "finished"}, notice: I18n.translate('finish.successfully')
     else
+      flash[:error] = @game.errors.values.join("\n")
       redirect_to games_url
     end
   end

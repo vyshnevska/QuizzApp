@@ -6,7 +6,7 @@ class Question < ActiveRecord::Base
 
   accepts_nested_attributes_for :answers, :allow_destroy => :true
 
-  validates :title, :presence => {:message => "Question title can't be blank."}
+  validates :title, :presence => {:message => I18n.translate('validation.title')}
 
   def answers_by_qst
     Answer.where("question_id = ?", self.id)

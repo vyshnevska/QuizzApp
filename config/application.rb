@@ -34,6 +34,10 @@ module QuizzApp
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
+    config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.yml').to_s]
+    # Populate the actual I18n.load_path before the initializers since they need translations
+    I18n.load_path += config.i18n.load_path
+
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 

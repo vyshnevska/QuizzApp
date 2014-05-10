@@ -69,7 +69,7 @@ class Game < ActiveRecord::Base
   def other_players
     games = self.other_games_by_quizz self.quizz_id
     # Take only unique and exclude currecnt_user
-    players = games.finished.select{|game| self.user_id != game.user_id}.map{|g| g.user_id}.count#.uniq.count
+    players = games.finished.select{|game| self.user_id != game.user_id}.map{|g| g.user_id}.count
   end
 
   def other_games_by_quizz id
@@ -81,7 +81,7 @@ class Game < ActiveRecord::Base
     games = self.other_games_by_quizz quizz_id
     games.finished.each do |game|
       if game.id != game_id
-        scores<< game.game_score_percent
+        scores << game.game_score_percent
       end
     end
     scores

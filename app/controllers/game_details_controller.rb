@@ -1,2 +1,0 @@
-class GameDetailsController < ApplicationController
-end

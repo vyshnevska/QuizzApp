@@ -1,0 +1,5 @@
+en:
+  validation:
+    game_presence: "Game must be assigned"
+    question_presence: "Question must be assigned"
+    answer_presence: "Answer must be assigned"

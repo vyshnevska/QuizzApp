@@ -1,35 +1,30 @@
-require "pry"
-
 class QuizzsController < ApplicationController
   def index
-    flash[:notice] = "There is no active quizz now. Please create new." unless Quizz.exists?
     @quizzes = Quizz.by_state
+    flash[:notice] = I18n.translate('index.no_active') unless Quizz.exists?
   end
 
   def complete
     @quizz = Quizz.find(params[:id])
     if @quizz.set_to_completed!
-      flash[:notice] = "Quizz# #{@quizz.id} is completed!"
+      flash[:notice] = I18n.translate('complete.notification', :quizz_id => @quizz.id)
       redirect_to  quizzs_path
     end
   end
 
-   def new
-    flash[:notice]  = nil
-     @quizz = Quizz.new
-     question = @quizz.questions.build
-     question.answers.build
-     #render :edit
-   end
+  def new
+    @quizz = Quizz.new
+    question = @quizz.questions.build
+    question.answers.build
+  end
 
   def edit
     @quizz = Quizz.find(params[:id])
-    flash[:notice] = "Please mark correct answers for Quizz # #{@quizz.id} #{@quizz.description}."
-
-    unless @quizz.draft?
-      flash[:notice] << "You can't edit this quizz."
+    if @quizz.completed?
+      flash[:error] =  I18n.translate('edit.cant_edit')
+    else 
+      flash[:notice] = I18n.translate('edit.mark_answers', :quizz_id => @quizz.id, :description => @quizz.description) 
     end
-    
   end
 
   def create
@@ -52,7 +47,7 @@ class QuizzsController < ApplicationController
     end
 
     if @quizz.errors.empty? && @errors.empty?
-      flash[:notice] = "Quizz # #{@quizz.id} was created."
+      flash[:notice] = I18n.translate('created', :quizz_id => @quizz.id)
       redirect_to quizzs_path
     else
       flash[:error] = @errors
@@ -65,11 +60,11 @@ class QuizzsController < ApplicationController
     if params[:correct_ids]
       @quizz.mark_answers params[:correct_ids].values.collect {|v| v.to_i}
     else
-      flash[:notice] = 'No answer is marked.'
+      flash[:notice] = I18n.translate('edit.no_marked')
     end
 
     if @quizz.update_attributes(params[:quizz])
-      flash[:notice] = "Quizz# #{@quizz.id} is updated."
+      flash[:notice] = I18n.translate('updated', :quizz_id => @quizz.id)
       redirect_to quizzs_path
     else
       render :edit
@@ -79,7 +74,7 @@ class QuizzsController < ApplicationController
   def destroy
     @quizz = Quizz.find(params[:id])
     @quizz.destroy
-    flash[:notice] = "Quizz# #{@quizz.id} is deleted."
+    flash[:notice] = I18n.translate('deleted', :quizz_id => @quizz.id)
     redirect_to quizzs_path
   end
 end

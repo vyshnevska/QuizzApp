@@ -11,4 +11,7 @@ module GamesHelper
     Game.finished.count
   end
 
+  def best_user_score
+    (@user_score != 0) && (@user_score == @max_score)
+  end
 end

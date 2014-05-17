@@ -8,8 +8,6 @@ class GamesController < ApplicationController
     if current_user
       @count_games = current_user.assigned_games
       @count_passed_games = current_user.passed_games.count
-      @user_score = current_user.total_score
-      @max_score = current_user.maximum_score
 
       # UserMailer.welcome_email(current_user).deliver
       # flash[:notice] = I18n.translate('mail.sent_notification', :current_user => current_user.name)
@@ -37,26 +35,14 @@ class GamesController < ApplicationController
 
   def paginate_available
     @quizzes = Quizz.completed.alphabetically.page(params[:page]).per(5)
-
-    respond_to do |format|
-      format.js
-    end
   end
 
   def paginate_created
     @new_games = current_user.games.created_games.page(params[:page]).per(5)
-
-    respond_to do |format|
-      format.js
-    end
   end
 
   def paginate_passed
     @games_passed = current_user.role == "admin" ? Game.passed_games.page(params[:page]).per(5) : current_user.games.passed_games.page(params[:page]).per(5)
-
-    respond_to do |format|
-      format.js
-    end
   end
 
   def show
@@ -107,21 +93,10 @@ class GamesController < ApplicationController
 
   def edit
     redirect_to games_path
-    # if current_user.role == "admin"
-    #   @game = Game.find(params[:id])
-    # else
-    #   redirect_to games_path
-    # end
   end
 
   def update
     redirect_to games_path
-    # @game = Game.find(params[:id])
-    # if @game.update_attributes(params[:game])
-    #   redirect_to @game, notice: I18n.translate('games.successful_update_msg')
-    # else
-    #   render :edit
-    # end
   end
 
   def destroy

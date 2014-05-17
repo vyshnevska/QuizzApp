@@ -1,0 +1,17 @@
+en:
+  title: "Welcome Page"
+  user:
+    statistic: "User statistic:"
+    statistic_detail: "%{score} points in %{game_passed} games (of %{games} assigned)"
+    max_score: "Maximum score of passed games: %{max_score}"
+    other: "Other users:"
+  total_statistic: "Total Hamster statistic:"
+  games:
+    draft:     "Draft: %{count} | "
+    started:   "Started: %{count} | "
+    finished:  "Finished: %{count}"
+  friends:
+    see_friendship:  "User Friendship:"
+    no_friends:  "No Friends. Please find someone."
+    find: "Find Friends"
+    add: "Add as a Friend"

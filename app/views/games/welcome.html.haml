@@ -1,43 +1,40 @@
--content_for :page_styles do
-  -stylesheet_link_tag "games"
-
-%h1.gorgeous Welcome Page
+- content_for :page_styles do
+  = stylesheet_link_tag "games"
+- @user_score = current_user.total_score
+- @max_score = current_user.maximum_score
+%h1.gorgeous
+  = I18n.translate('title')
 -if current_user
   .statistic_info
     .caption
-      %h4 User statistic:
+      %h4= I18n.translate('user.statistic')
     .bug_image
-      = image_tag "lady_bug.png", :alt=> "Lady Bug", :class=>"remove_answer"
+      = image_tag "lady_bug.png", :alt => "Lady Bug", :class => "remove_answer"
     .details
-      ="#{@user_score} points in #{@count_passed_games} games (of #{@count_games} assigned)"
-
-    %h4= "Maximum score of passed games: #{@max_score}"
-    -if @user_score !=0 && @user_score == @max_score
+      = I18n.translate('user.statistic_detail', :score => @user_score, :game_passed => @count_passed_games, :games => @count_games)
+    %h4= I18n.translate('user.max_score', :max_score => @max_score)
+    -if best_user_score
       = image_tag "nut.png", :class=> "nut_image"
     -if current_user.has_access_to_view?
-      %h4 Total Hamster statistic:
+      %h4= I18n.translate('total_statistic')
       .details
-        %span= "Draft: "
-        = hamster_draft_games
-        |
-        %span= "Started: "
-        = hamster_started_games
-        |
-        %span= "Finished: "
-        = hamster_finished_games
+        %span= I18n.translate('games.draft', :count => hamster_draft_games)
+        %span= I18n.translate('games.started', :count => hamster_started_games)
+        %span= I18n.translate('games.finished', :count => hamster_finished_games)
+
   -if current_user.has_access_to_view?
     .friendship
-      %h4 User Friendship:
+      %h4= I18n.translate('friends.see_friendship')
       .details
-        -unless current_user.inverse_friends.empty?
+        - unless current_user.inverse_friends.empty?
           -current_user.inverse_friends.each do |f|
             = f.name
-        -else
-          %h4 No Friends. Plase Find them.
-          = link_to "Find Friends", root_path
-      %h4 Other users:
-      -@users.each do|user|
+        - else
+          %h4= I18n.translate('friends.no_friends')
+          = link_to I18n.translate('friends.find'), root_path
+      %h4= I18n.translate('user.other')
+      - @users.each do|user|
         .details
           = user.name
           = user.email
-          = link_to "Add as a Friend", friendships_path(:friend_id => user.id), :method => :post 
+          = link_to I18n.translate('friends.add'), friendships_path(:friend_id => user.id), :method => :post 

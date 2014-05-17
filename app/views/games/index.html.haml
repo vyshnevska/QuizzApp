@@ -1,5 +1,5 @@
 -content_for :page_styles do
-  -stylesheet_link_tag "games"
+  = stylesheet_link_tag "games"
 
 - unless @quizzes.empty?
   = render :partial =>"available_games", :locals => { :quizzes => @quizzes }
@@ -8,4 +8,4 @@
 - unless @games_passed.empty?
   = render :partial =>"passed_games_show", :locals => { :games_passed => @games_passed }
 /TODO:delete this
-= link_to 'New', new_game_path
+= link_to 'New Game', new_game_path

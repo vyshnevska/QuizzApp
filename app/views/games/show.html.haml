@@ -1,5 +1,5 @@
 - content_for :page_styles do
-  - stylesheet_link_tag "games"
+  = stylesheet_link_tag "games"
 - points = @game.points.nil? ? 0 : @game.points
 - if @game.errors.any?
   #error_explanation
@@ -18,7 +18,7 @@
   .details
     %p="Points: #{points} (of #{@game.total_score})"
   %br
-  - if @game.points.nil?
+  - if points == 0
     = link_to 'Start', start_game_path(@game)
     \|
   - else

@@ -1,21 +1,19 @@
 %hr
 .caption
-  %h4= "Game # #{@game.id } statistics"
+  %h4= I18n.translate('game.statistics', :game_id => @game.id)
 .bug_image
-  = image_tag "lady_bug.png", :alt=> "Lady Bug", :class=>"remove_answer"
+  = image_tag "lady_bug.png", :alt => "Lady Bug", :class => "remove_answer"
 .statistics
   - if @game.try(:quizz)
-    %p= "People who played this game: #{@game.try(:played_game)}"
-  %p= "Maximum game score is #{@game.total_score}"
-  %p= "User result is : #{@user_result} %"
+    %p= I18n.translate('game.other_players', :count => @game.try(:played_game))
+  %p= I18n.translate('game.max_score', :score => @game.total_score)
+  %p= I18n.translate('game.user.result', :score => @user_result)
+
   - if @other_users
-    - if @other_users > 1
-      %p= "Other #{@other_users} users played this game"
-    - else
-      %p= "Other #{@other_users} user played this game"
+    %p= I18n.translate('game.other_users', :count => @other_users)
   - if @scores
     %ul
-      = "Other #{@scores.length} results: "
+      = I18n.translate('game.other_score', :score => @scores.length)
       - @scores.each do |score|
         %li
           = "#{score} %"

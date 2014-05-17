@@ -1,17 +1,17 @@
-%h3 Start a quizz
+%h3= I18n.translate('actions.start_quizz')
 %div{ :id => "progress", :class => "progress progress-warning progress-striped active" }
   %div{ :id => "myprogress", :class => "bar", :style =>"width:0px" }
 
 = form_for @game, :url => finish_game_path(@game) do |f|
   .actions
-    %h5=@quizz.description
+    %h5= @quizz.description
     %ul{:id => "qns-list"}
-      -@quizz.questions.each do |q|
+      - @quizz.questions.each do |q|
         %li{:data => {:checked => 0 }}
-          %h6="#{q.title}"
-          -q.answers.each do |a|
+          %h6= "#{q.title}"
+          - q.answers.each do |a|
             %div
-              =radio_button_tag "answers[#{q.id}]", "#{a.id}", false, :class =>"#{q.id}"
-              =f.label "#{a.content}"
+              = radio_button_tag "answers[#{q.id}]", "#{a.id}", false, :class =>"#{q.id}"
+              = f.label "#{a.content}"
     %br
   = f.submit 'Submit and Finish'

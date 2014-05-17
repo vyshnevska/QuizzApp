@@ -1,5 +1,7 @@
 en:
   create_new: "Create New Game"
+  game:
+    title: "Game"
   games:
     available: "Available games"
     not_finished: "Not finished games for %{user}"
@@ -10,7 +12,13 @@ en:
       updated: "Updated At %{updated}"
       quizz_points: "Points: %{points} ( of %{total} )"
   actions:
-    review:   "|Review|"
-    show:     "|Show|"
-    destroy:  "|Destroy|"
+    review:     "|Review|"
+    show:       "|Show|"
+    destroy:    "|Destroy|"
     sure_to_destroy: "Are you sure?"
+    start:      "Start"
+    start_quizz: "Start a quizz"
+  form:
+    save: "Save"
+    choose_quiz: "Choose a quizz"
+    assign_player: "Assign player"

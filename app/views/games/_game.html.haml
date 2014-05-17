@@ -1,14 +1,12 @@
-/- @games_new.each do |game|
 - if game.passed?
   = render :partial => 'passed', :locals => {:game => game}
 - else
   .details
     .item
       .quizz
-        Game
+        = I18n.translate('game.title')
         %strong=" # #{game.id}"
-        = " #{game.try(:quizz).try(:description)}  ( #{game.state} )"
-        %p
+        = " #{game.try(:quizz).try(:description)}  ( #{game.state} )  ||  "
         %strong=game.try(:user).try(:name)
       .actions
-        = link_to 'Start', {:controller => "games", :action => "new", :quizz_id => game.quizz_id }
+        = link_to I18n.translate('actions.start'), {:controller => "games", :action => "new", :quizz_id => game.quizz_id }

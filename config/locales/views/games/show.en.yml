@@ -1,10 +1,16 @@
 en:
   game:
     reviewing: "Reviewing game # %{game_id}"
-    showing: "Showing game # %{game_id}"
-    start: "Start"
-    back: "Go Back"
+    showing:   "Showing game # %{game_id}"
+    start:     "Start"
+    back:      "Go Back"
     user:
-      played: "Player %{user} played game: %{game}"
+      played:    "Player %{user} played game: %{game}"
       want_play: "Player %{user} wants to play game: %{game}"
-      score: "Points: %{points} (of %{total})"
+      score:     "Points: %{points} (of %{total})"
+      result:    "User result is : %{score} %"
+    statistics:     "Game # %{game_id} statistics"
+    other_players:  "People who played this game: %{count}"
+    other_users:    "Other %{count} users played this game"
+    other_score:    "Other %{score} results: "
+    max_score:      "Maximum game score is %{score}"

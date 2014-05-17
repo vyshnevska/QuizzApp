@@ -1,0 +1,10 @@
+en:
+  game:
+    reviewing: "Reviewing game # %{game_id}"
+    showing: "Showing game # %{game_id}"
+    start: "Start"
+    back: "Go Back"
+    user:
+      played: "Player %{user} played game: %{game}"
+      want_play: "Player %{user} wants to play game: %{game}"
+      score: "Points: %{points} (of %{total})"

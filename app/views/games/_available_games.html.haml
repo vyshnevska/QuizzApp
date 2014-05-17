@@ -7,13 +7,12 @@
 
 .games.available
   .section
-    %h1.gorgeous Available games
+    %h1.gorgeous= I18n.translate('games.available')
     %hr.section_caption
     #available_games
       = render @quizzes
   .footer
     #paginator_available
       = paginate @quizzes, :params => {:controller => 'games', :action => 'paginate_available'}, :remote => true
-
   .section
     %hr

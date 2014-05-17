@@ -2,17 +2,17 @@
 .details
   .item
     .game_detail
-      %strong="Game # #{game.id}"
-      %strong=game.try(:quizz).try(:description)
-      %p.date= "Created At #{game.created_at.to_formatted_s(:short)}"
-      %p.date= "Updated At #{game.updated_at.to_formatted_s(:short)}"
+      %strong= I18n.translate('games.detail.id', :game_id => game.id)
+      %strong= game.try(:quizz).try(:description)
+      %p.date= I18n.translate('games.detail.created', :created => game.created_at.to_formatted_s(:short))
+      %p.date= I18n.translate('games.detail.updated', :updated => game.updated_at.to_formatted_s(:short))
       %p
-        %strong=game.try(:user).try(:name)
+        %strong= game.try(:user).try(:name)
     .quizz
-      =image_tag "nut.png", :alt=> "nut", :class=> "nut_image"
-      ="Points: #{points} ( of #{game.total_score} )"
+      = image_tag "nut.png", :alt=> "nut", :class=> "nut_image"
+      = I18n.translate('games.detail.quizz_points', :points => points, :total => game.total_score)
     .actions
-      = link_to '|Review|', review_game_path(game)
-      = link_to '|Show|', game
+      = link_to I18n.translate('actions.review'), review_game_path(game)
+      = link_to I18n.translate('actions.show'), game
       - if current_user.has_access_to_view?
-        = link_to '|Destroy|', game, :method => :delete, :data => { :confirm => 'Are you sure?' }
+        = link_to I18n.translate('actions.destroy'), game, :method => :delete, :data => { :confirm => I18n.translate('actions.sure_to_destroy') }

@@ -7,15 +7,12 @@
 
 .games.not_finished
   .section
-    %h1.gorgeous
-      = "Not finished games for #{current_user.try(:name)}"
+    %h1.gorgeous= I18n.translate('games.not_finished', :user => current_user.try(:name))
     %hr.section_caption
     #created_games
       = render @new_games
-
   .footer
     #paginator_created
       = paginate @new_games, :params => {:controller => 'games', :action => 'paginate_created'}, :remote => true
-
   .section
     %hr

@@ -1,0 +1,16 @@
+en:
+  create_new: "Create New Game"
+  games:
+    available: "Available games"
+    not_finished: "Not finished games for %{user}"
+    passed: "Passed games"
+    detail:
+      id: "Game # %{game_id}"
+      created: "Created At %{created}"
+      updated: "Updated At %{updated}"
+      quizz_points: "Points: %{points} ( of %{total} )"
+  actions:
+    review:   "|Review|"
+    show:     "|Show|"
+    destroy:  "|Destroy|"
+    sure_to_destroy: "Are you sure?"

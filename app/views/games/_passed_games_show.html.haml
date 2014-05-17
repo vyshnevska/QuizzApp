@@ -7,13 +7,12 @@
 
 .games.passed
   .section
-    %h1.gorgeous Passed games
+    %h1.gorgeous= I18n.translate('games.passed')
     %hr.section_caption
     #passed_games
       = render @games_passed
   .footer
     #paginator_passed
       = paginate @games_passed, :params => {:controller => 'games', :action => 'paginate_passed'}, :remote => true
-
   .section
     %hr

@@ -1,11 +1,11 @@
--content_for :page_styles do
+- content_for :page_styles do
   = stylesheet_link_tag "games"
 
 - unless @quizzes.empty?
-  = render :partial =>"available_games", :locals => { :quizzes => @quizzes }
+  = render :partial => "available_games", :locals => { :quizzes => @quizzes }
 - unless @new_games.empty?
-  = render :partial =>"created_games_show", :locals => { :games_new => @games_new }
+  = render :partial => "created_games_show", :locals => { :games_new => @games_new }
 - unless @games_passed.empty?
-  = render :partial =>"passed_games_show", :locals => { :games_passed => @games_passed }
-/TODO:delete this
-= link_to 'New Game', new_game_path
+  = render :partial => "passed_games_show", :locals => { :games_passed => @games_passed }
+
+%h1.gorgeous= link_to I18n.translate('create_new'), new_game_path

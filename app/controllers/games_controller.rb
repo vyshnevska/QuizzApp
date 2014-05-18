@@ -8,15 +8,13 @@ class GamesController < ApplicationController
     if current_user
       @count_games = current_user.assigned_games
       @count_passed_games = current_user.passed_games.count
-
-      # UserMailer.welcome_email(current_user).deliver
-      # flash[:notice] = I18n.translate('mail.sent_notification', :current_user => current_user.name)
+      UserMailer.welcome_email(current_user).deliver
+      flash[:notice] = I18n.translate('mail.sent_notification', :current_user => current_user.name)
 
       current_user.inverse_friends.each do |fs|
         @inverse_friends  = fs.name
       end
       @users = User.without_user(current_user)
-      # UserMailer.test_email.deliver
     end
   end
 
@@ -108,7 +106,7 @@ class GamesController < ApplicationController
   def start game_id
     @game = Game.find_by_id(game_id)
     @quizz = @game.quizz
-    # Resque.enqueue(GameStartNotification, @game.id)
+    Resque.enqueue(GameStartNotification, @game.id)  
     @game.set_to_started!
     render :start
   end
@@ -129,7 +127,7 @@ class GamesController < ApplicationController
     end
     if !@game.errors.any?
       @game.save
-      # Resque.enqueue(GameFinishNotification, @game.id)
+      Resque.enqueue(GameFinishNotification, @game.id)
       @game.set_to_finished!
       redirect_to @game, :locals=> {:state => "finished"}, notice: I18n.translate('finish.successfully')
     else

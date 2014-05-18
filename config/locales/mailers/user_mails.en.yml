@@ -1,0 +1,5 @@
+en:
+  mail:
+    welcome: "Welcome to Hamster:) Web Site!"
+    finish_game:  "This game # %{game} is finished!"
+    start_game:  "This game # %{game} just started!"

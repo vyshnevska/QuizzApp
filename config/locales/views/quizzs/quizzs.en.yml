@@ -1,0 +1,17 @@
+en:
+  quizzs:
+    edit: "Edit quizz"
+    qst_section: "Question Section"
+    question: "Question"
+    answers: "Answers"
+    submit: "Submit Quizz"
+    index:
+      caption: "Listing quizzs"
+      detail:
+        quizz: "# %{quizz}  Quizz"
+        actions:
+          edit:  "|Edit|"
+          complete: "Complete"
+          destroy: "|Destroy|"
+          confirm: "Are you sure?"
+      new: "New Quizz"

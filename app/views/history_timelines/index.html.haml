@@ -1,0 +1,13 @@
+-content_for :page_styles do
+  = stylesheet_link_tag "timeline"
+
+%h1.timeline Timeline of Inventions
+%hr.section_caption
+  #timeline.dpSocialTimeline
+    - @timelines.each_with_index do |century, index|
+      - @name, @content = century['name'], century['description']
+      - if index > 0
+        .right_column
+          = render :partial => "templates/social_box", :locals => {:name => @name, :content => @content}
+      - else
+        = render :partial => "templates/social_box", :locals => {:name => @name, :content => @content}

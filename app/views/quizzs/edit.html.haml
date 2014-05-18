@@ -1,32 +1,31 @@
 -content_for :page_title do
-    -page_title "Edit quizz"
+  = page_title I18n.translate('quizzs.edit')
 -content_for :page_styles do
-    -stylesheet_link_tag "quizzs"
+  = stylesheet_link_tag "quizzs"
 
 :javascript
-    var action = "#{params[:action]}";
+  var action = "#{params[:action]}";
 
 = form_tag quizz_path(@quizz), :method => :put do
-    .quizz
-        %span.caption Quizz Title
-        = text_field_tag "quizz[description]", "#{@quizz.description}"
-        .question-section
-            .section
-                = image_tag "expand.png", :alt => "Expand Btn", :id => "expand"
-                = image_tag "collapse.png", :alt => "Collapse Btn", :id => "collapse"
-                %strong.caption
-                    = "Question Section"
-                %hr
-            - @quizz.questions.each do |question|
-                .question
-                    %span.caption Question
-                    = text_field_tag "questions[][title]", "#{question.title}"
-                    .answers
-                        %span.caption Answers
-                        - question.answers.each do |answer|
-                            .line.first
-                                = text_field_tag "questions[][answers][]", "#{answer.content}"
-                            .correct
-                                = radio_button_tag "correct_ids[#{question.id}]", "#{answer.id}", answer.is_correct?
+  .quizz
+    %span.caption Quizz Title
+    = text_field_tag "quizz[description]", "#{@quizz.description}"
+    .question-section
+      .section
+        = image_tag "expand.png", :alt => "Expand Btn", :id => "expand"
+        = image_tag "collapse.png", :alt => "Collapse Btn", :id => "collapse"
+        %strong.caption= I18n.translate('quizzs.qst_section')
+        %hr
+          - @quizz.questions.each do |question|
+            .question
+              %span.caption= I18n.translate('quizzs.question')
+              = text_field_tag "questions[][title]", "#{question.title}"
+              .answers
+                %span.caption= I18n.translate('quizzs.answers')
+                - question.answers.each do |answer|
+                  .line.first
+                    = text_field_tag "questions[][answers][]", "#{answer.content}"
+                  .correct
+                    = radio_button_tag "correct_ids[#{question.id}]", "#{answer.id}", answer.is_correct?
 
-    = submit_tag "Submit Quizz", :id=> "submit", :disabled=> true
+    = submit_tag I18n.translate('quizzs.submit'), :id=> "submit", :disabled=> true

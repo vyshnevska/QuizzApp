@@ -4,7 +4,7 @@
 .quizzes
   .section
     .caption
-      %h1.gorgeous Listing quizzs
+      %h1.gorgeous= I18n.translate('quizzs.index.caption')
     .bug_image
       = image_tag "lady_bug.png", :alt=> "Lady Bug", :class=>"remove_answer"
     %hr.section_caption
@@ -12,18 +12,18 @@
     .details
       .item
         .quizz
-          = "# #{quizz.id}  Quizz"
+          = I18n.translate('quizzs.index.detail.quizz', :quizz => quizz.id)
           %strong= "#{quizz.try(:description)}"
           %span.temp= current_user.has_access_to_view? ? quizz.status : ""
         .actions
-          = link_to '|Edit|', edit_quizz_path(quizz) unless quizz.completed?
-          = link_to 'Complete', complete_quizz_path(quizz) unless quizz.completed?
+          = link_to I18n.translate('quizzs.index.detail.actions.edit'), edit_quizz_path(quizz) unless quizz.completed?
+          = link_to I18n.translate('quizzs.index.detail.actions.complete'), complete_quizz_path(quizz) unless quizz.completed?
           - if current_user.has_access_to_view?
-            = link_to '|Destroy|', quizz, :method => :delete, :data => { :confirm => 'Are you sure?' }
+            = link_to I18n.translate('quizzs.index.detail.actions.destroy'), quizz, :method => :delete, :data => { :confirm => I18n.translate('quizzs.index.detail.actions.confirm') }
             = "(#{quizz.updated_at.to_date})"
 
   .section
     %hr
 
 -if can? :create, Quizz.new
-  = link_to 'New Quizz', new_quizz_path
+  = link_to I18n.translate('quizzs.index.new'), new_quizz_path

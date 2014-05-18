@@ -1,0 +1,14 @@
+en:
+  navigation:
+    user_activity: "User Activity"
+    edit_account: "Edit account"
+    quizzes:      "Quizzes"
+    games:        "Games"
+    history_map:  "History Map"
+    chat:         "Chat"
+    admin:        "Admin"
+    guest:        "Guest"
+    logout:       "Logout"
+    login:        "Login"
+    sign_up:      "Sign up"
+    sign_up_fb:   "Sign in with Facebook"

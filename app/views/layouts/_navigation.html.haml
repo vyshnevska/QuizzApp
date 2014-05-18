@@ -1,32 +1,33 @@
--#= link_to "Home", root_path, :class => 'brand'
 = link_to image_tag("puzzle.png"), home_games_path , :class => 'brand'
 
 %ul.nav
   - if user_signed_in?
     %li
-      = link_to('User Activity', welcome_games_path)
+      = link_to(I18n.translate('navigation.user_activity'), welcome_games_path)
     %li
-      = link_to('Edit account', edit_user_registration_path)
+      = link_to(I18n.translate('navigation.edit_account'), edit_user_registration_path)
     %li
-      = link_to("Quizzes", quizzs_path)
+      = link_to(I18n.translate('navigation.quizzes'), quizzs_path)
     %li
-      = link_to("Games", games_path)
+      = link_to(I18n.translate('navigation.games'), games_path)
+    %li.history
+      = link_to(I18n.translate('navigation.history_map'), history_timelines_path)
     %li
-      = link_to("Chat", messages_path)
+      = link_to(I18n.translate('navigation.chat'), messages_path)
     %li.user_email
       %strong= current_user.email
     - if current_user.has_access_to_view?
       %li.user_a_role
-        %strong Admin
+        %strong= I18n.translate('navigation.admin')
     - else
       %li.user_g_role
-        %strong Guest
+        %strong= I18n.translate('navigation.guest')
     %li
-      = link_to('Logout', destroy_user_session_path, :method=>'delete')
+      = link_to(I18n.translate('navigation.logout'), destroy_user_session_path, :method => 'delete')
   - else
     %li
-      = link_to('Login', new_user_session_path)
+      = link_to(I18n.translate('navigation.login'), new_user_session_path)
     %li
-      = link_to 'Sign in with Facebook', user_omniauth_authorize_path(:facebook)
+      = link_to(I18n.translate('navigation.sign_up'), new_user_registration_path)
     %li
-      = link_to('Sign up', new_user_registration_path)
+      = link_to(I18n.translate('navigation.sign_up_fb'), user_omniauth_authorize_path(:facebook))

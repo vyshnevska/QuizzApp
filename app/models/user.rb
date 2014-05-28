@@ -2,8 +2,8 @@ class User < ActiveRecord::Base
    devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
-  # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :role
+  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :role, :max_score, :notification
+
   attr_accessible :provider, :uid, :name
 
   has_many :games
@@ -37,6 +37,10 @@ class User < ActiveRecord::Base
 
   def assigned_games
     self.games.count
+  end
+
+  def can_send_mail?
+    notification
   end
 
   def passed_games

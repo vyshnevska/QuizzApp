@@ -36,6 +36,12 @@ QuizzApp::Application.routes.draw do
 
   resources :messages
 
+  resources :accounts do
+    member do
+      post :notification_flag
+    end
+  end
+
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   # devise_for :users
 

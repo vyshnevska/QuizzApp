@@ -20,6 +20,29 @@
 //= require_tree .
 
 
+function show_flash_message(type, text){
+  $('.flash_msgs').html("");
+  if (type == 'notice') {
+    $('.flash_msgs').append("<div class='alert alert-info'><a class='close' data-dismiss='alert'>×</a>"+text+"</div>")
+  } else if (type == 'success') {
+    $('.flash_msgs').append("<div class='alert alert-success'><a class='close' data-dismiss='alert'>×</a>"+text+"</div>")
+  } else if (type == 'error') {
+    $('.flash_msgs').append("<div class='alert alert-error'><a class='close' data-dismiss='alert'>×</a>"+text+"</div>")
+  }
+};
+
+function update_notification_flag(status){
+  var user = $('.mail_notifications').data('current_user');
+  $.post(
+    '/accounts/' + user + '/notification_flag', {"notification": status}, 
+    function(response) {
+      for (type in response) {
+        show_flash_message(type, response[type]);
+      }
+    }
+  );
+};
+
 $(function() {
   //Manage displaying of flash messages
   $(".alert-info, .alert-success, .alert-error").fadeIn(2000);
@@ -37,5 +60,10 @@ $(function() {
   faye.subscribe("/messages/new", function(data){
     eval(data);
   });
+
+  $('.mail_notifications').on("click", 'input[name="user[notification]"]', function(){
+    update_notification_flag($(this).val());
+  });
+
 
 });

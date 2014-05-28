@@ -3,7 +3,9 @@ class UserMailer < ActionMailer::Base
   MAIL = 'vyshnevska.n@gmail.com'
 
   def welcome_email(user)
-    mail(:to => user.email, :subject => I18n.translate('mail.welcome'))
+    @current_user = user
+    @url = 'hamster.heroku.com'
+    mail(:to => @current_user.email, :subject => I18n.translate('mail.welcome'))
   end
 
   def finish_game game_id

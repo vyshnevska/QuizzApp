@@ -36,6 +36,18 @@
   <%= f.password_field :current_password, :placeholder => ""%></div>
 
   <br/>
+  <p>
+    <strong>* Do you want to get mail notification ? </strong>
+  </p>
+  <div class="mail_notifications"  data-current_user= "<%=resource.id%>">
+    <% status = resource.notification %>
+    <span> Yes </span>
+      <%= f.radio_button :notification, 'true', :checked => status %>
+    <span> No </span>
+      <%= f.radio_button :notification, 'false', :checked => !status %>
+  </div>
+
+  <br/>
   <div><%= f.submit "Submit Changes" %></div>
 <% end %>
 <hr/>

@@ -1,4 +1,4 @@
-.flash_msgs{:style=>"margin:10px;"}
+.flash_msgs{:style => "margin:10px;"}
     - flash.each do |key, value|
         %div{:class =>"#{flash_class(key)}", :style=>"display: none;"}
             %a.close{"data-dismiss" => "alert"} ×

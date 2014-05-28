@@ -8,9 +8,12 @@ class GamesController < ApplicationController
     if current_user
       @count_games = current_user.assigned_games
       @count_passed_games = current_user.passed_games.count
-      UserMailer.welcome_email(current_user).deliver
-      flash[:notice] = I18n.translate('mail.sent_notification', :current_user => current_user.name)
 
+      if current_user.can_send_mail? && UserMailer.welcome_email(current_user).deliver
+        flash[:notice] = I18n.translate('mail.sent_notification', :current_user => current_user.name)
+      else
+        flash[:notice] = I18n.translate('mail.no_notification', :current_user => current_user.name)
+      end
       current_user.inverse_friends.each do |fs|
         @inverse_friends  = fs.name
       end

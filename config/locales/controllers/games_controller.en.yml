@@ -8,4 +8,5 @@ en:
     successfully:  "You have finished this game successfully!"
   mail:
     sent_notification: "Email is sent to %{current_user}"
+    no_notification: "Email wasn' sent to %{current_user}. Please check user Account settings."
 

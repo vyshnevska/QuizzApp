@@ -39,4 +39,11 @@ class Quizz < ActiveRecord::Base
     end
   end
 
+  def generate_csv(fields, options = {})
+    CSV.generate(options) do |csv|
+      csv << fields.collect(&:humanize)
+      csv << self.attributes.values_at(*fields)
+    end
+  end
+
 end

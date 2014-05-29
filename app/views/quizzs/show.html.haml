@@ -20,5 +20,8 @@
           - quest.answers.each_with_index do |answ, index|
             .line
               = "#{index +1 }. #{answ.content}"
-
-= link_to 'Back', quizzs_path
+.actions{:style => "padding: 10px;line-height: 20px;"}
+  Download:
+  = link_to "CSV", quizz_path(@quizz, format: "csv")
+  = link_to "Excel", quizz_path(@quizz, format: "xls")
+  = link_to 'Back', quizzs_path

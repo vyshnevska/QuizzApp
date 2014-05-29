@@ -14,6 +14,19 @@ class QuizzsController < ApplicationController
 
   def show
     @quizz = Quizz.find(params[:id])
+    respond_to do |format|
+      format.html {}
+      format.csv {
+        send_data(
+          @quizz.generate_csv(["id", "description", "status"]),
+          :disposition => "attachment; filename=\"quizz_#{@quizz.id}\".csv"
+        )
+      }
+      format.xls do
+        response.headers['Content-Disposition'] = "attachment; filename=\"quizz_#{@quizz.id}\".xls"
+        render "show.xls.erb"
+      end
+    end
   end
 
   def new

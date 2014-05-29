@@ -1,0 +1,24 @@
+- content_for :page_title do
+  - page_title "New quizz"
+- content_for :page_styles do
+  - stylesheet_link_tag "quizzs"
+
+.quizz
+  %span.caption Quizz Title
+  = @quizz.description
+  .question-section
+    %strong.caption
+      = "Question Section"
+    %hr{:style => "margin: 8px;"}
+    - @quizz.questions.each_with_index  do |quest, index|
+      .question
+        %span.caption
+          = "#{index + 1}. Question"
+        = quest.title
+        .answers
+          %span.caption Answers
+          - quest.answers.each_with_index do |answ, index|
+            .line
+              = "#{index +1 }. #{answ.content}"
+
+= link_to 'Back', quizzs_path

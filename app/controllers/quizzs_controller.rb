@@ -12,6 +12,10 @@ class QuizzsController < ApplicationController
     end
   end
 
+  def show
+    @quizz = Quizz.find(params[:id])
+  end
+
   def new
     @quizz = Quizz.new
     question = @quizz.questions.build

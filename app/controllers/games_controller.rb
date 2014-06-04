@@ -2,6 +2,10 @@ class GamesController < ApplicationController
   skip_before_filter :authenticate_user!, :only => :home
 
   def home
+    @updates_table = {}
+    @updates_table[:quizzes] = ["Export in CSV/XLS formats"]
+    @updates_table[:quizzes] << "View for individual quizz"
+    @updates_table[:account] = ["On/Off mail notifications"]
   end
 
   def welcome

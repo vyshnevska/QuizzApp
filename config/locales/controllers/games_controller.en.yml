@@ -7,6 +7,6 @@ en:
     same_game:     "Can't run the same game twice. Game %{game_id} was already finished!"
     successfully:  "You have finished this game successfully!"
   mail:
-    sent_notification: "Email is sent to %{current_user}"
-    no_notification: "Email wasn' sent to %{current_user}. Please check user Account settings."
+    sent_notification: "Welcome mail was sent to %{current_user}"
+    no_notification: "Welcome mail wasn't sent to %{current_user}. Please check user Account settings."
 

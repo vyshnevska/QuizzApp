@@ -1,6 +1,21 @@
 // Place all the styles related to the Games controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#home_section {
+	.updates_table{
+		float: right;
+		width: 30%;
+		margin-right: 15px;
+		margin-top: 35px;
+		font-size: 12px;
+		padding: 0px;
+	}
+	.puzzle_logo {
+		float:left;
+		margin-bottom: 70px;
+	}
+}
 .statistic_info, .friendship, .game {
 	.details{
 		margin-left: 20px;
@@ -105,9 +120,4 @@
     display: inline-block;
     width: 50px;
     height: 50px;
-}
-.puzzle {
-	margin-bottom: 70px;
-	margin-left: 20%;
-	margin-right: 20%;
 }

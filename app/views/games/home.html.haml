@@ -3,6 +3,21 @@
 
 :javascript
   var action = "#{params[:action]}";
+#home_section
+  %table.table.table-bordered.updates_table
+    %th
+      %h5 Updates
+    %th
+      %h5 Section
+    - @updates_table.each do |key, value|
+      - style = ["info_blue", "info_purple", "info_yellow", "info_green"].sample
+      %tr{:class => "#{style}"}
+        %td
+          %h5= key
+        %td
+          - @updates_table[key].each do |line|
+            = line
+            %br
 
-.puzzle
-  = image_tag "cute_puzzled.png", :alt=> "Lady Bug", :class=>"remove_answer"
+  .puzzle_logo
+    = image_tag "cute_puzzled.png", :alt=> "Logo"

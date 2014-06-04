@@ -1865,6 +1865,19 @@ table td[class*="span"], table th[class*="span"], .row-fluid table td[class*="sp
     background-color: #3fb618
 }
 
+.table tbody tr.info_blue>td {
+    background-color: #d9edf7
+}
+.table tbody tr.info_yellow>td {
+    background-color: #fcf8e3
+}
+.table tbody tr.info_green>td {
+    background-color: #dff0d8
+}
+.table tbody tr.info_purple>td {
+    background-color: #cf95cf
+}
+
 .table tbody tr.error>td {
     background-color: #ff0039
 }

@@ -1,0 +1,24 @@
+-content_for :page_styles do
+  = stylesheet_link_tag "timeline", "flip_effect"
+
+.flip-container{:ontouchstart => "this.classList.toggle('hover')"}
+  .flipper
+    .front
+      %h3= caption
+      %p
+        %i= label
+    .back
+      %table.table.table-bordered.updates_table
+        %th
+          %h5 Updates
+        %th
+          %h5 Section
+        - @updates_table.each do |key, value|
+          - style = ["info_blue", "info_purple", "info_yellow", "info_green"].sample
+          %tr{:class => "#{style}"}
+            %td
+              %h5= key
+            %td
+              - @updates_table[key].each do |line|
+                = line
+                %br

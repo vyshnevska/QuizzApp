@@ -4,20 +4,8 @@
 :javascript
   var action = "#{params[:action]}";
 #home_section
-  %table.table.table-bordered.updates_table
-    %th
-      %h5 Updates
-    %th
-      %h5 Section
-    - @updates_table.each do |key, value|
-      - style = ["info_blue", "info_purple", "info_yellow", "info_green"].sample
-      %tr{:class => "#{style}"}
-        %td
-          %h5= key
-        %td
-          - @updates_table[key].each do |line|
-            = line
-            %br
-
+  #flip_effect_section{:style => "float: right; width: 30%; margin-right: 15px; margin-top: 35px;"}
+    = render :partial => "smart_flip_box", :locals => {:caption => "Updates", :label => "(hover to view)"}
+          
   .puzzle_logo
     = image_tag "cute_puzzled.png", :alt=> "Logo"

@@ -1,6 +1,7 @@
 -content_for :page_styles do
-  = stylesheet_link_tag "timeline"
+  = stylesheet_link_tag "timeline", "flip_effect"
 
+  
 %h1.timeline Timeline of Inventions
 %hr.section_caption
   #timeline.dpSocialTimeline
@@ -11,3 +12,11 @@
           = render :partial => "templates/social_box", :locals => {:name => @name, :content => @content}
       - else
         = render :partial => "templates/social_box", :locals => {:name => @name, :content => @content}
+
+#flip_effect
+  .flip-container{:ontouchstart => "this.classList.toggle('hover')"}
+    .flipper
+      .front
+        = render :partial => "templates/social_box", :locals => {:name => @name, :content => @content}
+      .back
+        back content

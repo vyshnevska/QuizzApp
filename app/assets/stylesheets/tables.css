@@ -1,0 +1,44 @@
+#quizz_list {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 14px;
+  margin: 5px;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  background: url('../assets/table-images/pattern.png');
+}
+#quizz_list thead tr {
+  background: url('../assets/table-images/pattern-head.png');
+}
+#quizz_list th {
+  font-size: 15px;
+  font-weight: bold;
+  padding: 8px;
+  border-bottom: 1px solid #fff;
+  color: #039;
+}
+#quizz_list td {
+  padding: 8px; 
+  border-bottom: 1px solid #fff;
+  color: #669;
+  border-top: 1px solid transparent;
+}
+#quizz_list tbody tr:hover td{
+  color: #339;
+  background: #fff;
+}
+th.header { 
+  font-weight: bold;
+  cursor: pointer;
+  background-repeat: no-repeat; 
+  background-position: center right; 
+  padding-left: 20px; 
+  border-right: 1px solid #dad9c7; 
+  margin-left: -1px; 
+}
+th.headerSortUp { 
+  background-image: url('../assets/table-images/asc.gif');
+}
+th.headerSortDown { 
+  background-image: url('../assets/table-images/desc.gif'); 
+}

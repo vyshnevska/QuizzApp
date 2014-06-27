@@ -8,7 +8,6 @@ en:
     index:
       caption: "Listing quizzs"
       detail:
-        quizz: "# %{quizz}  Quizz"
         actions:
           edit:  "|Edit|"
           complete: "Complete"

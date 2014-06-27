@@ -89,37 +89,3 @@ form #submit {
   display: inline;
 }
 /* ---END NEW QUIZZ--- */
-
-/* ---Index--- */
-
-.quizzes {
-  line-height: 16px;
-  .details {
-    border-left: thin solid #333;
-    border-right: thin solid #333;
-    padding: 10px;
-    margin-top: -10px;
-  }
-  .item {
-    display: block; 
-  }
-  .quizz {
-    display: inline-block;
-    width: 60%;
-    margin-left: 20px;
-  }
-  .actions {
-    display: inline-block;
-    margin-left: 30px;
-    width: 30%;
-  }
-}
-
-.quizzes .section {
-  .caption { display: inline-block;}
-  .bug_image {
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-  }
-}

@@ -1,0 +1,34 @@
+-content_for :page_styles do
+  -stylesheet_link_tag "tables"
+
+:javascript
+  $(document).ready(function() 
+    { 
+      $("#quizz_list").tablesorter({sortList: [[0,0], [1,0]]}); 
+    } 
+  );
+
+%table#quizz_list{:summary => "Quizzes List"}
+  %thead
+    %tr
+      %th.header.headerSortDown{:scope => "col"} Quizz ID
+      %th.header{:scope => "col"} Quizz Details
+      %th.header{:scope => "col"} Status
+      %th.header{:scope => "col"} Action
+      %th.header{:scope => "col"} Last Update
+  %tbody
+    - @quizzes.each do |quizz|
+      %tr
+        %td= "# #{quizz.id}"
+        %td 
+          %strong= "#{quizz.try(:description)}"
+        %td
+          %span.temp= current_user.has_access_to_view? ? quizz.status : ""
+        %td
+          = link_to I18n.translate('quizzs.index.detail.actions.show'), quizz_path(quizz) if quizz.completed?
+          = link_to I18n.translate('quizzs.index.detail.actions.edit'), edit_quizz_path(quizz) unless quizz.completed?
+          = link_to I18n.translate('quizzs.index.detail.actions.complete'), complete_quizz_path(quizz) unless quizz.completed?
+          - if current_user.has_access_to_view?
+            = link_to I18n.translate('quizzs.index.detail.actions.destroy'), quizz, :method => :delete, :data => { :confirm => I18n.translate('quizzs.index.detail.actions.confirm') }
+        %td
+          = distance_of_time_in_words(quizz.updated_at.to_date, Time.now)

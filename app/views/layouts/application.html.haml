@@ -10,7 +10,7 @@
  
     = stylesheet_link_tag "my_bootstrap", "navigation_bar", "layout", "application"
     = yield :page_styles
-    = javascript_include_tag "application", "games", "quizzes", "jquery", "http://localhost:9292/faye.js"
+    = javascript_include_tag "application", "games", "quizzes", "jquery", "http://localhost:9292/faye.js", 'jquery.tablesorter.min'
     = csrf_meta_tags
 
     = yield(:head)

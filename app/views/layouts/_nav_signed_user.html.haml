@@ -1,0 +1,24 @@
+.left_side
+  %li.item
+    = link_to(I18n.translate('navigation.user_activity'), welcome_games_path)
+  %li.item
+    = link_to(I18n.translate('navigation.edit_account'), edit_user_registration_path)
+  %li.item
+    = link_to(I18n.translate('navigation.quizzes'), quizzs_path)
+  %li.item
+    = link_to(I18n.translate('navigation.games'), games_path)
+  %li.item
+    = link_to(I18n.translate('navigation.chat'), messages_path)
+.right_side
+  / %li.item.history
+  /  = link_to(I18n.translate('navigation.history_map'), history_timelines_path)
+  %li.item.user_email
+    %strong= current_user.email
+  - if current_user.has_access_to_view?
+    %li.item.role.admin
+      %strong= I18n.translate('navigation.admin')
+  - else
+    %li.item.role.guest
+      %strong= I18n.translate('navigation.guest')
+  %li.item
+    = link_to(I18n.translate('navigation.logout'), destroy_user_session_path, :method => 'delete')

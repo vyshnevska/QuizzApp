@@ -1,10 +1,22 @@
 -content_for :page_styles do
-  -stylesheet_link_tag "quizzs"
-%hr
+  -stylesheet_link_tag "quizzs", "games"
 
-.index-section
+.index-section.quizz
+  -if can? :create, Quizz.new
+    = link_to I18n.translate('quizzs.index.new'), new_quizz_path
+  %br
+
+  / .cutout
+  /   Mimi1
+  /   Mimi2
+  /   .island
+  /     #circleText.gorgeous
+  /       Hamster
+
+
+  .caption_line
+    %hr.left_side
+      %span.gorgeous Quizzes
+    %hr.right_side
   = render :partial => "table", :local => {:quizzes => @quizzes}
-%hr
-
--if can? :create, Quizz.new
-  = link_to I18n.translate('quizzs.index.new'), new_quizz_path
+  %hr

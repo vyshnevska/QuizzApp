@@ -89,3 +89,36 @@ form #submit {
   display: inline;
 }
 /* ---END NEW QUIZZ--- */
+
+.index-section.quizz{
+  .caption_line {
+    width:100%;
+    text-align:center;
+    margin-top:20px;
+    margin-bottom: 10px;
+  }
+  .caption_line hr {
+    margin-left:auto;
+    margin-right:auto;
+    width:45%;
+    border: 0;
+
+    height: 1px;
+    margin-top: 5px;
+    background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+    background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0));
+  }
+  .left_side {
+    float:left;
+  }
+  .right_side {
+    float:right;
+  }
+  hr {
+    margin-top:10px;
+  }
+}
+
+

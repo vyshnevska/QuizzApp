@@ -8,7 +8,7 @@
     %meta{:content => "", :name => "author"}
     %link{:href => "/assets/cute.ico", :rel => "shortcut icon"}
  
-    = stylesheet_link_tag "my_bootstrap", "navigation_bar", "layout", "application"
+    = stylesheet_link_tag "my_bootstrap", "navigation_bar", "layout", "application", "hamster_header"
     = yield :page_styles
     = javascript_include_tag "application", "games", "quizzes", "jquery", "http://localhost:9292/faye.js", 'jquery.tablesorter.min'
     = csrf_meta_tags
@@ -16,10 +16,12 @@
     = yield(:head)
   %body
     %section
-      %header.navbar.navbar-fixed-top
-        %nav.navbar-inner
-          .container
-            = render 'layouts/navigation'
+      / %header.navbar.navbar-fixed-top
+      /   %nav.navbar-inner
+      /     .container
+      /       = render 'layouts/navigation'
+      %header
+        = render 'layouts/navigation'
       #main{:role => "main"}
         .container
           .content

@@ -1,0 +1,66 @@
+body {
+  animation: bg 3s infinite;
+}
+.appHeader {
+  height: 7em;
+  background: radial-gradient(ellipse 204px 137px at 50% 98%, transparent 100px, rgb(83, 83, 83) 50px);
+  position: relative;
+}
+.appContent {
+  color: rgb(85, 85, 85);
+  position: absolute;
+  left: calc(50% - 150px);
+  bottom: -37%;
+  width: 300px;
+  background: radial-gradient(ellipse 225px 119px at 50% 51%, silver 90px, rgba(0, 0, 0, 0) 50px);
+  height: 7em;
+}
+.appContent > div {
+  position: absolute;
+  bottom: 30px;
+  left: 93px;
+  right: 80px;
+  top: 20px;
+  background: rgba(fff, 0, 0, 0.2);
+  padding: 5px;    
+  text-align: center;    
+}
+
+#appHamster {
+  padding-top: 27px;
+  font-size: 2em;
+}
+.menu_items {
+  padding-top: 55px;
+}
+.left_side {
+  margin-left: 40px;
+}
+.right_side {
+  margin-left: 240px;
+  float: left;
+}
+.menu_items .item {
+  display: list-item;
+  text-align: -webkit-match-parent;
+  list-style: none;
+  line-height: 25px;
+  float: left;
+  padding: 3px;
+  text-decoration: none;
+}
+.menu_items .item>a {
+  float: none;
+  padding: 15px 15px 15px;
+  color: #fff;
+}
+.menu_items .item.role{
+  padding-left: 15px;
+}
+.role.admin {color: crimson;}
+.role.guest {color: seagreen;}
+.user_email {color: #A271BB;}
+
+.menu_items .signup_section {
+  margin-left: 140px;
+}

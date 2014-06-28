@@ -12,6 +12,6 @@
           = link_to(I18n.translate('navigation.sign_up_fb'), user_omniauth_authorize_path(:facebook))
     .appContent
       #appHamster.gorgeous
-        Hamster
+        = link_to 'Hamster', home_games_path
 
 / = link_to image_tag("puzzle.png"), home_games_path , :class => 'brand'

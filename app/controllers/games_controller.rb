@@ -3,9 +3,11 @@ class GamesController < ApplicationController
 
   def home
     @updates_table = {}
-    @updates_table[:quizzes] = ["Export in CSV/XLS formats"]
+    @updates_table[:quizzes] =  ["Export in CSV/XLS formats"]
     @updates_table[:quizzes] << "View for individual quizz"
-    @updates_table[:account] = ["On/Off mail notifications"]
+    @updates_table[:account] =  ["On/Off mail notifications"]
+    @updates_table[:layout] =   ["New UI for Quizzes"]
+    @updates_table[:layout] <<  "New UI for App Menu"
   end
 
   def welcome

@@ -30,6 +30,9 @@ body {
   padding-top: 27px;
   font-size: 2em;
 }
+
+#appHamster a {color: #000;}
+
 .menu_items {
   padding-top: 55px;
 }

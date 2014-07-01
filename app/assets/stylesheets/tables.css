@@ -42,3 +42,23 @@ th.headerSortUp {
 th.headerSortDown { 
   background-image: url('../assets/table-images/desc.gif'); 
 }
+
+td.actions span{
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  font-size: 18px;
+}
+td.actions span a {color: #6E9FCF;}
+th.header span.glyphicon{
+  vertical-align: text-top;
+  font-size: 18px;
+}
+
+.num, .details, .actions {
+  padding-left: 15px !important;
+}
+
+.status, .update {
+  padding-left: 25px !important;
+}

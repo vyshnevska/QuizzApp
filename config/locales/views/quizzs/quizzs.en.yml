@@ -9,9 +9,9 @@ en:
       caption: "Listing quizzs"
       detail:
         actions:
-          edit:  "|Edit|"
+          edit:  "Edit"
           complete: "Complete"
-          destroy: "|Destroy|"
+          destroy: "Destroy"
           confirm: "Are you sure?"
           show: "Show"
       new: "New Quizz"

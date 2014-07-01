@@ -1,0 +1,58 @@
+-content_for :page_styles do
+  -stylesheet_link_tag "tables"
+
+:javascript
+  $(document).ready(function() 
+    { 
+      $("#quizz_list").tablesorter({sortList: [[0,0], [1,0]]}); 
+    } 
+  );
+
+%table#quizz_list{:summary => "Quizzes List"}
+  %thead
+    %tr
+      %th.header.headerSortDown{:scope => "col"}
+        %span.glyphicon.glyphicon-list-alt
+          %span{:style => "margin-left: -10px; font-family: \"Lucida Sans Unicode\", \"Lucida Grande\", Sans-Serif;"}
+            ID
+      %th.header{:scope => "col"}
+        %span.glyphicon.glyphicon-align-justify
+          %span{:style => "margin-left: -10px; font-family: \"Lucida Sans Unicode\", \"Lucida Grande\", Sans-Serif;"}
+            Details
+      %th.header{:scope => "col"}
+        %span.glyphicon.glyphicon-file
+          %span{:style => "margin-left: -10px; font-family: \"Lucida Sans Unicode\", \"Lucida Grande\", Sans-Serif;"}
+            Status
+      %th.header{:scope => "col"}
+        %span.glyphicon.glyphicon-cog
+          %span{:style => "margin-left: -10px; font-family: \"Lucida Sans Unicode\", \"Lucida Grande\", Sans-Serif;"}
+            Actions
+      %th.header{:scope => "col"}
+        %span.glyphicon.glyphicon-time
+          %span{:style => "margin-left: -10px; font-family: \"Lucida Sans Unicode\", \"Lucida Grande\", Sans-Serif;"}
+            Last Update
+  %tbody
+    - @quizzes.each do |quizz|
+      %tr
+        %td.num
+          = "# #{quizz.id}"
+        %td.details
+          %strong= "#{quizz.try(:description)}"
+        %td.status
+          %span.temp= current_user.has_access_to_view? ? quizz.status : ""
+        %td.actions
+          - unless quizz.completed?
+            %span
+              = link_to "", edit_quizz_path(quizz), :class => "glyphicon glyphicon-pencil", :title => I18n.translate('quizzs.index.detail.actions.edit')
+          - if quizz.completed?
+            %span
+              = link_to '', quizz_path(quizz), :class => "glyphicon glyphicon-check", :title => I18n.translate('quizzs.index.detail.actions.show')
+
+          - unless quizz.completed?
+            %span
+              = link_to '', complete_quizz_path(quizz), :class => "glyphicon glyphicon-lock", :title => I18n.translate('quizzs.index.detail.actions.complete')
+          - if current_user.has_access_to_view?
+            %span
+              = link_to '', quizz, :class => "glyphicon glyphicon-trash", :title => I18n.translate('quizzs.index.detail.actions.destroy'), :method => :delete, :data => { :confirm => I18n.translate('quizzs.index.detail.actions.confirm') }
+        %td.update
+          = distance_of_time_in_words(quizz.updated_at.to_date, Time.now)

@@ -6,17 +6,9 @@
     = link_to I18n.translate('quizzs.index.new'), new_quizz_path
   %br
 
-  / .cutout
-  /   Mimi1
-  /   Mimi2
-  /   .island
-  /     #circleText.gorgeous
-  /       Hamster
-
-
   .caption_line
     %hr.left_side
       %span.gorgeous Quizzes
     %hr.right_side
-  = render :partial => "table", :local => {:quizzes => @quizzes}
+  = render :partial => "quizzes_table", :local => {:quizzes => @quizzes}
   %hr

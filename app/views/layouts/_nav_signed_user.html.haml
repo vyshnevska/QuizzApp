@@ -21,4 +21,6 @@
     %li.item.role.guest
       %strong= I18n.translate('navigation.guest')
   %li.item
-    = link_to(I18n.translate('navigation.logout'), destroy_user_session_path, :method => 'delete')
+    .nav_header
+      %span.glyphicon.glyphicon-log-out
+        %span= link_to(I18n.translate('navigation.logout'), destroy_user_session_path, :method => 'delete')

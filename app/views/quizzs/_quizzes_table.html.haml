@@ -13,23 +13,23 @@
     %tr
       %th.header.headerSortDown{:scope => "col"}
         %span.glyphicon.glyphicon-list-alt
-          %span{:style => "margin-left: -10px; font-family: \"Lucida Sans Unicode\", \"Lucida Grande\", Sans-Serif;"}
+          %span.caption
             ID
       %th.header{:scope => "col"}
         %span.glyphicon.glyphicon-align-justify
-          %span{:style => "margin-left: -10px; font-family: \"Lucida Sans Unicode\", \"Lucida Grande\", Sans-Serif;"}
+          %span.caption
             Details
       %th.header{:scope => "col"}
         %span.glyphicon.glyphicon-file
-          %span{:style => "margin-left: -10px; font-family: \"Lucida Sans Unicode\", \"Lucida Grande\", Sans-Serif;"}
+          %span.caption
             Status
       %th.header{:scope => "col"}
         %span.glyphicon.glyphicon-cog
-          %span{:style => "margin-left: -10px; font-family: \"Lucida Sans Unicode\", \"Lucida Grande\", Sans-Serif;"}
+          %span.caption
             Actions
       %th.header{:scope => "col"}
         %span.glyphicon.glyphicon-time
-          %span{:style => "margin-left: -10px; font-family: \"Lucida Sans Unicode\", \"Lucida Grande\", Sans-Serif;"}
+          %span.caption
             Last Update
   %tbody
     - @quizzes.each do |quizz|

@@ -55,6 +55,11 @@ th.header span.glyphicon{
   font-size: 18px;
 }
 
+.glyphicon span.caption{
+  margin-left: -10px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+
+}
 .num, .details, .actions {
   padding-left: 15px !important;
 }

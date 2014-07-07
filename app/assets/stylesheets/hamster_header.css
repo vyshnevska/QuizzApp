@@ -51,7 +51,8 @@ body {
   padding: 3px;
   text-decoration: none;
 }
-.menu_items .item>a {
+.menu_items .item a {
+  font-weight: bold;
   float: none;
   padding: 15px 15px 15px;
   color: #fff;
@@ -64,5 +65,34 @@ body {
 .user_email {color: #A271BB;}
 
 .menu_items .signup_section {
-  margin-left: 140px;
+  margin-left: 120px;
 }
+
+/* Navigator */
+.nav_header{
+  margin-left: 20px;
+}
+.glyphicon.glyphicon-log-out{
+  color:#fff !important;
+}
+.glyphicon.glyphicon-log-out span, .glyphicon.glyphicon-log-in span, .glyphicon.glyphicon-transfer span {
+  margin-left: -20px;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", "Sans-Serif";
+  font-weight: bold;
+}
+.fb_login img{
+  width:25px;
+  height: 25px;
+}
+.fb_login a{
+  margin-left: -10px;
+}
+.nav_login_header{
+  margin-left: 20px;
+  color:#fff !important;
+}
+
+
+
+
+

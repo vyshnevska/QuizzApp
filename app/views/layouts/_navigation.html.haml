@@ -5,10 +5,17 @@
     - else
       .signup_section
         %li.item
-          = link_to(I18n.translate('navigation.login'), new_user_session_path)
+          .nav_login_header
+            %span.glyphicon.glyphicon-log-in
+              %span{:style => "margin-left: -20px; font-family: \"Lucida Sans Unicode\", \"Lucida Grande\", Sans-Serif;"}
+                = link_to(I18n.translate('navigation.login'), new_user_session_path)
         %li.item
-          = link_to(I18n.translate('navigation.sign_up'), new_user_registration_path)
-        %li.item
+          .nav_login_header
+            %span.glyphicon.glyphicon-transfer
+              %span
+                = link_to(I18n.translate('navigation.sign_up'), new_user_registration_path)
+        %li.item.fb_login
+          = image_tag("facebook_ico.png")
           = link_to(I18n.translate('navigation.sign_up_fb'), user_omniauth_authorize_path(:facebook))
     .appContent
       #appHamster.gorgeous

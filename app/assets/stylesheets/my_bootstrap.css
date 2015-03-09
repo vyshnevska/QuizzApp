@@ -4050,9 +4050,9 @@ button.btn.btn-mini, input[type="submit"].btn.btn-mini {
 .navbar .nav>li>a {
     float: none;
     padding: 15px 15px 15px;
-    color: #fff;
+    color: #999999;
     text-decoration: none;
-    text-shadow: 0 1px 0 #080808
+    /*text-shadow: 0 1px 0 #080808*/
 }
 
 .navbar .nav .dropdown-toggle .caret {

@@ -48,11 +48,6 @@ padding: 9px 0;
   line-height: 25px;
 }
 
-#main {
-  padding-top: 50px;
-  height: 100%;
-}
-
 div.hamster {
   background-image: url(/assets/cute.jpg);
   background-size: 350px 270px;

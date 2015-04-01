@@ -9,15 +9,13 @@ class Game < ActiveRecord::Base
 
   scope :passed_games, joins(:game_details).where("points IS NOT NULL").group("games.id").order("games.created_at ASC")
   scope :created_games, where("points IS NULL").group("id").order("games.created_at ASC")
-  
+
   attr_protected :state
   aasm_column :state
-
   aasm_initial_state :draft
   aasm_state :draft
   aasm_state :started
   aasm_state :finished
-
 
   aasm_event :set_to_started do
     transitions :from => :draft, :to => :started
@@ -49,7 +47,6 @@ class Game < ActiveRecord::Base
     if self.max_score
       self.quizz ? self.max_score : 1
     else
-      #TODO: Fix this
       if self.quizz
         self.quizz.questions.count * 10
       else
@@ -86,5 +83,4 @@ class Game < ActiveRecord::Base
     end
     scores
   end
- 
 end

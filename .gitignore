@@ -20,3 +20,5 @@
 !/log/.gitkeep
 
 Procfile
+rails_best_practices_output.html
+.metrics

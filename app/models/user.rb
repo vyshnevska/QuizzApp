@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   has_many :quizzs, :through => :games
   has_many :messages
   ROLES = %w[admin guest simple_user]
-  
+
   #Friendship
   has_many :friendships
   has_many :friends, :through => :friendships
@@ -68,16 +68,13 @@ class User < ActiveRecord::Base
     user
   end
 
-  def rank
-    # TODO: implement this
-  end
-
   def has_access_to_view?
     self.admin?
   end
 
-private
-  def assign_role
-    self.role = "guest" unless role.nil?
-  end
+  private
+
+    def assign_role
+      self.role = "guest" unless role.nil?
+    end
 end

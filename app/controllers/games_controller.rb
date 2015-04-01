@@ -115,7 +115,7 @@ class GamesController < ApplicationController
   def start game_id
     @game = Game.find_by_id(game_id)
     @quizz = @game.quizz
-    Resque.enqueue(GameStartNotification, @game.id)  
+    Resque.enqueue(GameStartNotification, @game.id)
     @game.set_to_started!
     render :start
   end

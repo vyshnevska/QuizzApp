@@ -11,14 +11,36 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+ActiveRecord::Schema.define(:version => 20150401112047) do
 
-ActiveRecord::Schema.define(:version => 20140131224354) do
   create_table "answers", :force => true do |t|
     t.string   "content"
     t.integer  "question_id"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
-    t.boolean  "correct",     :default => false, :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.boolean  "correct"
+  end
+
+  add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
+
+  create_table "authentications", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "token"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "century_timelines", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.string   "person"
+    t.datetime "period"
+    t.string   "impact_type"
+    t.integer  "history_timeline_id"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
   end
 
   create_table "friendships", :force => true do |t|
@@ -28,6 +50,9 @@ ActiveRecord::Schema.define(:version => 20140131224354) do
     t.datetime "updated_at", :null => false
   end
 
+  add_index "friendships", ["friend_id"], :name => "index_friendships_on_friend_id"
+  add_index "friendships", ["user_id"], :name => "index_friendships_on_user_id"
+
   create_table "game_details", :force => true do |t|
     t.integer  "game_id"
     t.integer  "question_id"
@@ -35,6 +60,10 @@ ActiveRecord::Schema.define(:version => 20140131224354) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "game_details", ["answer_id"], :name => "index_game_details_on_answer_id"
+  add_index "game_details", ["game_id"], :name => "index_game_details_on_game_id"
+  add_index "game_details", ["question_id"], :name => "index_game_details_on_question_id"
 
   create_table "games", :force => true do |t|
     t.integer  "user_id"
@@ -45,6 +74,16 @@ ActiveRecord::Schema.define(:version => 20140131224354) do
     t.boolean  "emailed"
     t.string   "state"
     t.integer  "max_score"
+  end
+
+  add_index "games", ["quizz_id"], :name => "index_games_on_quizz_id"
+  add_index "games", ["user_id"], :name => "index_games_on_user_id"
+
+  create_table "history_timelines", :force => true do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "messages", :force => true do |t|
@@ -60,6 +99,8 @@ ActiveRecord::Schema.define(:version => 20140131224354) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "questions", ["quizz_id"], :name => "index_questions_on_quizz_id"
 
   create_table "quizzs", :force => true do |t|
     t.string   "description", :default => "", :null => false
@@ -87,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20140131224354) do
     t.string   "role"
     t.string   "provider"
     t.string   "uid"
+    t.boolean  "notification"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

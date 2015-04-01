@@ -39,8 +39,8 @@ class QuizzsController < ApplicationController
     @quizz = Quizz.find(params[:id])
     if @quizz.completed?
       flash[:error] =  I18n.translate('edit.cant_edit')
-    else 
-      flash[:notice] = I18n.translate('edit.mark_answers', :quizz_id => @quizz.id, :description => @quizz.description) 
+    else
+      flash[:notice] = I18n.translate('edit.mark_answers', :quizz_id => @quizz.id, :description => @quizz.description)
     end
   end
 

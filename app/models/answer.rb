@@ -2,7 +2,7 @@ class Answer < ActiveRecord::Base
   attr_accessible :content
   belongs_to :question
   validates :content, :presence => {:message => I18n.translate('validation.content')}
-  
+
   def is_correct?
     self.correct
   end
@@ -16,9 +16,4 @@ class Answer < ActiveRecord::Base
     self.correct = false
     save!
   end
-
-  # def correct_answers_by_qst qst_id
-  #   Answer.where("question_id = ? AND correct = ?", qst_id, true)
-  # end
-
 end

@@ -9,10 +9,10 @@ class UserMailer < ActionMailer::Base
   end
 
   def finish_game game_id
-    mail(:to => MAIL, :subject => I18n.translate('mail.finish_game', :game => game_id))    
+    mail(:to => MAIL, :subject => I18n.translate('mail.finish_game', :game => game_id))
   end
 
   def start_game game_id
-    mail(:to => MAIL, :subject => I18n.translate('mail.start_game', :game => game_id))    
+    mail(:to => MAIL, :subject => I18n.translate('mail.start_game', :game => game_id))
   end
 end

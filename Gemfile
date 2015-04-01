@@ -61,6 +61,10 @@ end
 # gem 'rb-readline', '~> 0.4.2'
 gem "pry"
 
+gem "simplecov"
+# coverege
+gem 'metric_fu'
+gem 'rails_best_practices'
 #Run redis server
 # redis-server /usr/local/etc/redis.conf
 #Start resque queue

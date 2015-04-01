@@ -12,8 +12,9 @@
           %li.fb_login
             = image_tag("facebook_ico.png")
             = link_to(I18n.translate('navigation.sign_up_fb'), user_omniauth_authorize_path(:facebook))
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          %a{:href => "#"}= current_user.email
-        %li
-          = link_to(I18n.translate('navigation.logout'), destroy_user_session_path, :method => 'delete', :target => "_blank")
+      - if current_user
+        %ul.nav.navbar-nav.navbar-right
+          %li
+            %a{:href => "#"}= current_user.email
+          %li
+            = link_to(I18n.translate('navigation.logout'), destroy_user_session_path, :method => 'delete', :target => "_blank")

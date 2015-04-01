@@ -35,24 +35,17 @@ class User < ActiveRecord::Base
     user
   end
 
-  def assigned_games
-    self.games.count
-  end
-
   def can_send_mail?
     notification
   end
 
-  def passed_games
-    Game.joins(:game_details).where("points IS NOT NULL AND user_id = ?", self.id)
-  end
 
   def total_score
-    self.passed_games.map{|game| game.points}.inject {|sum, points| sum + points }
+    self.games.passed.map{|game| game.points}.inject {|sum, points| sum + points }
   end
 
   def maximum_score
-    self.passed_games.map{|game| game.total_score}.inject {|sum, score| sum + score }
+    self.games.passed.map{|game| game.total_score}.inject {|sum, score| sum + score }
   end
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)

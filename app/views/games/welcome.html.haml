@@ -11,7 +11,9 @@
     .bug_image
       = image_tag "lady_bug.png", :alt => "Lady Bug", :class => "remove_answer"
     .details
-      = I18n.translate('user.statistic_detail', :score => @user_score, :game_passed => @count_passed_games, :games => @count_games)
+      - user_games = current_user.games.count
+      - user_passed_games = current_user.games.passed.count
+      = I18n.translate('user.statistic_detail', :score => @user_score, :game_passed => user_passed_games, :games => user_games)
     %h4= I18n.translate('user.max_score', :max_score => @max_score)
     -if best_user_score
       = image_tag "nut.png", :class=> "nut_image"
@@ -37,4 +39,4 @@
         .details
           = user.name
           = user.email
-          = link_to I18n.translate('friends.add'), friendships_path(:friend_id => user.id), :method => :post 
+          = link_to I18n.translate('friends.add'), friendships_path(:friend_id => user.id), :method => :post

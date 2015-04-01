@@ -1,4 +1,3 @@
-- points = game.points.nil? ? 0 : game.points
 .details
   .item
     .game_detail
@@ -10,7 +9,7 @@
         %strong= game.try(:user).try(:name)
     .quizz
       = image_tag "nut.png", :alt=> "nut", :class=> "nut_image"
-      = I18n.translate('games.detail.quizz_points', :points => points, :total => game.total_score)
+      = I18n.translate('games.detail.quizz_points', :points => game.points, :total => game.total_score)
     .actions
       = link_to I18n.translate('actions.review'), review_game_path(game)
       = link_to I18n.translate('actions.show'), game

@@ -13,6 +13,9 @@ class Game < ActiveRecord::Base
   scope :passed_games, joins(:game_details).where("points IS NOT NULL").group("games.id").order("games.created_at ASC")
   scope :created_games, where("points IS NULL").group("id").order("games.created_at ASC")
   scope :with_quizz, -> { joins(:quizz) }
+  scope :without_points, -> { where('points IS NULL') }
+  scope :passed, -> { where('points IS NOT NULL') }
+
 
   attr_protected :state
   aasm_column :state
@@ -34,6 +37,11 @@ class Game < ActiveRecord::Base
   scope :finished, where( state: 'finished' )
 
   before_save :set_maximum_score
+
+
+  def points
+    self[:points]|| 0
+  end
 
   def passed?
     self.finished? && self.game_details.any?
@@ -68,23 +76,11 @@ class Game < ActiveRecord::Base
   end
 
   def other_players
-    games = self.other_games_by_quizz self.quizz_id
     # Take only unique and exclude currecnt_user
-    players = games.finished.select{|game| self.user_id != game.user_id}.map{|g| g.user_id}.count
+    players = self.quizz.games.finished.select{|game| self.user_id != game.user_id}.map{|g| g.user_id}.count
   end
 
-  def other_games_by_quizz id
-    Game.where('quizz_id = ?', id)
-  end
-
-  def other_games_scores game_id, quizz_id
-    scores = []
-    games = self.other_games_by_quizz quizz_id
-    games.finished.each do |game|
-      if game.id != game_id
-        scores << game.game_score_percent
-      end
-    end
-    scores
+  def other_games_scores
+    scores = self.quizz.games.finished.inject([]){|arr, game| arr << game.game_score_percent if game.id != self.id; arr}
   end
 end

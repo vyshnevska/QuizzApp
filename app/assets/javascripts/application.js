@@ -14,9 +14,6 @@
 //= require jquery_ujs
 
 //= require nested_form
-//= require underscore
-//= require backbone
-//= require quizz_app
 //= require_tree .
 
 
@@ -34,7 +31,7 @@ function show_flash_message(type, text){
 function update_notification_flag(status){
   var user = $('.mail_notifications').data('current_user');
   $.post(
-    '/accounts/' + user + '/notification_flag', {"notification": status}, 
+    '/accounts/' + user + '/notification_flag', {"notification": status},
     function(response) {
       for (type in response) {
         show_flash_message(type, response[type]);

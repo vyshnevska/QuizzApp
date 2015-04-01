@@ -27,7 +27,7 @@ class Quizz < ActiveRecord::Base
   scope :alphabetically, order("description ASC")
   scope :by_state, order("status, updated_at ASC")
 
-  def mark_answers ans_ids
+  def mark_answers(ans_ids)
     self.questions.each do |question|
       question.answers_by_qst.each do |answer|
         if ans_ids.include?(answer.id)

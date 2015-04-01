@@ -16,32 +16,12 @@ ActiveRecord::Schema.define(:version => 20150401112047) do
   create_table "answers", :force => true do |t|
     t.string   "content"
     t.integer  "question_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.boolean  "correct"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+    t.boolean  "correct",     :default => false, :null => false
   end
 
   add_index "answers", ["question_id"], :name => "index_answers_on_question_id"
-
-  create_table "authentications", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "provider"
-    t.string   "uid"
-    t.string   "token"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "century_timelines", :force => true do |t|
-    t.string   "title"
-    t.string   "description"
-    t.string   "person"
-    t.datetime "period"
-    t.string   "impact_type"
-    t.integer  "history_timeline_id"
-    t.datetime "created_at",          :null => false
-    t.datetime "updated_at",          :null => false
-  end
 
   create_table "friendships", :force => true do |t|
     t.integer  "user_id"
@@ -78,13 +58,6 @@ ActiveRecord::Schema.define(:version => 20150401112047) do
 
   add_index "games", ["quizz_id"], :name => "index_games_on_quizz_id"
   add_index "games", ["user_id"], :name => "index_games_on_user_id"
-
-  create_table "history_timelines", :force => true do |t|
-    t.string   "title"
-    t.string   "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
 
   create_table "messages", :force => true do |t|
     t.string   "content"
@@ -128,7 +101,7 @@ ActiveRecord::Schema.define(:version => 20150401112047) do
     t.string   "role"
     t.string   "provider"
     t.string   "uid"
-    t.boolean  "notification"
+    t.boolean  "notification",           :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

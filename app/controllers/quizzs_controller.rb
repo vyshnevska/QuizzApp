@@ -1,11 +1,12 @@
 class QuizzsController < ApplicationController
+  before_filter :set_quizz, :only => [:complete, :show, :edit, :update, :destroy]
+
   def index
     @quizzes = Quizz.by_state
     flash[:notice] = I18n.translate('index.no_active') unless Quizz.exists?
   end
 
   def complete
-    @quizz = Quizz.find(params[:id])
     if @quizz.set_to_completed!
       flash[:notice] = I18n.translate('complete.notification', :quizz_id => @quizz.id)
       redirect_to  quizzs_path
@@ -13,7 +14,6 @@ class QuizzsController < ApplicationController
   end
 
   def show
-    @quizz = Quizz.find(params[:id])
     respond_to do |format|
       format.html {}
       format.csv {
@@ -36,7 +36,6 @@ class QuizzsController < ApplicationController
   end
 
   def edit
-    @quizz = Quizz.find(params[:id])
     if @quizz.completed?
       flash[:error] =  I18n.translate('edit.cant_edit')
     else
@@ -45,53 +44,58 @@ class QuizzsController < ApplicationController
   end
 
   def create
-    @errors = []
     @quizz = Quizz.new(params[:quizz])
+    build_quizz_parameters(@quizz, params[:questions])
     if @quizz.save
-      params["questions"].each do |question|
-        new_quest = @quizz.questions.build(:title => question["title"])
-        question["answers"].each do |answer|
-          new_quest.answers.build(:content => answer)
-        end
-        if !new_quest.save
-          # TODO: refactor this
-          flash[:error] = new_quest.errors.values.join("\n")
-          @errors = new_quest.errors.values.join("\n")
-        end
-      end
-    else
-      @errors = @quizz.errors.values.join("\n")
-    end
-
-    if @quizz.errors.empty? && @errors.empty?
       flash[:notice] = I18n.translate('created', :quizz_id => @quizz.id)
       redirect_to quizzs_path
     else
-      flash[:error] = @errors
+      flash[:error] = @quizz.errors.values.join("\n")
       render :new
     end
   end
 
   def update
-    @quizz = Quizz.find(params[:id])
-    if params[:correct_ids]
-      @quizz.mark_answers params[:correct_ids].values.collect {|v| v.to_i}
-    else
-      flash[:notice] = I18n.translate('edit.no_marked')
+    @valid = @quizz.update_attributes(:description => params[:quizz][:description])
+    if params[:quizz][:questions]
+      params[:quizz][:questions].each do |question_id, data|
+        q =  @quizz.questions.where(:id => question_id).first
+        q.title = data[:title]
+        update_answers(data, q)
+        @valid = q.save
+      end
     end
-
-    if @quizz.update_attributes(params[:quizz])
-      flash[:notice] = I18n.translate('updated', :quizz_id => @quizz.id)
-      redirect_to quizzs_path
-    else
-      render :edit
-    end
+    flash[:notice] = I18n.translate('updated', :quizz_id => @quizz.id) if @valid
+    redirect_to quizzs_path
   end
 
   def destroy
-    @quizz = Quizz.find(params[:id])
     @quizz.destroy
     flash[:notice] = I18n.translate('deleted', :quizz_id => @quizz.id)
     redirect_to quizzs_path
   end
+
+  private
+    def set_quizz
+      @quizz = Quizz.find(params[:id])
+    end
+
+    def build_quizz_parameters(quizz, questions)
+      questions.each do |q|
+        quizz.questions.build(:title => q[:title])
+        q[:answers].each do |a|
+          quizz.questions.last.answers.build(:content => a, :correct => false)
+        end
+      end
+    end
+
+    def update_answers(data, question)
+      if data[:answers_attributes]
+        data[:answers_attributes].each do |answer_id, data|
+          a =  question.answers.where(:id => answer_id).first
+          data[:correct] = "false" unless data.include?("correct")
+          a.update_attributes(data)
+        end
+      end
+    end
 end

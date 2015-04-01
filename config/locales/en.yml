@@ -3,10 +3,14 @@
 
 en:
   games:
-    successful_create_msg:    "Game was successfully created."
-    successful_update_msg:    "Game was successfully updated."
+    successful_create_msg: Game was successfully created.
+    successful_update_msg: Game was successfully updated.
   views:
     pagination:
       previous: "&lt; Previous"
       next: "Next &gt;"
       truncate: "..."
+  general:
+    actions:
+      update: Update
+      start: Start

@@ -4,9 +4,9 @@
 
 = form_for @game, :url => finish_game_path(@game) do |f|
   .actions
-    %h5= @quizz.description
+    %h5= @game.quizz_description
     %ul{:id => "qns-list"}
-      - @quizz.questions.each do |q|
+      - @game.quizz.questions.each do |q|
         %li{:data => {:checked => 0 }}
           %h6= "#{q.title}"
           - q.answers.each do |a|

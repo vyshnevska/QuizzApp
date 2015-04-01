@@ -1,0 +1,21 @@
+- content_for :page_styles do
+  = stylesheet_link_tag "games"
+
+.game
+  - if @answers
+    %h4= I18n.translate('game.reviewing', :game_id => @game.id)
+    .details
+      %p= I18n.translate('game.user.played', :user => @game.user_name, :game => @game.try(:quizz).try(:description))
+  - else
+    %h4= I18n.translate('game.showing', :game_id => @game.id)
+    .details
+      %p= I18n.translate('game.user.want_play', :user => @game.user_name, :game => @game.try(:quizz).try(:description))
+  .details
+    %p= I18n.translate('game.user.score', :points => @game.points, :total => @game.total_score)
+  %br
+  - if @game.points.zero?
+    = link_to I18n.translate('game.start'), start_game_path(@game)
+    \|
+  - elsif @game.finished?
+    = render :partial => "game_statisctics", :locals => { :game => @game }
+= link_to I18n.translate('game.back'), games_path

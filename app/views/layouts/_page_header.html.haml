@@ -1,10 +1,8 @@
 .navbar.navbar-default.navbar-fixed-top
   .container
-    / .navbar-header
-    /   %a{:href => home_games_path, :class => "navbar-brand" }= 'Hamster'
     .navbar-collapse.collapse{:id => "navbar-main"}
       %ul.nav.navbar-nav
-        %li=link_to 'Hamster', home_games_path, :class => "navbar-brand"
+        %li=link_to 'Hamster', home_path, :class => "navbar-brand"
         - if user_signed_in?
           = render :partial => "layouts/nav_signed_user"
         - else

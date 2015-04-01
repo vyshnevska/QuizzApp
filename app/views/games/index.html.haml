@@ -7,5 +7,3 @@
   = render :partial => "created_games_show", :locals => { :games_new => @games_new }
 - unless @games_passed.empty?
   = render :partial => "passed_games_show", :locals => { :games_passed => @games_passed }
-
-%h1.gorgeous= link_to I18n.translate('create_new'), new_game_path

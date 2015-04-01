@@ -1,0 +1,9 @@
+en:
+  games:
+    flip_box:
+      front:
+        caption: Update
+        details: (hover to view)
+      back:
+        header_1: Update
+        header_2: Section

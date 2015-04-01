@@ -38,11 +38,6 @@ GEM
     arrayfields (4.9.2)
     ast (2.0.0)
     atomic (1.1.14)
-    backbone-on-rails (1.1.0.0)
-      eco
-      ejs
-      jquery-rails
-      rails (>= 3.1)
     bcrypt-ruby (3.1.2)
     bootstrap-sass (3.0.2.1)
       sass (~> 3.2)
@@ -90,12 +85,6 @@ GEM
     diff-lcs (1.2.5)
     domain_name (0.5.23)
       unf (>= 0.0.5, < 1.0.0)
-    eco (1.0.0)
-      coffee-script
-      eco-source
-      execjs
-    eco-source (1.1.0.rc.1)
-    ejs (1.1.1)
     em-http-request (1.0.3)
       addressable (>= 2.2.3)
       cookiejar
@@ -392,7 +381,6 @@ PLATFORMS
 
 DEPENDENCIES
   aasm (= 2.2.0)
-  backbone-on-rails
   bootstrap-sass
   cancan
   coffee-rails (~> 3.2.1)

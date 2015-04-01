@@ -2,39 +2,35 @@ class GamesController < ApplicationController
   skip_before_filter :authenticate_user!, :only => :home
 
   def home
-    @updates_table = {}
-    @updates_table[:quizzes] =  ["Export in CSV/XLS formats"]
-    @updates_table[:quizzes] << "View for individual quizz"
-    @updates_table[:account] =  ["On/Off mail notifications"]
-    @updates_table[:layout] =   ["New UI for Quizzes"]
-    @updates_table[:layout] <<  "New UI for App Menu"
+    @updates_table = {
+      :quizzes  => ['Export in CSV/XLS formats', 'View for individual quizz'],
+      :account  => ['On/Off mail notifications'],
+      :layout   => ['New UI for Quizzes', 'New UI for App Menu']
+    }
   end
 
   def welcome
-    if current_user
-      @count_games = current_user.assigned_games
-      @count_passed_games = current_user.passed_games.count
+    @count_games = current_user.assigned_games
+    @count_passed_games = current_user.passed_games.count
 
-      if current_user.can_send_mail? && UserMailer.welcome_email(current_user).deliver
-        flash[:notice] = I18n.translate('mail.sent_notification', :current_user => current_user.name)
-      else
-        flash[:notice] = I18n.translate('mail.no_notification', :current_user => current_user.name)
-      end
-      current_user.inverse_friends.each do |fs|
-        @inverse_friends  = fs.name
-      end
-      @users = User.without_user(current_user)
+    if current_user.can_send_mail? && UserMailer.welcome_email(current_user).deliver
+      flash[:notice] = I18n.translate('mail.sent_notification', :current_user => current_user.name)
+    else
+      flash[:notice] = I18n.translate('mail.no_notification', :current_user => current_user.name)
     end
+    current_user.inverse_friends.each do |fs|
+      @inverse_friends  = fs.name
+    end
+    @users = User.without_user(current_user)
   end
 
   def index
     @quizzes = Quizz.completed.alphabetically.page(params[:page]).per(5)
+    @new_games = current_user.games.with_quizz.page(params[:page]).per(5)
     if current_user.role == "admin"
-      @new_games = current_user.games.created_games.page(params[:page]).per(5)
       @games_passed = Game.passed_games.page(params[:page]).per(5)
       flash[:notice] = I18n.translate('index.new_game') unless Game.exists?
     else
-      @new_games = current_user.games.created_games.page(params[:page]).per(5)
       @games_passed = current_user.games.passed_games.page(params[:page]).per(5)
       flash[:notice] = I18n.translate('index.new_user_game', :current_user => current_user.name) unless current_user.games.exists?
     end
@@ -87,15 +83,15 @@ class GamesController < ApplicationController
     render :show, :game => @game , :answers => @answers
   end
 
-  def new
-    @game = Game.new
-    @game.quizz_id = params[:quizz_id]
-    @game.user_id = current_user.id
-    if @game.save
-      start @game.id
-    else
-      render :new
-    end
+  def create
+    @game = Game.create(:quizz_id =>  params[:quizz_id], :user_id => current_user.id) if params[:quizz_id]
+    redirect_to start_game_path(@game)
+  end
+
+  def start
+    @game = Game.find(params[:id])
+    # Resque.enqueue(GameStartNotification, @game.id)
+    @game.set_to_started!
   end
 
   def edit
@@ -110,14 +106,6 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @game.destroy
     redirect_to games_path
-  end
-
-  def start game_id
-    @game = Game.find_by_id(game_id)
-    @quizz = @game.quizz
-    Resque.enqueue(GameStartNotification, @game.id)
-    @game.set_to_started!
-    render :start
   end
 
   def finish

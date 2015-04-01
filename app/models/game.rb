@@ -7,8 +7,12 @@ class Game < ActiveRecord::Base
   belongs_to :quizz
   has_many :game_details
 
+  delegate :description, :to => :quizz, :prefix => true
+  delegate :name,        :to => :user, :prefix => true
+
   scope :passed_games, joins(:game_details).where("points IS NOT NULL").group("games.id").order("games.created_at ASC")
   scope :created_games, where("points IS NULL").group("id").order("games.created_at ASC")
+  scope :with_quizz, -> { joins(:quizz) }
 
   attr_protected :state
   aasm_column :state

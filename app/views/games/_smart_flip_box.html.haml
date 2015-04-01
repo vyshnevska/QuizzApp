@@ -1,21 +1,18 @@
--content_for :page_styles do
-  = stylesheet_link_tag "timeline", "flip_effect"
-
 .flip-container{:ontouchstart => "this.classList.toggle('hover')"}
   .flipper
     .front
-      %h3= caption
+      %h3= I18n.t('games.flip_box.front.caption')
       %p
-        %i= label
+        %i= I18n.t('games.flip_box.front.details')
     .back
       %table.table.table-bordered.updates_table
         %th
-          %h5 Updates
+          %h5= I18n.t('games.flip_box.back.header_1')
         %th
-          %h5 Section
+          %h5= I18n.t('games.flip_box.back.header_2')
         - @updates_table.each do |key, value|
-          - style = ["info_blue", "info_purple", "info_yellow", "info_green"].sample
-          %tr{:class => "#{style}"}
+          - box_style = ["info_blue", "info_purple", "info_yellow", "info_green"].sample
+          %tr{:class => box_style}
             %td
               %h5= key
             %td

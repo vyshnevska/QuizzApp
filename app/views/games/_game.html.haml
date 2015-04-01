@@ -6,7 +6,7 @@
       .quizz
         = I18n.translate('game.title')
         %strong=" # #{game.id}"
-        = " #{game.try(:quizz).try(:description)}  ( #{game.state} )  ||  "
-        %strong=game.try(:user).try(:name)
+        = " #{game.quizz_description}  ( #{game.state} )  ||  "
+        %strong=game.user_name
       .actions
-        = link_to I18n.translate('actions.start'), {:controller => "games", :action => "new", :quizz_id => game.quizz_id }
+        = link_to(I18n.translate('actions.start'), games_path(:quizz_id => game.quizz), :method => :post)

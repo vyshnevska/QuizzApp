@@ -19,7 +19,6 @@ gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
 gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
-gem 'quiet_assets'
 
 gem 'devise'
 gem 'omniauth'
@@ -41,19 +40,20 @@ gem 'aasm', '2.2.0'
 gem 'kaminari'
 
 group :test, :development do
-  gem "rspec-rails", "~> 2.0"
-  gem "rspec-mocks"
+  gem 'rspec-rails', '~> 3.0'
   gem "shoulda-matchers"
+  gem 'factory_girl_rails'
+
   gem 'guard-rspec'
   gem 'guard-livereload', require: false
   gem "spork", "> 0.9.0.rc"
   gem "guard-spork"
   gem "database_cleaner"
   gem 'simplecov', :require => false
+  gem 'ffaker'
+  gem 'quiet_assets'
+  # coverege
+  gem 'metric_fu'
+  gem 'rails_best_practices'
+  gem "pry"
 end
-
-gem "pry"
-
-# coverege
-gem 'metric_fu'
-gem 'rails_best_practices'

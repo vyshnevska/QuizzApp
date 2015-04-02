@@ -1,5 +1,5 @@
 class Answer < ActiveRecord::Base
-  attr_accessible :content
+  # attr_accessible :content, :correct
   belongs_to :question
   validates :content, :presence => {:message => I18n.translate('validation.content')}
 

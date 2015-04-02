@@ -10,10 +10,12 @@ group :production do
 end
 
 group :development do
-  gem "sqlite3"
+  gem 'mysql2'
   gem 'resque', :require => "resque/server"
 end
 
+gem "nested_form"
+gem 'simple_form'
 
 gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
@@ -32,8 +34,6 @@ gem 'foreman', '0.24.0'
 gem "cancan"
 
 gem "haml-rails"
-gem "nested_form"
-
 gem 'bootstrap-sass'
 
 gem 'aasm', '2.2.0'

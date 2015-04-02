@@ -6,26 +6,25 @@
 :javascript
   var action = "#{params[:action]}";
 
-= form_tag quizz_path(@quizz), :method => :put do
-  .quizz
-    %span.caption Quizz Title
-    = text_field_tag "quizz[description]", "#{@quizz.description}"
-    .question-section
-      .section
-        = image_tag "expand.png", :alt => "Expand Btn", :id => "expand"
-        = image_tag "collapse.png", :alt => "Collapse Btn", :id => "collapse"
-        %strong.caption= I18n.translate('quizzs.qst_section')
-        %hr
-          - @quizz.questions.each do |question|
-            .question
-              %span.caption= I18n.translate('quizzs.question')
-              = text_field_tag "questions[][title]", "#{question.title}"
-              .answers
-                %span.caption= I18n.translate('quizzs.answers')
-                - question.answers.each do |answer|
-                  .line.first
-                    = text_field_tag "questions[][answers][]", "#{answer.content}"
-                  .correct
-                    = radio_button_tag "correct_ids[#{question.id}]", "#{answer.id}", answer.is_correct?
-
-    = submit_tag I18n.translate('quizzs.submit'), :id=> "submit", :disabled=> true
+= simple_form_for @quizz, :url => quizz_path, :html => { :class => 'form-horizontal', :novalidate => '' } do |f|
+  .modal-body.resizable-content
+    %label.col-sm-3.control-label{for: 'description'}= 'Quizz Title'
+    .form-group
+      .col-sm-8
+        = f.text_field :description, :size => '50', :maxlength => '100'
+    - if @quizz.questions.any?
+      - @quizz.questions.each_with_index do |q, index|
+        .bs-callout.bs-callout-danger-purple.bs-callout-sm-inner{:id => "question-#{q.id}"}
+          %label.col-sm-3.control-label
+          .form-group
+            .col-sm-8
+              = text_field_tag :title, q.title, :name => "quizz[questions][#{q.id}][title]", :size => '50', :maxlength => '100'
+          .answers.margin-sm-top
+            - q.answers.each_with_index do |a, index|
+              .radio{:id => "answer-#{a.id}"}
+                %label.col-sm-3.control-label
+                .form-group
+                  .col-sm-4
+                    = check_box_tag "quizz[questions][#{q.id}][answers_attributes][#{a.id}][correct]", true, a.correct?
+                    = text_field_tag :content, a.content, :name => "quizz[questions][#{q.id}][answers_attributes][#{a.id}][content]", :size => '50', :maxlength => '100'
+  = f.submit I18n.t('general.actions.update'), :id => 'new_quizz', :class => 'button btn'

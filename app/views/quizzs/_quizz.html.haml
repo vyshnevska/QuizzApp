@@ -5,4 +5,4 @@
       %strong
         = quizz.try(:description)
     .actions
-      = link_to 'Start', {:controller => "games", :action => "new", :quizz_id => quizz.id }
+      = link_to(I18n.t('general.actions.start'), games_path(:quizz_id => quizz.id), :method => :post)

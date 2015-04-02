@@ -9,4 +9,4 @@
         = " #{game.quizz_description}  ( #{game.state} )  ||  "
         %strong=game.user_name
       .actions
-        = link_to(I18n.translate('actions.start'), games_path(:quizz_id => game.quizz), :method => :post)
+        = link_to(I18n.t('general.actions.start'), games_path(:quizz_id => game.quizz), :method => :post)
